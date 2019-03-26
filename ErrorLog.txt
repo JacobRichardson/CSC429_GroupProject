@@ -1,0 +1,32 @@
+[11/20/11 9:12 AM]|Teller|createTransaction|Error|NOTAG|null<Transaction Creation Failure: Unrecognized transaction java.lang.NullPointerException>
+[11/20/11 9:15 AM]|Teller|createTransaction|Error|NOTAG|null<Transaction Creation Failure: Unrecognized transaction java.lang.NullPointerException>
+[11/20/11 9:22 AM]|DepositTransaction|Transaction|Error|NOTAG|null<Could not find any accounts for 1>
+[2/10/14 3:42 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ';wlkrpekw)' at line 1>
+[2/10/14 3:42 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ret54' in 'where clause'>
+[2/10/14 3:47 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'smitra' in 'where clause'>
+[2/10/14 3:47 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'klakshma' in 'where clause'>
+[2/10/14 3:47 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'matthew' in 'where clause'>
+[2/10/14 3:48 PM]|AccountHolder|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'etienne' in 'where clause'>
+[6/11/15 4:42 PM]|DepositTransaction|processTransaction|Error|NOTAG|null<Failed to verify ownership of account number : 2.>
+[6/11/15 4:59 PM]|DepositTransaction|processTransaction|Error|NOTAG|null<Failed to verify ownership of account number : 2.>
+[6/11/15 4:59 PM]|DepositTransaction|processTransaction|Error|NOTAG|null<Failed to verify ownership of account number : 2.>
+[6/11/15 4:59 PM]|DepositTransaction|processTransaction|Error|NOTAG|null<Failed to verify ownership of account number : 2.>
+[6/11/15 5:04 PM]|DepositTransaction|processTransaction|Error|NOTAG|null<Failed to verify ownership of account number : 2.>
+[2/12/19 5:39 PM]|ATM|ATM.<init>|Error|NOTAG|null<Unable to create Teller object>
+[2/12/19 5:46 PM]|Teller|swapToView|Error|NOTAG|null<Missing view for display >
+[2/13/19 9:16 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/13/19 9:27 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/13/19 9:31 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/13/19 9:35 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/13/19 11:08 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/14/19 10:22 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/14/19 10:23 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[com.mysql.jdbc.Driver]>
+[2/26/19 1:26 PM]|BLS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[2/26/19 1:28 PM]|BLS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[2/26/19 1:31 PM]|BLS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[2/26/19 1:32 PM]|BLS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[2/28/19 1:34 PM]|Librarian|swapToView|Error|NOTAG|null<Missing view for display >
+[2/28/19 5:43 PM]|PatronZipCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'AccountNumber' in 'where clause'>
+[3/7/19 1:09 PM]|BLS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[3/12/19 10:07 AM]|BookCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1146: Table 'spr19_csc429_jbour3.Account' doesn't exist>
+[3/12/19 10:08 AM]|BookCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1146: Table 'spr19_csc429_scarp5.Account' doesn't exist>
