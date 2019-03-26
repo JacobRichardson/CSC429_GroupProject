@@ -34,8 +34,7 @@ import model.Librarian;
 import userInterface.MainStageContainer;
 import userInterface.WindowPosition;
 
-
-
+//TESTING
 public class BLS extends Application
 {
 
