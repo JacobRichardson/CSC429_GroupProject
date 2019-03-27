@@ -28,23 +28,19 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.BookCatalog;
 
-public class EnterBookView extends View {
+public class SearchVendorNamePhone extends View {
 	
-	private TextField authorTF = new TextField();
-	private TextField titleTF = new TextField();
-	private TextField pubYearTF = new TextField();
-	private ComboBox statusCB = new ComboBox();
+	private TextField vendorTF = new TextField();
+	private TextField phoneTF = new TextField();
 	
 	private Button submitBTN;
-	private Button goBackBTN = new Button("Go Back");
+	private Button cancelBTN = new Button("Cancel");
 	
-	private Label authorLBL = new Label("Author");
-	private Label titleLBL= new Label("Title");
-	private Label pubYearLBL = new Label("Publication Year");
-	private Label statusLBL= new Label("Status");
+	private Label vendorLBL = new Label("Vendor");
+	private Label phoneLBL= new Label("Phone Number");
 	private Label messageLBL = new Label();
 	
-	public EnterBookView(IModel model) {
+	public SearchVendorNamePhone(IModel model) {
 		super(model, "EnterBookView");
 		
 		VBox container = new VBox(10);
@@ -66,14 +62,13 @@ public class EnterBookView extends View {
 	}
 	
 	private void populateFields() {
-		authorTF.setText("");
-		titleTF.setText("");
-		pubYearTF.setText("");
+		vendorTF.setText("");
+		phoneTF.setText("");
 		messageLBL.setText("");
 	}
 	
 	private Node createTitle() {		
-		Text titleText = new Text("       Brockport Library          ");
+		Text titleText = new Text("       Restaurant Inventory Managment         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
@@ -89,17 +84,12 @@ public class EnterBookView extends View {
     	grid.setVgap(10);
     	grid.setPadding(new Insets(25, 25, 25, 25));
     	
-    	grid.add(authorLBL, 0, 0);
-    	grid.add(titleLBL, 1, 0);
-    	grid.add(pubYearLBL, 2, 0);
-    	grid.add(statusLBL, 3, 0);
+    	grid.add(vendorLBL, 0, 0);
+    	grid.add(phoneLBL, 0, 1);
     	grid.add(messageLBL, 0, 4);
     	
-    	grid.add(authorTF, 0, 1);
-    	grid.add(titleTF, 1, 1);
-    	grid.add(pubYearTF, 2, 1);
-    	statusCB.getItems().addAll("Avaliable", "Unavaible");
-    	grid.add(statusCB, 3, 1);
+    	grid.add(vendorTF, 1, 0);
+    	grid.add(phoneTF, 1, 1);
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -109,47 +99,29 @@ public class EnterBookView extends View {
  		     	processAction(e);    
       	     }
   	});
-    	grid.add(submitBTN, 3, 2);
+    	grid.add(submitBTN, 0, 2);
     	
-    	goBackBTN.setOnAction(new EventHandler<ActionEvent>() {
+    	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 
 		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
  	});
-    	grid.add(goBackBTN, 3, 3);
+    	grid.add(cancelBTN, 1, 2);
     	return grid;
 	}
 	
 	protected void processAction(Event e) {
-		if(e.getSource() == goBackBTN)
-			myModel.stateChangeRequest("LibrarianView", null);
-		else if(authorTF.getText().isEmpty() || titleTF.getText().isEmpty() || pubYearTF.getText().isEmpty())
+		if(e.getSource() == cancelBTN)
+			myModel.stateChangeRequest("cancel", null);
+		else if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
 			messageLBL.setText("Please enter info.");
-		else {
-			int year=Integer.parseInt(pubYearTF.getText());
-			if(year<1800 || year>2018)
-				messageLBL.setText("Please make sure the year is\n between 1800 and 2018");
 			else
-				enterBook();
-		}
+				enterVendorDetails();
 	}
-	private void enterBook(){
-		Properties props = new Properties();
-		props.put("author", authorTF.getText());
-		props.put("title",titleTF.getText());
-		props.put("pubYear",pubYearTF.getText());
-		props.put("status",statusCB.getValue());
-		Properties schema = new Properties();
-		schema.put("TableName", "books");
-		try {
-			new BookCatalog(props);
-			populateFields();
-			messageLBL.setText("Book entered");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	private void enterVendorDetails(){
+		myModel.stateChangeRequest("VendorSelectionScreen", null);
 	}
 		
 	@Override

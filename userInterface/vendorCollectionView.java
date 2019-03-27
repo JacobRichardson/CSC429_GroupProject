@@ -39,19 +39,19 @@ import java.util.Enumeration;
 import impresario.IModel;
 import model.Patron;
 import model.PatronZipCollection;
-import model.Librarian;
+import model.Manager;
 
 //==============================================================================
-public class PatronCollectionView extends View
+public class vendorCollectionView extends View
 {
-	protected TableView<PatronTableModel> tableOfPatrons;
+	protected TableView<vendorTableModel> tableOfVendors;
 	protected Button cancelButton;
 
 	protected MessageView statusLog;
 
 
 	//--------------------------------------------------------------------------
-	public PatronCollectionView(IModel wsc)
+	public vendorCollectionView(IModel wsc)
 	{
 		super(wsc, "PatronCollectionView");
 
@@ -68,7 +68,7 @@ public class PatronCollectionView extends View
 
 		getChildren().add(container);
 		
-		populateFields();
+		//populateFields();
 	}
 
 	//--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ public class PatronCollectionView extends View
 	protected void getEntryTableModelValues()
 	{
 		
-		ObservableList<PatronTableModel> tableData = FXCollections.observableArrayList();
+		ObservableList<vendorTableModel> tableData = FXCollections.observableArrayList();
 		try
 		{
 			PatronZipCollection patronCollection = (PatronZipCollection)myModel.getState("PatronList");
@@ -94,12 +94,12 @@ public class PatronCollectionView extends View
 				Patron nextPatron= (Patron)entries.nextElement();
 				Vector<String> view = nextPatron.getEntryListView();
 				// add this list entry to the list
-				PatronTableModel nextTableRowData = new PatronTableModel(view);
+				vendorTableModel nextTableRowData = new vendorTableModel(view);
 				tableData.add(nextTableRowData);
 				
 			}
 			
-			tableOfPatrons.setItems(tableData);
+			tableOfVendors.setItems(tableData);
 		}
 		catch (Exception e) {//SQLException e) {
 			// Need to handle this exception
@@ -113,7 +113,7 @@ public class PatronCollectionView extends View
 		HBox container = new HBox();
 		container.setAlignment(Pos.CENTER);	
 
-		Text titleText = new Text(" Brockport Library ");
+		Text titleText = new Text(" Restuarant Management System ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setWrappingWidth(300);
 		titleText.setTextAlignment(TextAlignment.CENTER);
@@ -135,14 +135,14 @@ public class PatronCollectionView extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
-        Text prompt = new Text("LIST OF Patrons");
+        Text prompt = new Text("LIST OF VENDORS");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-		tableOfPatrons = new TableView<PatronTableModel>();
-		tableOfPatrons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		tableOfVendors = new TableView<vendorTableModel>();
+		tableOfVendors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
 		TableColumn patronIDColumn = new TableColumn("Patron ID") ;
 		patronIDColumn.setMinWidth(100);
@@ -191,10 +191,10 @@ public class PatronCollectionView extends View
 	                new PropertyValueFactory<BookTableModel2, String>("status"));
 
 
-		tableOfPatrons.getColumns().addAll(patronIDColumn, 
+		tableOfVendors.getColumns().addAll(patronIDColumn, 
 				nameColumn, addressColumn, cityColumn, stateCodeColumn, zipColumn, emailColumn, dateOfBirthColumn, statusColumn);
 
-		tableOfPatrons.setOnMousePressed(new EventHandler<MouseEvent>() {
+		tableOfVendors.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event)
 			{
@@ -205,7 +205,7 @@ public class PatronCollectionView extends View
 		});
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setPrefSize(115, 150);
-		scrollPane.setContent(tableOfPatrons);
+		scrollPane.setContent(tableOfVendors);
 
 		cancelButton = new Button("Back");
  		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -221,7 +221,7 @@ public class PatronCollectionView extends View
 			 		*/
 					//----------------------------------------------------------
        		     	clearErrorMessage();
-       		     	new model.Librarian();
+       		     	new model.Manager();
        		     	//myModel.stateChangeRequest("CancelBookList", null); 
             	  }
         	});

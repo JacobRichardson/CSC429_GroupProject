@@ -7,17 +7,17 @@ public class ViewFactory {
 
 	public static View createView(String viewName, IModel model)
 	{
-		if(viewName.equals("LibrarianView") == true)
+		if(viewName.equals("ManagerView") == true)
 		{
 			return new LibrarianView(model);
 		}
-		else if(viewName.equals("searchPatron") == true)
+		else if(viewName.equals("searchVendor") == true)
 		{
-			return new SearchPatron(model);
+			return new SearchVendorNamePhone(model);
 		}
-		else if(viewName.equals("patronCollection") == true)
+		else if(viewName.equals("vendorCollection") == true)
 		{
-			return new PatronCollectionView(model);
+			return new vendorCollectionView(model);
 		}
 		else if(viewName.equals("titleSearch") == true)
 		{
@@ -26,10 +26,6 @@ public class ViewFactory {
 		else if(viewName.equals("BookCollectionView") == true)
 		{
 			return new BookCollectionView2(model);
-		}
-		else if(viewName.equals("enterBookView") == true)
-		{
-			return new EnterBookView(model);
 		}
 		else if(viewName.equals("enterPatronView") == true)
 		{

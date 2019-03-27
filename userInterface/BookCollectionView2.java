@@ -39,7 +39,7 @@ import java.util.Enumeration;
 import impresario.IModel;
 import model.Book;
 import model.BookCatalog;
-import model.Librarian;
+import model.Manager;
 
 //==============================================================================
 public class BookCollectionView2 extends View
@@ -199,7 +199,7 @@ public class BookCollectionView2 extends View
 			 		*/
 					//----------------------------------------------------------
        		     	clearErrorMessage();
-       		     	new model.Librarian();
+       		     	new model.Manager();
        		     	//myModel.stateChangeRequest("CancelBookList", null); 
             	  }
         	});

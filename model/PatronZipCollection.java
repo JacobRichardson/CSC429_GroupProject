@@ -15,7 +15,7 @@ import database.*;
 import impresario.IView;
 import impresario.ModelRegistry;
 import javafx.scene.Scene;
-import userInterface.PatronCollectionView;
+import userInterface.vendorCollectionView;
 import userInterface.View;
 import userInterface.ViewFactory;
 

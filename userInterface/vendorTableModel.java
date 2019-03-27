@@ -5,7 +5,7 @@ import java.util.Vector;
 import javafx.beans.property.SimpleStringProperty;
 
 //==============================================================================
-public class PatronTableModel
+public class vendorTableModel
 {
 	private final SimpleStringProperty patronID;
 	private final SimpleStringProperty name;
@@ -18,7 +18,7 @@ public class PatronTableModel
 	private final SimpleStringProperty status;
 
 	//----------------------------------------------------------------------------
-	public PatronTableModel(Vector<String> accountData)
+	public vendorTableModel(Vector<String> accountData)
 	{
 		patronID =  new SimpleStringProperty(accountData.elementAt(0));
 		name =  new SimpleStringProperty(accountData.elementAt(1));

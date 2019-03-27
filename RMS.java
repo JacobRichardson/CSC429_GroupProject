@@ -30,22 +30,21 @@ import event.Event;
 import event.EventLog;
 import common.PropertyFile;
 
-import model.Librarian;
+import model.Manager;
 import userInterface.MainStageContainer;
 import userInterface.WindowPosition;
 
-//TESTING
-public class BLS extends Application
+public class RMS extends Application
 {
 
-	private static Librarian myLibrarian;		// the main behavior for the application
+	private static Manager myManager;		// the main behavior for the application
 	private Stage mainStage;
 	
 	public void start(Stage primaryStage)
 	{
 
            // Create the top-level container (main frame) and add contents to it.
-	   MainStageContainer.setStage(primaryStage, "Brockport Library System");
+	   MainStageContainer.setStage(primaryStage, "Resturant managment System");
 	   mainStage = MainStageContainer.getInstance();
 
 	   // Finish setting up the stage (ENABLE THE GUI TO BE CLOSED USING THE TOP RIGHT
@@ -59,7 +58,7 @@ public class BLS extends Application
 
            try
 	   {
-		myLibrarian = new Librarian();
+		myManager = new Manager();
 	   }
 	   catch(Exception exc)
 	   {

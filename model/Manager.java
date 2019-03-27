@@ -22,7 +22,7 @@ import event.Event;
 
 /** The class containing the Teller  for the Librarian application */
 //==============================================================
-public class Librarian implements IView, IModel
+public class Manager implements IView, IModel
 // This class implements all these interfaces (and does NOT extend 'EntityBase')
 // because it does NOT play the role of accessing the back-end database tables.
 // It only plays a front-end role. 'EntityBase' objects play both roles.
@@ -37,17 +37,17 @@ public class Librarian implements IView, IModel
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public Librarian()
+	public Manager()
 	{
 		myStage = MainStageContainer.getInstance();
 		myViews = new Hashtable<String, Scene>();
 
 		// STEP 3.1: Create the Registry object - if you inherit from
 		// EntityBase, this is done for you. Otherwise, you do it yourself
-		myRegistry = new ModelRegistry("Librarian");
+		myRegistry = new ModelRegistry("Manager");
 		if(myRegistry == null)
 		{
-			new Event(Event.getLeafLevelClassName(this), "Librarian",
+			new Event(Event.getLeafLevelClassName(this), "Manager",
 				"Could not instantiate Registry", Event.ERROR);
 		}
 
@@ -55,7 +55,7 @@ public class Librarian implements IView, IModel
 		setDependencies();
 
 		// Set up the initial view
-		createAndShowLibrarianView();
+		createAndShowVendorSearch();
 	}
 
 
@@ -86,22 +86,12 @@ public class Librarian implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-		if(key.endsWith("searchPatron"))
-			createAndShowPatronSearch();
-		else if(key.equals("titleSearch"))
-			createAndShowTitleSearch();
-		else if(key.equals("LibrarianView")||key.equals("CancelBookList"))
-			createAndShowLibrarianView();
-		else if(key.equals("zip"))
-			searchPatrons((String)value);
-		else if(key.equals("title"))
-			searchBooks((String)value);
-		else if(key.equals("enterBookView")) {
-			createAndShowEnterBookView();
-		}
-		else if(key.equals("enterPatronView")) {
+		if(key.equals("ModifyVendor")||key.equals("AddVIIT"))
+			createAndShowVendorSearch();
+		else if(key.equals("VendorSelectionScreen"))
+			searchVendors();
+		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
 			createAndShowEnterPatronView();
-		}
 		else
 			System.out.println("No screen for key.");
 		myRegistry.updateSubscribers(key, this);
@@ -109,10 +99,9 @@ public class Librarian implements IView, IModel
 
 
 
-	private void searchPatrons(String zip) {
+	private void searchVendors() {
 		try {
-			PatronZipCollection p =new PatronZipCollection(zip);
-			createAndShowPatronView(p);
+			createAndShowVendorCollection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,15 +194,15 @@ public class Librarian implements IView, IModel
 		
 	}
 	
-	private void createAndShowPatronSearch() {
-		Scene currentScene = (Scene)myViews.get("searchPatron");
+	private void createAndShowVendorSearch() {
+		Scene currentScene = (Scene)myViews.get("searchVendor");
 		
 		if (currentScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("searchPatron", this); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
-			myViews.put("searchPatron", currentScene);
+			myViews.put("searchVendor", currentScene);
 		}
 				
 
@@ -279,15 +268,15 @@ public class Librarian implements IView, IModel
 		
 	}
 	
-	private void createAndShowPatronView(PatronZipCollection p) {
-		Scene localScene = myViews.get("patronCollection");
+	private void createAndShowVendorCollection() {
+		Scene localScene = myViews.get("vendorCollection");
 
 		if (localScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("patronCollection", p); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("vendorCollection", this); // USE VIEW FACTORY
 			localScene = new Scene(newView);
-			myViews.put("patronCollection", localScene);
+			myViews.put("vendorCollection", localScene);
 		}	
 		swapToView(localScene);
 	}
