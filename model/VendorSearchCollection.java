@@ -18,17 +18,17 @@ public class VendorSearchCollection  extends EntityBase implements IView
 {
 	private static final String myTableName = "Vendor";
 
-	private Vector vendors;
+	private Vector <Vendor>vendors;
 	// GUI Components
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public VendorSearchCollection(String date) throws
+	public VendorSearchCollection(String details) throws
 		Exception
 	{
 		super(myTableName);
 
-		if (date == null)
+		if (details == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "<init>",
 				"Missing account holder information", Event.FATAL);
@@ -36,59 +36,77 @@ public class VendorSearchCollection  extends EntityBase implements IView
 				("UNEXPECTED ERROR: PatronAgeCollection.<init>: account holder information is null");
 		}
 
-		String query = "SELECT * FROM patron WHERE dateOfBirth > '"+date+"'";
+		String query = "SELECT * FROM Vendor where "+details;
 
 		Vector allDataRetrieved = getSelectQueryResult(query);
-		
-		String result="";
 		if (allDataRetrieved != null)
 		{
-			vendors = new Vector();
+			vendors = new Vector<Vendor>();
 
-			result = ("==============================================\n");
+			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+			{
+				Properties nextVendorData = (Properties)allDataRetrieved.elementAt(cnt);
 
-			Properties p1 = (Properties) allDataRetrieved.firstElement();
+				Vendor vendor = new Vendor(nextVendorData);
 
-			Enumeration props1 = p1.propertyNames();
-
-			while (props1.hasMoreElements())
-
-				result += (props1.nextElement() + "\t");
-
-			result += "\n";
-
-			result += ("----------------------------------------------\n");
-			Vector<Properties> data= allDataRetrieved;
-			for (Properties p : data) {
-
-				Enumeration props = p.propertyNames();
-
-				while (props.hasMoreElements())
-
-					result += (p.getProperty((String) (props.nextElement())) + "\t");
-
-				result += "\n";
-
+				if (vendor != null)
+				{
+					addVendor(vendor);
+				}
 			}
-
-			result += ("==============================================");
 
 		}
 		else
-			System.out.println("No vendors found for "+date);
-		System.out.println(result);
+			System.out.println("No vendors found for "+details);
 	}
 
-	/**
-	 *
-	 */
-	//----------------------------------------------------------
-	public Object getState(String key)
-	{
-		if (key.equals("Title"))
-			return vendors;
-		return null;
+	private void addVendor(Vendor p) {
+		// TODO Auto-generated method stub
+			int index = findIndexToAdd(p);
+			vendors.insertElementAt(p,index);
 	}
+
+
+		private int findIndexToAdd(Vendor p) {
+			//users.add(u);
+			int low=0;
+			int high = vendors.size()-1;
+			int middle;
+
+			while (low <=high)
+			{
+				middle = (low+high)/2;
+
+				Vendor midSession = vendors.elementAt(middle);
+
+				int result = Vendor.compare(p,midSession);
+
+				if (result ==0)
+				{
+					return middle;
+				}
+				else if (result<0)
+				{
+					high=middle-1;
+				}
+				else
+				{
+					low=middle+1;
+				}
+
+
+			}
+			return low;
+		}
+		
+		public Object getState(String key)
+		{
+			if (key.equals("Vendor"))
+				return vendors;
+			else if(key.equals("VendorList"))
+				return this;
+			return null;
+		}
 
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)

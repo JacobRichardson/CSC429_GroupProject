@@ -47,6 +47,7 @@ public class vendorCollectionView extends View
 	protected TableView<vendorTableModel> tableOfVendors;
 	protected Button cancelButton;
 
+
 	protected MessageView statusLog;
 
 
@@ -68,7 +69,7 @@ public class vendorCollectionView extends View
 
 		getChildren().add(container);
 		
-		//populateFields();
+		populateFields();
 	}
 
 	//--------------------------------------------------------------------------
@@ -85,7 +86,6 @@ public class vendorCollectionView extends View
 		try
 		{
 			VendorSearchCollection vendorCollection = (VendorSearchCollection)myModel.getState("VendorList");
-
 	 		Vector entryList = (Vector)vendorCollection.getState("Vendor");
 			Enumeration entries = entryList.elements();
 
@@ -145,24 +145,24 @@ public class vendorCollectionView extends View
 		tableOfVendors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
 		TableColumn IdColumn = new TableColumn("Id") ;
-		IdColumn.setMinWidth(100);
+		IdColumn.setMinWidth(50);
 		IdColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("Id"));
 		
 		TableColumn nameColumn = new TableColumn("Name") ;
-		nameColumn.setMinWidth(100);
+		nameColumn.setMinWidth(125);
 		nameColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("Name"));
 		  
-		TableColumn phoneNumberColumn = new TableColumn("Phone Number") ;
-		phoneNumberColumn.setMinWidth(200);
+		TableColumn phoneNumberColumn = new TableColumn("PhoneNumber") ;
+		phoneNumberColumn.setMinWidth(100);
 		phoneNumberColumn.setCellValueFactory(
-	                new PropertyValueFactory<vendorTableModel, String>("Phone Number"));
+	                new PropertyValueFactory<vendorTableModel, String>("PhoneNumber"));
 		
 		TableColumn statusColumn = new TableColumn("Status") ;
-		statusColumn.setMinWidth(100);
+		statusColumn.setMinWidth(50);
 		statusColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("Status"));
+	                new PropertyValueFactory<vendorTableModel, String>("Status"));
 
 
 
@@ -173,7 +173,7 @@ public class vendorCollectionView extends View
 			public void handle(MouseEvent event)
 			{
 				if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
-					processAccountSelected();
+					processVendorSelected();
 				}
 			}
 		});
@@ -181,7 +181,7 @@ public class vendorCollectionView extends View
 		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(tableOfVendors);
 
-		cancelButton = new Button("Back");
+		cancelButton = new Button("cancel");
  		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
        		     @Override
@@ -196,7 +196,6 @@ public class vendorCollectionView extends View
 					//----------------------------------------------------------
        		     	clearErrorMessage();
        		     	new model.Manager();
-       		     	//myModel.stateChangeRequest("CancelBookList", null); 
             	  }
         	});
 
@@ -219,9 +218,9 @@ public class vendorCollectionView extends View
 	}
 
 	//--------------------------------------------------------------------------
-	protected void processAccountSelected()
+	protected void processVendorSelected()
 	{
-		
+		System.out.println("Clicked");
 	}
 
 	//--------------------------------------------------------------------------
@@ -250,15 +249,13 @@ public class vendorCollectionView extends View
 	{
 		statusLog.clearErrorMessage();
 	}
-	/*
 	//--------------------------------------------------------------------------
 	public void mouseClicked(MouseEvent click)
 	{
 		if(click.getClickCount() >= 2)
 		{
-			processAccountSelected();
+			processVendorSelected();
 		}
 	}
-   */
 	
 }

@@ -121,7 +121,8 @@ public class SearchVendorNamePhone extends View {
 				enterVendorDetails();
 	}
 	private void enterVendorDetails(){
-		myModel.stateChangeRequest("VendorSelectionScreen", null);
+		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
+		myModel.stateChangeRequest("VendorSelectionScreen", details);
 	}
 		
 	@Override

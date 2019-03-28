@@ -89,7 +89,7 @@ public class Manager implements IView, IModel
 		if(key.equals("ModifyVendor")||key.equals("AddVIIT"))
 			createAndShowVendorSearch();
 		else if(key.equals("VendorSelectionScreen"))
-			searchVendors();
+			searchVendors(value);
 		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
 			createAndShowEnterPatronView();
 		else
@@ -99,9 +99,10 @@ public class Manager implements IView, IModel
 
 
 
-	private void searchVendors() {
+	private void searchVendors(Object value) {
 		try {
-			createAndShowVendorCollection();
+			VendorSearchCollection v=new VendorSearchCollection((String)value);
+			createAndShowVendorCollection(v);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,13 +269,13 @@ public class Manager implements IView, IModel
 		
 	}
 	
-	private void createAndShowVendorCollection() {
+	private void createAndShowVendorCollection(VendorSearchCollection v) {
 		Scene localScene = myViews.get("vendorCollection");
 
 		if (localScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("vendorCollection", this); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
 			localScene = new Scene(newView);
 			myViews.put("vendorCollection", localScene);
 		}	

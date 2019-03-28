@@ -158,7 +158,7 @@ public class Vendor extends EntityBase implements IView
 
 		v.addElement(persistentState.getProperty("Id"));
 		v.addElement(persistentState.getProperty("Name"));
-		v.addElement(persistentState.getProperty("Phone Number"));
+		v.addElement(persistentState.getProperty("PhoneNumber"));
 		v.addElement(persistentState.getProperty("Status"));
 		return v;
 	}
