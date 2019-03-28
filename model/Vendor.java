@@ -19,9 +19,9 @@ import userInterface.ViewFactory;
 
 /** The class containing the Account for the ATM application */
 //==============================================================
-public class Patron extends EntityBase implements IView
+public class Vendor extends EntityBase implements IView
 {
-	private static final String myTableName = "patron";
+	private static final String myTableName = "Vendor";
 
 	protected Properties dependencies;
 
@@ -33,7 +33,7 @@ public class Patron extends EntityBase implements IView
 	// Can also be used to create a NEW Account (if the system it is part of
 	// allows for a new account to be set up)
 	//----------------------------------------------------------
-	public Patron(Properties props)
+	public Vendor(Properties props)
 	{
 		super(myTableName);
 
@@ -86,88 +86,27 @@ public class Patron extends EntityBase implements IView
 	 * Verify ownership
 	 */
 	//----------------------------------------------------------
-	public boolean verifyOwnership(PatronZipCollection cust)
+	public boolean verifyOwnership(VendorSearchCollection vendor)
 	{
-		if (cust == null)
+		if (vendor == null)
 		{
 			return false;
 		}
 		else
 		{
-			String custid = (String)cust.getState("ID");
+			String vendorID = (String)vendor.getState("Id");
 			String myOwnerid = (String)getState("OwnerID");
 			// DEBUG System.out.println("Account: custid: " + custid + "; ownerid: " + myOwnerid);
 
-			return (custid.equals(myOwnerid));
+			return (vendor.equals(myOwnerid));
 		}
-	}
-
-	/**
-	 * Credit balance (Method is public because it may be invoked directly as it has no possibility of callback associated with it)
-	 */
-	//----------------------------------------------------------
-	public void credit(String amount)
-	{
-		String myBalance = (String)getState("Balance");
-		double myBal = Double.parseDouble(myBalance);
-
-		double incrementAmount = Double.parseDouble(amount);
-		myBal += incrementAmount;
-
-		persistentState.setProperty("Balance", ""+myBal);
-	}
-
-	/**
-	 * Debit balance (Method is public because it may be invoked directly as it has no possibility of callback associated with it)
-	 */
-	//----------------------------------------------------------
-	public void debit(String amount)
-	{
-		String myBalance = (String)getState("Balance");
-		double myBal = Double.parseDouble(myBalance);
-
-		double incrementAmount = Double.parseDouble(amount);
-		myBal -= incrementAmount;
-
-		persistentState.setProperty("Balance", ""+myBal);
-	}
-
-	/**
-	 * Check balance -- returns true/false depending on whether
-	 * there is enough balance to cover withdrawalAmount or not
-	 * (Method is public because it may be invoked directly as it has no possibility of callback associated with it)
-	 *
-	 */
-	//----------------------------------------------------------
-	public boolean checkBalance(String withdrawalAmount)
-	{
-		String myBalance = (String)getState("Balance");
-		double myBal = Double.parseDouble(myBalance);
-
-		double checkAmount = Double.parseDouble(withdrawalAmount);
-
-		if (myBal >= checkAmount)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	//----------------------------------------------------------
-	public void setServiceCharge(String value)
-	{
-		persistentState.setProperty("ServiceCharge", value);
-		updateStateInDatabase();
 	}
 	
 	//-----------------------------------------------------------------------------------
-	public static int compare(Patron a, Patron b)
+	public static int compare(Vendor a, Vendor b)
 	{
-		String aNum = (String)a.getState("name");
-		String bNum = (String)b.getState("name");
+		String aNum = (String)a.getState("Id");
+		String bNum = (String)b.getState("Id");
 
 		return aNum.compareTo(bNum);
 	}
@@ -183,20 +122,20 @@ public class Patron extends EntityBase implements IView
 	{
 		try
 		{
-			if (persistentState.getProperty("patronID") != null)
+			if (persistentState.getProperty("Id") != null)
 			{
 				Properties whereClause = new Properties();
-				whereClause.setProperty("patronID",
-				persistentState.getProperty("patronID"));
+				whereClause.setProperty("Id",
+				persistentState.getProperty("Id"));
 				updatePersistentState(mySchema, persistentState, whereClause);
-				updateStatusMessage = "Account data for account number : " + persistentState.getProperty("AccountNumber") + " updated successfully in database!";
+				updateStatusMessage = "Account data for account number : " + persistentState.getProperty("Id") + " updated successfully in database!";
 			}
 			else
 			{
 				Integer accountNumber =
 					insertAutoIncrementalPersistentState(mySchema, persistentState);
-				persistentState.setProperty("patronID", "" + accountNumber.intValue());
-				updateStatusMessage = "Account data for new account : " +  persistentState.getProperty("patronID")
+				persistentState.setProperty("Id", "" + accountNumber.intValue());
+				updateStatusMessage = "Account data for new account : " +  persistentState.getProperty("Id")
 					+ "installed successfully in database!";
 			}
 		}
@@ -217,15 +156,10 @@ public class Patron extends EntityBase implements IView
 	{
 		Vector<String> v = new Vector<String>();
 
-		v.addElement(persistentState.getProperty("patronID"));
-		v.addElement(persistentState.getProperty("name"));
-		v.addElement(persistentState.getProperty("address"));
-		v.addElement(persistentState.getProperty("city"));
-		v.addElement(persistentState.getProperty("stateCode"));
-		v.addElement(persistentState.getProperty("zip"));
-		v.addElement(persistentState.getProperty("email"));
-		v.addElement(persistentState.getProperty("dateOfBirth"));
-		v.addElement(persistentState.getProperty("status"));
+		v.addElement(persistentState.getProperty("Id"));
+		v.addElement(persistentState.getProperty("Name"));
+		v.addElement(persistentState.getProperty("Phone Number"));
+		v.addElement(persistentState.getProperty("Status"));
 		return v;
 	}
 

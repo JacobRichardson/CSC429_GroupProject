@@ -37,8 +37,8 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
-import model.Patron;
-import model.PatronZipCollection;
+import model.Vendor;
+import model.VendorSearchCollection;
 import model.Manager;
 
 //==============================================================================
@@ -84,15 +84,15 @@ public class vendorCollectionView extends View
 		ObservableList<vendorTableModel> tableData = FXCollections.observableArrayList();
 		try
 		{
-			PatronZipCollection patronCollection = (PatronZipCollection)myModel.getState("PatronList");
+			VendorSearchCollection vendorCollection = (VendorSearchCollection)myModel.getState("VendorList");
 
-	 		Vector entryList = (Vector)patronCollection.getState("Patron");
+	 		Vector entryList = (Vector)vendorCollection.getState("Vendor");
 			Enumeration entries = entryList.elements();
 
 			while (entries.hasMoreElements() == true)
 			{
-				Patron nextPatron= (Patron)entries.nextElement();
-				Vector<String> view = nextPatron.getEntryListView();
+				Vendor nextVendor= (Vendor)entries.nextElement();
+				Vector<String> view = nextVendor.getEntryListView();
 				// add this list entry to the list
 				vendorTableModel nextTableRowData = new vendorTableModel(view);
 				tableData.add(nextTableRowData);
@@ -144,55 +144,29 @@ public class vendorCollectionView extends View
 		tableOfVendors = new TableView<vendorTableModel>();
 		tableOfVendors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
-		TableColumn patronIDColumn = new TableColumn("Patron ID") ;
-		patronIDColumn.setMinWidth(100);
-		patronIDColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("patronID"));
+		TableColumn IdColumn = new TableColumn("Id") ;
+		IdColumn.setMinWidth(100);
+		IdColumn.setCellValueFactory(
+	                new PropertyValueFactory<vendorTableModel, String>("Id"));
 		
 		TableColumn nameColumn = new TableColumn("Name") ;
 		nameColumn.setMinWidth(100);
 		nameColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("name"));
+	                new PropertyValueFactory<vendorTableModel, String>("Name"));
 		  
-		TableColumn addressColumn = new TableColumn("Address") ;
-		addressColumn.setMinWidth(200);
-		addressColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("address"));
-		
-		TableColumn cityColumn = new TableColumn("City") ;
-		cityColumn.setMinWidth(100);
-		cityColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("city"));
-		
-		TableColumn stateCodeColumn = new TableColumn("State") ;
-		stateCodeColumn.setMinWidth(100);
-		stateCodeColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("stateCode"));
-		
-		TableColumn zipColumn = new TableColumn("Zip Code") ;
-		zipColumn.setMinWidth(100);
-		zipColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("zip"));
-		
-		
-		TableColumn emailColumn = new TableColumn("Email") ;
-		emailColumn.setMinWidth(100);
-		emailColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("email"));
-		
-		TableColumn dateOfBirthColumn = new TableColumn("DOB") ;
-		dateOfBirthColumn.setMinWidth(100);
-		dateOfBirthColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("dateOfBirth"));
+		TableColumn phoneNumberColumn = new TableColumn("Phone Number") ;
+		phoneNumberColumn.setMinWidth(200);
+		phoneNumberColumn.setCellValueFactory(
+	                new PropertyValueFactory<vendorTableModel, String>("Phone Number"));
 		
 		TableColumn statusColumn = new TableColumn("Status") ;
 		statusColumn.setMinWidth(100);
 		statusColumn.setCellValueFactory(
-	                new PropertyValueFactory<BookTableModel2, String>("status"));
+	                new PropertyValueFactory<BookTableModel2, String>("Status"));
 
 
-		tableOfVendors.getColumns().addAll(patronIDColumn, 
-				nameColumn, addressColumn, cityColumn, stateCodeColumn, zipColumn, emailColumn, dateOfBirthColumn, statusColumn);
+
+		tableOfVendors.getColumns().addAll(IdColumn, nameColumn, phoneNumberColumn, statusColumn);
 
 		tableOfVendors.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override

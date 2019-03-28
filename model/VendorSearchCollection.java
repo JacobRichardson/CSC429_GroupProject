@@ -14,16 +14,16 @@ import database.*;
 import impresario.IView;
 
 //==============================================================
-public class PatronYounger  extends EntityBase implements IView
+public class VendorSearchCollection  extends EntityBase implements IView
 {
-	private static final String myTableName = "patron";
+	private static final String myTableName = "Vendor";
 
-	private Vector patrons;
+	private Vector vendors;
 	// GUI Components
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public PatronYounger(String date) throws
+	public VendorSearchCollection(String date) throws
 		Exception
 	{
 		super(myTableName);
@@ -43,7 +43,7 @@ public class PatronYounger  extends EntityBase implements IView
 		String result="";
 		if (allDataRetrieved != null)
 		{
-			patrons = new Vector();
+			vendors = new Vector();
 
 			result = ("==============================================\n");
 
@@ -75,7 +75,7 @@ public class PatronYounger  extends EntityBase implements IView
 
 		}
 		else
-			System.out.println("No patrons found for "+date);
+			System.out.println("No vendors found for "+date);
 		System.out.println(result);
 	}
 
@@ -86,7 +86,7 @@ public class PatronYounger  extends EntityBase implements IView
 	public Object getState(String key)
 	{
 		if (key.equals("Title"))
-			return patrons;
+			return vendors;
 		return null;
 	}
 

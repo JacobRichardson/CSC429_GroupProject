@@ -21,7 +21,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.BookCatalog;
-import model.Patron;
+import model.Vendor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -180,7 +180,7 @@ public class EnterPatronView extends View {
 		Properties schema = new Properties();
 		schema.put("TableName", "patron");
 		try {
-			new Patron(props).updateStateInDatabase();
+			new Vendor(props).updateStateInDatabase();
 			populateFields();
 			messageLBL.setText("Patron entered");
 		} catch(Exception e) {

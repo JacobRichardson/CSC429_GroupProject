@@ -24,7 +24,7 @@ public class PatronZipCollection  extends EntityBase implements IView
 {
 	private static final String myTableName = "patron";
 
-	private Vector<Patron> patrons;
+	private Vector<Vendor> patrons;
 
 	// For Impresario
 		private Properties dependencies;
@@ -55,13 +55,13 @@ public class PatronZipCollection  extends EntityBase implements IView
 
 		if (allDataRetrieved != null)
 		{
-			patrons = new Vector<Patron>();
+			patrons = new Vector<Vendor>();
 
 			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
 			{
 				Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
 
-				Patron account = new Patron(nextAccountData);
+				Vendor account = new Vendor(nextAccountData);
 
 				if (account != null)
 				{
@@ -78,14 +78,14 @@ public class PatronZipCollection  extends EntityBase implements IView
 	}
 
 
-		private void addAccount(Patron p) {
+		private void addAccount(Vendor p) {
 		// TODO Auto-generated method stub
 			int index = findIndexToAdd(p);
 			patrons.insertElementAt(p,index);
 	}
 
 
-		private int findIndexToAdd(Patron p) {
+		private int findIndexToAdd(Vendor p) {
 			//users.add(u);
 			int low=0;
 			int high = patrons.size()-1;
@@ -95,9 +95,9 @@ public class PatronZipCollection  extends EntityBase implements IView
 			{
 				middle = (low+high)/2;
 
-				Patron midSession = patrons.elementAt(middle);
+				Vendor midSession = patrons.elementAt(middle);
 
-				int result = Patron.compare(p,midSession);
+				int result = Vendor.compare(p,midSession);
 
 				if (result ==0)
 				{
