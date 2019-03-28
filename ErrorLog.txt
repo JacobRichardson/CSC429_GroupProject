@@ -36,3 +36,4 @@
 [3/28/19 12:50 PM]|VendorSearchCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '%Scott%' and PhoneNumber Like '%1234%'' at line 1>
 [3/28/19 12:50 PM]|VendorSearchCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '%Scott%' and PhoneNumber Like '%1234%'' at line 1>
 [3/28/19 12:51 PM]|VendorSearchCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '%Scott%' and PhoneNumber Like '%1234%'' at line 1>
+[3/28/19 5:41 PM]|RMS|BLS.<init>|Error|NOTAG|null<Unable to create Librarian object>

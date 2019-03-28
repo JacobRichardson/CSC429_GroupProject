@@ -9,7 +9,7 @@ public class ViewFactory {
 	{
 		if(viewName.equals("ManagerView") == true)
 		{
-			return new LibrarianView(model);
+			return new MangerView(model);
 		}
 		else if(viewName.equals("searchVendor") == true)
 		{

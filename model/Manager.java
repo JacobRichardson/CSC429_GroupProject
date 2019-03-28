@@ -55,7 +55,7 @@ public class Manager implements IView, IModel
 		setDependencies();
 
 		// Set up the initial view
-		createAndShowVendorSearch();
+		createAndShowManagerView();
 	}
 
 
@@ -180,15 +180,15 @@ public class Manager implements IView, IModel
 	}
 
 //---------			Create and show methods			-----------------------------------------------------------------------------------------------//
-	private void createAndShowLibrarianView() {
-		Scene currentScene = (Scene)myViews.get("LibrarianView");
+	private void createAndShowManagerView() {
+		Scene currentScene = (Scene)myViews.get("ManagerView");
 
 		if (currentScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("LibrarianView", this); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("ManagerView", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
-			myViews.put("TellerView", currentScene);
+			myViews.put("ManagerView", currentScene);
 		}
 				
 		swapToView(currentScene);
