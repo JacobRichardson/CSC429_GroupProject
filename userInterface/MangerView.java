@@ -128,7 +128,8 @@ public class MangerView extends View {
     	addIventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
  		     @Override
  		     public void handle(ActionEvent e) {
- 		     	processAction(e);    
+ 		     	processAction(e);  
+ 		     	
       	     }
  		});
     	
@@ -207,13 +208,13 @@ public class MangerView extends View {
 		if(e.getSource() == doneBTN) {
 			System.exit(0);
 		}
-		else if(e.getSource()==addIventoryItemTypeBTN) {
-			myModel.stateChangeRequest("searchPatron", null);
+		else if(e.getSource() == addVendorInventoryItemTypeBTN) {
+			myModel.stateChangeRequest("AddVIIT", null);
 		}
 		else if(e.getSource() == modifyVendorBTN)
 			myModel.stateChangeRequest("ModifyVendor", null);
 		else if(e.getSource() == outOfInventoryBTN)
-			myModel.stateChangeRequest("enterBookView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modiftIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
 		else if(e.getSource() == modiftIventoryItemTypeBTN)

@@ -91,7 +91,7 @@ public class Manager implements IView, IModel
 		else if(key.equals("VendorSelectionScreen"))
 			searchVendors(value);
 		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
-			createAndShowEnterPatronView();
+			createAndShowManagerView();
 		else
 			System.out.println("No screen for key.");
 		myRegistry.updateSubscribers(key, this);
@@ -109,20 +109,6 @@ public class Manager implements IView, IModel
 		}
 	}
 
-
-
-	//Search for books
-	private void searchBooks(String title) {
-		// TODO Auto-generated method stub
-		try {
-			BookCatalog b=new BookCatalog(title);
-			//b.createAndShowView();
-			createAndShowCollectionView(b);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 
 	/** Called via the IView relationship */
@@ -209,63 +195,6 @@ public class Manager implements IView, IModel
 
 		// make the view visible by installing it into the frame
 		swapToView(currentScene);
-		
-	}
-	
-	private void createAndShowTitleSearch() {
-		Scene currentScene = (Scene)myViews.get("titleSearch");
-		
-		if (currentScene == null)
-		{
-			// create our initial view
-			View newView = ViewFactory.createView("titleSearch", this); // USE VIEW FACTORY
-			currentScene = new Scene(newView);
-			myViews.put("titleSearch", currentScene);
-		}
-				
-
-		// make the view visible by installing it into the frame
-		swapToView(currentScene);
-		
-	}
-	
-	private void createAndShowEnterBookView() {
-		Scene currentScene = (Scene)myViews.get("enterBookView");
-		
-		if (currentScene == null)
-		{
-			// create our initial view
-			View newView = ViewFactory.createView("enterBookView", this); // USE VIEW FACTORY
-			currentScene = new Scene(newView);
-			myViews.put("enterBookView", currentScene);
-		}
-		swapToView(currentScene);
-	}
-	
-	private void createAndShowEnterPatronView() {
-		Scene currentScene = (Scene)myViews.get("enterPatronView");
-		
-		if (currentScene == null)
-		{
-			// create our initial view
-			View newView = ViewFactory.createView("enterPatronView", this); // USE VIEW FACTORY
-			currentScene = new Scene(newView);
-			myViews.put("enterPatronView", currentScene);
-		}
-		swapToView(currentScene);
-	}
-	
-	protected void createAndShowCollectionView(BookCatalog b){
-		Scene localScene = myViews.get("BookCollectionView");
-
-		if (localScene == null)
-		{
-			// create our initial view
-			View newView = ViewFactory.createView("BookCollectionView", b); // USE VIEW FACTORY
-			localScene = new Scene(newView);
-			myViews.put("BookCollectionView", localScene);
-		}	
-		swapToView(localScene);
 		
 	}
 	
