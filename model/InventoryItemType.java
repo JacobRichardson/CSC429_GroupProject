@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
@@ -9,12 +10,14 @@ import impresario.IView;
 
 public class InventoryItemType extends EntityBase implements IView{
 
-	private static final String myTableName = "ItemTypeName";
+	private static final String myTableName = "InventoryItemType";
+	
+	private String updateStatusMessage = "";
 	
 	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
-		String query = "SELECT * FROM " + myTableName + " WHERE (ItemTypeName = " + itemTypeName + ")";
+		String query = "SELECT * FROM " + myTableName + " WHERE (ItemTypeName = '" + itemTypeName + "')";
 
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
@@ -55,6 +58,25 @@ public class InventoryItemType extends EntityBase implements IView{
 			throw new InvalidPrimaryKeyException("No InventoryItemType matching name : " + itemTypeName);
 		}
 	}
+	
+	public void delete() {
+		
+		try {
+			
+			if (persistentState.getProperty("ItemTypeName") != null) {
+				
+				Properties whereClause = new Properties();
+				whereClause.setProperty("ItemTypeName",
+						persistentState.getProperty("ItemTypeName"));
+					deletePersistentState(mySchema, whereClause);
+				updateStatusMessage = "InventoryItemType data for name: " + persistentState.getProperty("ItemTypeName") + " delete successfully in database!";
+		
+			}	
+		} catch (SQLException e) {
+			updateStatusMessage = "Error in deleting InventoryItemType data in database!";
+		}
+		
+	}
 
 	@Override
 	public void updateState(String key, Object value) {
@@ -76,7 +98,9 @@ public class InventoryItemType extends EntityBase implements IView{
 
 	@Override
 	protected void initializeSchema(String tableName) {
-		// TODO Auto-generated method stub
-		
+		if (mySchema == null)
+		{
+			mySchema = getSchemaInfo(tableName);
+		}
 	}
 }
