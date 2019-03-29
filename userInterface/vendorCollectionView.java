@@ -46,6 +46,7 @@ public class vendorCollectionView extends View
 {
 	protected TableView<vendorTableModel> tableOfVendors;
 	protected Button cancelButton;
+	protected Button submitButton;
 
 
 	protected MessageView statusLog;
@@ -180,7 +181,7 @@ public class vendorCollectionView extends View
 		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(tableOfVendors);
 
-		cancelButton = new Button("cancel");
+		cancelButton = new Button("Cancel");
  		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
        		     public void handle(ActionEvent e) {
 					/**
@@ -192,12 +193,21 @@ public class vendorCollectionView extends View
 			 		*/
 					//----------------------------------------------------------
        		     	clearErrorMessage();
-       		     	new model.Manager();
+       		     	myModel.stateChangeRequest("cancel", null);
+       		     	//new model.Manager();
             	  }
         	});
 
+ 		submitButton = new Button("Submit");
+ 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+       		     public void handle(ActionEvent e) {
+					processVendorSelected();
+            	  }
+        	});
+ 		
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
+		btnContainer.getChildren().add(submitButton);
 		btnContainer.getChildren().add(cancelButton);
 		
 		vbox.getChildren().add(grid);
@@ -217,7 +227,14 @@ public class vendorCollectionView extends View
 	//--------------------------------------------------------------------------
 	protected void processVendorSelected()
 	{
-		System.out.println("Clicked");
+		vendorTableModel selectedItem = tableOfVendors.getSelectionModel().getSelectedItem();
+		
+		if(selectedItem != null)
+		{
+			String selectedVendorNumber = selectedItem.getId();
+
+			myModel.stateChangeRequest("VendorSelected", selectedVendorNumber);
+		}
 	}
 
 	//--------------------------------------------------------------------------

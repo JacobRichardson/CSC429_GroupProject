@@ -92,6 +92,8 @@ public class Manager implements IView, IModel
 			searchVendors(value);
 		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
 			createAndShowManagerView();
+		else if(key.equals("VendorSelected")) //Needs history
+			createAndShowModifyVendor((Vendor)value);
 		else
 			System.out.println("No screen for key.");
 		myRegistry.updateSubscribers(key, this);
@@ -205,6 +207,19 @@ public class Manager implements IView, IModel
 			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
 			localScene = new Scene(newView);
 			myViews.put("vendorCollection", localScene);
+		}	
+		swapToView(localScene);
+	}
+	
+	private void createAndShowModifyVendor(Vendor v) {
+		Scene localScene = myViews.get("vendorModify");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			myViews.put("vendorModify", localScene);
 		}	
 		swapToView(localScene);
 	}
