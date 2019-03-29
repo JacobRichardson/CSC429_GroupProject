@@ -30,7 +30,7 @@ public class MangerView extends View {
 	private Button addIventoryItemTypeBTN;
 	private Button modifyVendorBTN;
 	private Button outOfInventoryBTN;
-	private Button modiftIventoryItemTypeBTN;
+	private Button modifyIventoryItemTypeBTN;
 	private Button addVendorInventoryItemTypeBTN;
 	private Button modifyStatusInventoryItemBTN;
 	private Button deleteInventoryItemTypeBTN;
@@ -89,7 +89,7 @@ public class MangerView extends View {
     	addIventoryItemTypeBTN = new Button("Add an Inventory Item Type");
     	modifyVendorBTN = new Button("Modify A Vendor");
     	outOfInventoryBTN = new Button("Take an Item out of Inventory");
-    	modiftIventoryItemTypeBTN = new Button("Modify an Inventory Item Type");
+    	modifyIventoryItemTypeBTN = new Button("Modify an Inventory Item Type");
     	addVendorInventoryItemTypeBTN = new Button("Add a Vendor Inventory Item Type");
     	modifyStatusInventoryItemBTN = new Button("Modify the Status of an Inventory Item");
     	deleteInventoryItemTypeBTN = new Button("Delete an Inventory Item Type");
@@ -101,21 +101,39 @@ public class MangerView extends View {
        	doneBTN = new Button("Done");
        	
        	//Add buttons to grid.
-       	grid.add(addIventoryItemTypeBTN,0,0);
-       	grid.add(modifyVendorBTN,1,0);
-       	grid.add(outOfInventoryBTN,2,0);
-       	grid.add(modiftIventoryItemTypeBTN,3,0);
-       	grid.add(addVendorInventoryItemTypeBTN,0,1);
-       	grid.add(modifyStatusInventoryItemBTN,1,1);
-       	grid.add(deleteInventoryItemTypeBTN,2,1);
-       	grid.add(deleteVendorInvetoryItemBTN,3,1);
-       	grid.add(reorderListBTN,0,2);
-       	grid.add(addVendorBTN,1,2);
-       	grid.add(processInvoiceBTN,2,2);
-       	grid.add(fullInventoryBTN,3,2);
+       	grid.add(addIventoryItemTypeBTN,0,0);		 	grid.add(addVendorBTN,1,0);					 grid.add(deleteVendorInvetoryItemBTN,2,0);		grid.add(modifyStatusInventoryItemBTN,3,0);
+       	grid.add(modifyIventoryItemTypeBTN,0,1);		grid.add(modifyVendorBTN,1,1);				 grid.add(processInvoiceBTN,2,1);	    		grid.add(reorderListBTN,3,1);
+    	grid.add(deleteInventoryItemTypeBTN,0,2);  		grid.add(addVendorInventoryItemTypeBTN,1,2); grid.add(outOfInventoryBTN,2,2);				grid.add(fullInventoryBTN,3,2);
        	grid.add(doneBTN, 0, 4);
     	
-
+       	
+       	//Styles
+       	addIventoryItemTypeBTN.setMinWidth(250);
+    	addIventoryItemTypeBTN.setMinHeight(30);
+    	modifyVendorBTN.setMinWidth(250);
+    	modifyVendorBTN.setMinHeight(30);
+    	outOfInventoryBTN.setMinWidth(250);
+    	outOfInventoryBTN.setMinHeight(30);
+    	modifyIventoryItemTypeBTN.setMinWidth(250);
+    	modifyIventoryItemTypeBTN.setMinHeight(30);
+    	addVendorInventoryItemTypeBTN.setMinWidth(250);
+    	addVendorInventoryItemTypeBTN.setMinHeight(30);
+    	modifyStatusInventoryItemBTN.setMinWidth(250);
+    	modifyStatusInventoryItemBTN.setMinHeight(30);
+    	deleteInventoryItemTypeBTN.setMinWidth(250);
+    	deleteInventoryItemTypeBTN.setMinHeight(30);
+    	deleteVendorInvetoryItemBTN.setMinWidth(250);
+    	deleteVendorInvetoryItemBTN.setMinHeight(30);
+    	reorderListBTN.setMinWidth(250);
+    	reorderListBTN.setMinHeight(30);
+    	addVendorBTN.setMinWidth(250);
+    	addVendorBTN.setMinHeight(30);
+    	processInvoiceBTN.setMinWidth(250);
+    	processInvoiceBTN.setMinHeight(30);
+    	fullInventoryBTN.setMinWidth(250);
+    	fullInventoryBTN.setMinHeight(30);
+    	
+    	
        	//EVENT HANDLERS
     	
     	doneBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -141,7 +159,7 @@ public class MangerView extends View {
 		     	processAction(e);    
      	     }
 		});
-    	modiftIventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
+    	modifyIventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
@@ -202,23 +220,23 @@ public class MangerView extends View {
 			myModel.stateChangeRequest("ModifyVendor", null);
 		else if(e.getSource() == outOfInventoryBTN)
 			myModel.stateChangeRequest("", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
-		else if(e.getSource() == modiftIventoryItemTypeBTN)
+		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("enterPatronView", null);
 		else
 			System.out.println(e);
