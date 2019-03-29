@@ -26,7 +26,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import model.BookCatalog;
 
 public class SearchVendorNamePhone extends View {
 	
@@ -120,8 +119,7 @@ public class SearchVendorNamePhone extends View {
 		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
 		myModel.stateChangeRequest("VendorSelectionScreen", details);
 	}
-		
-	public void updateState(String key, Object value) {
+			public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
 	}
