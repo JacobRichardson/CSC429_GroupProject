@@ -119,14 +119,12 @@ public class MangerView extends View {
        	//EVENT HANDLERS
     	
     	doneBTN.setOnAction(new EventHandler<ActionEvent>() {
-  		     @Override
   		     public void handle(ActionEvent e) {
   		     	processAction(e);    
        	     }
   		});
     	
     	addIventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);  
  		     	
@@ -134,67 +132,56 @@ public class MangerView extends View {
  		});
     	
     	modifyVendorBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	outOfInventoryBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	modiftIventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	modifyStatusInventoryItemBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	deleteInventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	deleteVendorInvetoryItemBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	reorderListBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	processInvoiceBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	fullInventoryBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	addVendorInventoryItemTypeBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
 		});
     	addVendorBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
@@ -237,7 +224,6 @@ public class MangerView extends View {
 			System.out.println(e);
 	}
 	
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

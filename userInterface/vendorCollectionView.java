@@ -169,7 +169,6 @@ public class vendorCollectionView extends View
 		tableOfVendors.getColumns().addAll(IdColumn, nameColumn, phoneNumberColumn, statusColumn);
 
 		tableOfVendors.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event)
 			{
 				if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
@@ -183,8 +182,6 @@ public class vendorCollectionView extends View
 
 		cancelButton = new Button("cancel");
  		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
-
-       		     @Override
        		     public void handle(ActionEvent e) {
 					/**
 					 * Process the Cancel button.

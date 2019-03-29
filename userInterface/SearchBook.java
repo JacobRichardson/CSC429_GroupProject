@@ -86,8 +86,6 @@ public class SearchBook extends View {
     	//Cancel button
     	cancelBTN=new Button("Cancel");
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -97,8 +95,6 @@ public class SearchBook extends View {
     	//Submit button
     	submitBTN= new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -132,7 +128,6 @@ public class SearchBook extends View {
 		myModel.stateChangeRequest("title", titleCode);
 	}
 
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

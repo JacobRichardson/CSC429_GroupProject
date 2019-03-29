@@ -139,8 +139,6 @@ public class Manager implements IView, IModel
 		// forward to our registry
 		myRegistry.unSubscribe(key, subscriber);
 	}
-
-	@Override
 	public Object getState(String key) {
 		// TODO Auto-generated method stub
 		return null;

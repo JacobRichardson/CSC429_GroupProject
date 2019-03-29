@@ -50,7 +50,6 @@ public class RMS extends Application
 	   // Finish setting up the stage (ENABLE THE GUI TO BE CLOSED USING THE TOP RIGHT
 	   // 'X' IN THE WINDOW), and show it.
            mainStage.setOnCloseRequest(new EventHandler <javafx.stage.WindowEvent>() {
-            @Override
             public void handle(javafx.stage.WindowEvent event) {
                 System.exit(0);
             }

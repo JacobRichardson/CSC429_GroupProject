@@ -78,19 +78,16 @@ public class InventoryItemType extends EntityBase implements IView{
 		
 	}
 
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public Object getState(String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void stateChangeRequest(String key, Object value) {
 		// TODO Auto-generated method stub
 		

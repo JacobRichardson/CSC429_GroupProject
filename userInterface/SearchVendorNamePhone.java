@@ -93,8 +93,6 @@ public class SearchVendorNamePhone extends View {
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -102,8 +100,6 @@ public class SearchVendorNamePhone extends View {
     	grid.add(submitBTN, 0, 2);
     	
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
-
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
@@ -125,7 +121,6 @@ public class SearchVendorNamePhone extends View {
 		myModel.stateChangeRequest("VendorSelectionScreen", details);
 	}
 		
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

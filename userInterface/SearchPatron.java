@@ -85,8 +85,6 @@ public class SearchPatron extends View {
     	//Cancel button
     	cancelBTN=new Button("Cancel");
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -96,8 +94,6 @@ public class SearchPatron extends View {
     	//Submit button
     	submitBTN= new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -131,7 +127,6 @@ public class SearchPatron extends View {
 		myModel.stateChangeRequest("zip", zipCode);
 	}
 
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

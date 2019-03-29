@@ -121,8 +121,6 @@ public class EnterPatronView extends View {
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
-
- 		     @Override
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
@@ -130,8 +128,6 @@ public class EnterPatronView extends View {
     	grid.add(submitBTN, 1, 8);
     	
     	goBackBTN.setOnAction(new EventHandler<ActionEvent>() {
-
-		     @Override
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
@@ -187,7 +183,6 @@ public class EnterPatronView extends View {
 			e.printStackTrace();
 		}
 	}
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

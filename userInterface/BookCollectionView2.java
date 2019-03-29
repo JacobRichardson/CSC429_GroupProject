@@ -173,7 +173,6 @@ public class BookCollectionView2 extends View
 				authorColumn, titleColumn, pubYearColumn, statusColumn);
 
 		tableOfBooks.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
 			public void handle(MouseEvent event)
 			{
 				if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
@@ -188,7 +187,6 @@ public class BookCollectionView2 extends View
 		cancelButton = new Button("Back");
  		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
        		     public void handle(ActionEvent e) {
 					/**
 					 * Process the Cancel button.
