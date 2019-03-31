@@ -20,6 +20,7 @@ import impresario.ModelRegistry;
 
 import event.Event;
 
+
 /** The class containing the Teller  for the Librarian application */
 //==============================================================
 public class Manager implements IView, IModel
@@ -34,6 +35,10 @@ public class Manager implements IView, IModel
 	// GUI Components
 		private Hashtable<String, Scene> myViews;
 		private Stage	  	myStage;
+		
+	//CHOICE
+	private static String choice;
+		
 
 	// constructor for this class
 	//----------------------------------------------------------
@@ -86,14 +91,18 @@ public class Manager implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
+		//Set choice to tbe key being passed in.
+		Manager.setChoice(key);
+		
 		if(key.equals("ModifyVendor")||key.equals("AddVIIT"))
 			createAndShowVendorSearch();
 		else if(key.equals("VendorSelectionScreen"))
 			searchVendors(value);
+		else if(key.equals("VendorSelected")) //Needs history
+	        createAndShowModifyVendor((Vendor)value);
+
 		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
 			createAndShowManagerView();
-		else if(key.equals("VendorSelected")) //Needs history
-			createAndShowModifyVendor((Vendor)value);
 		else
 			System.out.println("No screen for key.");
 		myRegistry.updateSubscribers(key, this);
@@ -211,19 +220,52 @@ public class Manager implements IView, IModel
 		swapToView(localScene);
 	}
 	
-	private void createAndShowModifyVendor(Vendor v) {
-		Scene localScene = myViews.get("vendorModify");
+    private void createAndShowModifyVendor(Vendor v) {
+    	Scene localScene = myViews.get("vendorModify");
 
 		if (localScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
-			localScene = new Scene(newView);
-			myViews.put("vendorModify", localScene);
-		}	
+		    View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("vendorModify", localScene);
+		}
 		swapToView(localScene);
 	}
+
 	
 //-----------------------------------------------------------------------------
 
+
+//------------------------------   CHOICE METHODS - ---------------------------------------------//
+	
+
+	/*
+	 * Sets the variable choice to the passed in string.
+	 * 
+	 * @param choice The value chocie is to be set to.
+	 */
+	public static void setChoice (String choice)
+	{
+		Manager.choice = choice;
+	}
+	
+	/*
+	 * Returns the value of the variable choice.
+	 * 
+	 * @return the value of choice.
+	 */
+	public static String getChoice ()
+	{
+		return Manager.choice;
+	}
+	
+	/*
+	 * Sets the value of choice to an empty string.
+	 * 
+	 */
+	public static void resetChoice ()
+	{
+		Manager.choice = "";
+	}
 }

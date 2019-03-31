@@ -214,7 +214,7 @@ public class MangerView extends View {
 			System.exit(0);
 		}
 		else if(e.getSource() == addVendorInventoryItemTypeBTN) {
-			myModel.stateChangeRequest("addVIIT", null);
+			myModel.stateChangeRequest("AddVIIT", null);
 		}
 		else if(e.getSource() == modifyVendorBTN)
 			myModel.stateChangeRequest("ModifyVendor", null);
