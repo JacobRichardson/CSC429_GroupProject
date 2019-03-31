@@ -214,30 +214,30 @@ public class MangerView extends View {
 			System.exit(0);
 		}
 		else if(e.getSource() == addVendorInventoryItemTypeBTN) {
-			myModel.stateChangeRequest("AddVIIT", null);
+			myModel.stateChangeRequest("addVIIT", null);
 		}
 		else if(e.getSource() == modifyVendorBTN)
 			myModel.stateChangeRequest("ModifyVendor", null);
 		else if(e.getSource() == outOfInventoryBTN)
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("enterPatronView", null);
+			myModel.stateChangeRequest("", null);
 		else
 			System.out.println(e);
 	}
