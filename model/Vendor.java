@@ -22,6 +22,8 @@ import userInterface.ViewFactory;
 public class Vendor extends EntityBase implements IView
 {
 	private static final String myTableName = "Vendor";
+	
+	private static String selectedVendorId;
 
 	protected Properties dependencies;
 
@@ -173,5 +175,32 @@ public class Vendor extends EntityBase implements IView
 	}
 
 	
-}
+	//------------------------------   SELECTED VENDOR ID METHODS - ---------------------------------------------//
+	
+	/*
+	 * Sets the variable choice to the passed in string.
+	 * 
+	 * @param choice The value chocie is to be set to.
+	 */
+	public static void setSelectedVendorId(String selectedVendorId) {
+		Vendor.selectedVendorId = selectedVendorId;
+	}
 
+	/*
+	 * Returns the value of the variable choice.
+	 * 
+	 * @return the value of choice.
+	 */
+	public static String getSelectedVendorId() {
+		return Vendor.selectedVendorId;
+	}
+
+	/*
+	 * Sets the value of choice to an empty string.
+	 * 
+	 */
+	public static void resetSelectedVendorId() {
+		Vendor.selectedVendorId = "";
+	}
+}
+	

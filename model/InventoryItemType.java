@@ -12,6 +12,8 @@ public class InventoryItemType extends EntityBase implements IView{
 
 	private static final String myTableName = "InventoryItemType";
 	
+	private static String selectedInventoryItemTypeName;
+	
 	private String updateStatusMessage = "";
 	
 	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
@@ -99,5 +101,33 @@ public class InventoryItemType extends EntityBase implements IView{
 		{
 			mySchema = getSchemaInfo(tableName);
 		}
+	}
+	
+	//------------------------------   SELECTED INVENTORY ITEM TYPE NAME METHODS - ---------------------------------------------//
+	
+	/*
+	 * Sets the variable choice to the passed in string.
+	 * 
+	 * @param choice The value chocie is to be set to.
+	 */
+	public static void setSelectedInventoryItemTypeName(String selectedInventoryItemTypeName) {
+		InventoryItemType.selectedInventoryItemTypeName = selectedInventoryItemTypeName;
+	}
+
+	/*
+	 * Returns the value of the variable choice.
+	 * 
+	 * @return the value of choice.
+	 */
+	public static String getSelectedInventoryItemTypeName() {
+		return InventoryItemType.selectedInventoryItemTypeName;
+	}
+
+	/*
+	 * Sets the value of choice to an empty string.
+	 * 
+	 */
+	public static void resetSelectedVendorId() {
+		InventoryItemType.selectedInventoryItemTypeName = "";
 	}
 }
