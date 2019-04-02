@@ -1,6 +1,7 @@
 package userInterface;
 
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import impresario.IModel;
 import javafx.geometry.Insets;
@@ -119,6 +120,7 @@ public class SearchVendorNamePhone extends View {
 		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
 		myModel.stateChangeRequest("VendorSelectionScreen", details);
 	}
+	
 			public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

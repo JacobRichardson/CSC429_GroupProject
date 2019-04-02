@@ -71,7 +71,6 @@ public class modifyVendorView extends View {
 		vendorTF.setText((String) myModel.getState("Name"));
 		phoneTF.setText((String) myModel.getState("PhoneNumber"));
 		statusCB.getItems().addAll("Active", "Inactive");
-		System.out.print(myModel.getState("Status"));
 		statusCB.setValue(myModel.getState("Status"));
 		messageLBL.setText("");
 	}
@@ -120,12 +119,12 @@ public class modifyVendorView extends View {
 	}
 	
 	protected void processAction(Event e) {
-		if(e.getSource()==submitBTN)
-			updateVendor();
-		else if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
+		if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
 			messageLBL.setText("All vendor data must be filled");
-		else
-			myModel.stateChangeRequest("chooseActionScreen", null);
+		else if(!checkPhone(phoneTF.getText()) || phoneTF.getText().length()!=12)
+			messageLBL.setText("Please enter phone number \nin xxx-xxx-xxxx");
+			
+		else updateVendor();
 	}
 	
 	protected void updateVendor() {
@@ -137,6 +136,17 @@ public class modifyVendorView extends View {
 		Vendor v= new Vendor(props);
 		v.update();
 		messageLBL.setText("Vendor updated");
+	}
+	
+	public boolean checkPhone(String num) {
+		//585-111-1111
+		for(int i=0; i<num.length(); i++) {
+			if((i==3||i==7) && num.charAt(i)!='-') 
+				return false;
+			else if(num.charAt(i)<='0' && num.charAt(i)>='9') 
+				return false;
+		}
+		return true;
 	}
 	
 			public void updateState(String key, Object value) {
