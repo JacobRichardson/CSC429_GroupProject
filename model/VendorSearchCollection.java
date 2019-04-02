@@ -2,6 +2,7 @@
 package model;
 
 import java.util.Enumeration;
+import java.util.Hashtable;
 // system imports
 import java.util.Properties;
 import java.util.Vector;
@@ -10,20 +11,28 @@ import java.util.Vector;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
-
+import impresario.IModel;
 import impresario.IView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userInterface.MainStageContainer;
+import userInterface.View;
+import userInterface.ViewFactory;
+import userInterface.WindowPosition;
 
 //==============================================================
-public class VendorSearchCollection  extends EntityBase implements IView
+public class VendorSearchCollection  extends EntityBase implements IView, IModel
 {
 	private static final String myTableName = "Vendor";
-
+	String history;
 	private Vector <Vendor>vendors;
 	// GUI Components
+	private Hashtable<String, Scene> myViews;
+	private Stage	  	myStage;
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public VendorSearchCollection(String details) throws
+	public VendorSearchCollection(String details, String history) throws
 		Exception
 	{
 		super(myTableName);
@@ -58,6 +67,9 @@ public class VendorSearchCollection  extends EntityBase implements IView
 		}
 		else
 			System.out.println("No vendors found for "+details);
+		this.history=history;
+		myViews = new Hashtable<String, Scene>();
+		myStage = MainStageContainer.getInstance();
 	}
 
 	private void addVendor(Vendor p) {
@@ -112,7 +124,18 @@ public class VendorSearchCollection  extends EntityBase implements IView
 	public void stateChangeRequest(String key, Object value)
 	{
 		// Class is invariant, so this method does not change any attributes
-
+		if(history=="ModifyVendor") {
+			modifyVendor((String)value);
+		}
+		else if(key.equals("VendorSelected") && Manager.getChoice() == "AddVIIT") {
+			//First need to go to inventory search view once it is implemented.
+			
+			//For now go to vendorPriceScreen.
+			createAndShowVendorIventoryPriceView();
+		}
+			else {
+				
+			}
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -131,4 +154,63 @@ public class VendorSearchCollection  extends EntityBase implements IView
 			mySchema = getSchemaInfo(tableName);
 		}
 	}
+	
+	public void modifyVendor(String Id) {
+		try {
+			Vendor v=new Vendor((String)Id);
+			createAndShowModifyVendor(v);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void createAndShowModifyVendor(Vendor v) {
+    	Scene localScene = (Scene)myViews.get("vendorModify");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("vendorModify", v); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("vendorModify", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+    
+    private void createAndShowVendorIventoryPriceView () {
+    	
+    	System.out.println("CREATING VENDOR PRICE VIEW!");
+    	Scene localScene = myViews.get("VendorInventoryPrice");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("VendorInventoryPrice", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("VendorInventoryPrice", localScene);
+		}
+		swapToView(localScene);
+    }
+	
+	public void swapToView(Scene newScene)
+	{		
+		if (newScene == null)
+		{
+			System.out.println("Librarian.swapToView(): Missing view for display");
+			new Event(Event.getLeafLevelClassName(this), "swapToView",
+				"Missing view for display ", Event.ERROR);
+			return;
+		}
+
+		myStage.setScene(newScene);
+		myStage.sizeToScene();
+		
+			
+		//Place in center
+		WindowPosition.placeCenter(myStage);
+
+	}
+	
 }

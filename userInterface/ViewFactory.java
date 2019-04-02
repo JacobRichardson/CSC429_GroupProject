@@ -22,9 +22,9 @@ public class ViewFactory {
 		else if(viewName.equals("vendorModify") == true) {
 			return new modifyVendorView(model);
 		}
-		else if(viewName.equals("VendorInventoryPrice") == true) {
-			return new VendorInventoryPriceView(model);
-		}
+		//else if(viewName.equals("VendorInventoryPrice") == true) {
+			//return new VendorInventoryPriceView(model);
+		//}
 		else
 			return null;
 	}

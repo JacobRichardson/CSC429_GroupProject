@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 // project imports
 import exception.InvalidPrimaryKeyException;
 import database.*;
-
+import event.Event;
 import impresario.IView;
 
 import userInterface.View;
@@ -52,6 +52,56 @@ public class Vendor extends EntityBase implements IView
 			}
 		}
 	}
+	
+	public Vendor(String Id)
+			throws InvalidPrimaryKeyException
+		{
+			super(myTableName);
+
+			setDependencies();
+			String query = "SELECT * FROM " + myTableName + " WHERE (Id = " + Id + ")";
+
+			Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
+
+			// You must get one account at least
+			if (allDataRetrieved != null)
+			{
+				int size = allDataRetrieved.size();
+
+				// There should be EXACTLY one account. More than that is an error
+				if (size != 1)
+				{
+					throw new InvalidPrimaryKeyException("Multiple accounts matching id : "
+						+ Id + " found.");
+				}
+				else
+				{
+					// copy all the retrieved data into persistent state
+					Properties retrievedAccountData = allDataRetrieved.elementAt(0);
+					persistentState = new Properties();
+
+					Enumeration allKeys = retrievedAccountData.propertyNames();
+					while (allKeys.hasMoreElements() == true)
+					{
+						String nextKey = (String)allKeys.nextElement();
+						String nextValue = retrievedAccountData.getProperty(nextKey);
+						// accountNumber = Integer.parseInt(retrievedAccountData.getProperty("accountNumber"));
+
+						if (nextValue != null)
+						{
+							persistentState.setProperty(nextKey, nextValue);
+						}
+					}
+
+				}
+			}
+			// If no account found for this user name, throw an exception
+			else
+			{
+				throw new InvalidPrimaryKeyException("No account matching id : "
+					+ Id + " found.");
+			}
+		}
 
 	//-----------------------------------------------------------------------------------
 	private void setDependencies()
@@ -64,10 +114,13 @@ public class Vendor extends EntityBase implements IView
 	//----------------------------------------------------------
 	public Object getState(String key)
 	{
-		if (key.equals("UpdateStatusMessage") == true)
-			return updateStatusMessage;
-
-		return persistentState.getProperty(key);
+		if (key.equals("Name") == true)
+			return persistentState.getProperty(key);
+		else if((key.equals("PhoneNumber") == true))
+			return persistentState.getProperty(key);
+		else if((key.equals("Status") == true))
+			return persistentState.getProperty(key);
+		else return persistentState.getProperty(key);
 	}
 
 	//----------------------------------------------------------------

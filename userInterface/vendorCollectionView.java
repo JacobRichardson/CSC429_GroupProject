@@ -39,7 +39,6 @@ import java.util.Enumeration;
 import impresario.IModel;
 import model.Vendor;
 import model.VendorSearchCollection;
-import model.Manager;
 
 //==============================================================================
 public class vendorCollectionView extends View
@@ -193,8 +192,7 @@ public class vendorCollectionView extends View
 			 		*/
 					//----------------------------------------------------------
        		     	clearErrorMessage();
-       		     	myModel.stateChangeRequest("cancel", null);
-       		     	//new model.Manager();
+       		     	new model.Manager();
             	  }
         	});
 
@@ -231,16 +229,14 @@ public class vendorCollectionView extends View
 		
 		if(selectedItem != null)
 		{
-			String selectedVendorNumber = selectedItem.getId();
-			Vendor.setSelectedVendorId(selectedItem.getId());
+			String selectedId = selectedItem.getId();
 			
 			/*
 			 * For some reason this will not switch over to the vendor selected key. It won't
 			 * call the manager stateChangeRequest for some reason. This needs to be looked into.
 			 */
 			System.out.println("REQUESTING VENDORSELECTED!");
-			
-			myModel.stateChangeRequest("VendorSelected", selectedVendorNumber);
+			myModel.stateChangeRequest("VendorSelected", selectedId);
 		}
 	}
 

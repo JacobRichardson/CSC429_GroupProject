@@ -109,17 +109,6 @@ public class Manager implements IView, IModel
 			//Debug.
 			System.out.println("VENDOR SELECTED KEY!");
 			
-			//Use history.
-			if(Manager.getChoice() == "ModifyVendor") {
-				createAndShowModifyVendor((Vendor)value);
-			}
-			else if(Manager.getChoice() == "AddVIIT") {
-				//First need to go to inventory search view once it is implemented.
-				
-				//For now go to vendorPriceScreen.
-				createAndShowVendorIventoryPriceView();
-			}
-			
 			
 		}
 		else if(key.equals("chooseActionScreen")||key.equals("cancel")) {
@@ -136,7 +125,8 @@ public class Manager implements IView, IModel
 
 	private void searchVendors(Object value) {
 		try {
-			VendorSearchCollection v=new VendorSearchCollection((String)value);
+			String history=Manager.getChoice();
+			VendorSearchCollection v=new VendorSearchCollection((String)value, history);
 			createAndShowVendorCollection(v);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -259,21 +249,7 @@ public class Manager implements IView, IModel
 		}
 		swapToView(localScene);
 	}
-    
-    private void createAndShowVendorIventoryPriceView () {
-    	
-    	System.out.println("CREATING VENDOR PRICE VIEW!");
-    	Scene localScene = myViews.get("VendorInventoryPrice");
 
-		if (localScene == null)
-		{
-			// create our initial view
-		    View newView = ViewFactory.createView("VendorInventoryPrice", this); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    myViews.put("VendorInventoryPrice", localScene);
-		}
-		swapToView(localScene);
-    }
 
 	
 //-----------------------------------------------------------------------------

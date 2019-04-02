@@ -26,6 +26,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import model.Manager;
+import model.Vendor;
 
 public class modifyVendorView extends View {
 	
@@ -64,9 +66,14 @@ public class modifyVendorView extends View {
 	}
 	
 	private void populateFields() {
-		vendorTF.setText("");
-		phoneTF.setText("");
+		System.out.println(myModel.getState("Name"));
+		vendorTF.setText((String) myModel.getState("Name"));
+		phoneTF.setText((String) myModel.getState("PhoneNumber"));
 		statusCB.getItems().addAll("Active", "Inactive");
+		if( myModel.getState("status")=="Active")
+			statusCB.setValue("Active");
+		else
+			statusCB.setValue("Inactive");
 		messageLBL.setText("");
 	}
 	
@@ -106,7 +113,7 @@ public class modifyVendorView extends View {
     	
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
-		     	processAction(e);    
+		     	new Manager();   
      	     }
  	});
     	grid.add(cancelBTN, 1, 3);
