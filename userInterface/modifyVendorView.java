@@ -43,6 +43,7 @@ public class modifyVendorView extends View {
 	
 	private ComboBox statusCB = new ComboBox();
 	private Label messageLBL = new Label();
+	private String Id;
 	
 	public modifyVendorView(IModel model) {
 		super(model, "EnterBookView");
@@ -66,13 +67,12 @@ public class modifyVendorView extends View {
 	}
 	
 	private void populateFields() {
+		Id=""+myModel.getState("Id");
 		vendorTF.setText((String) myModel.getState("Name"));
 		phoneTF.setText((String) myModel.getState("PhoneNumber"));
 		statusCB.getItems().addAll("Active", "Inactive");
-		if( myModel.getState("status")=="Active")
-			statusCB.setValue("Active");
-		else
-			statusCB.setValue("Inactive");
+		System.out.print(myModel.getState("Status"));
+		statusCB.setValue(myModel.getState("Status"));
 		messageLBL.setText("");
 	}
 	
@@ -96,7 +96,7 @@ public class modifyVendorView extends View {
     	grid.add(vendorLBL, 0, 0);
     	grid.add(phoneLBL, 0, 1);
     	grid.add(statusLBL, 0, 2);
-    	grid.add(messageLBL, 0, 3);
+    	grid.add(messageLBL, 0, 4);
     	
     	grid.add(vendorTF, 1, 0);
     	grid.add(phoneTF, 1, 1);
@@ -130,9 +130,13 @@ public class modifyVendorView extends View {
 	
 	protected void updateVendor() {
 		Properties props = new Properties();
-		props.put("Name", vendorTF.getText());
-		props.put("PhoneNumber", phoneTF.getText());
-		props.put("Status", statusCB.getValue());
+		props.setProperty("Id", Id);
+		props.setProperty("Name", vendorTF.getText());
+		props.setProperty("PhoneNumber", phoneTF.getText());
+		props.setProperty("Status", (String) statusCB.getValue());
+		Vendor v= new Vendor(props);
+		v.update();
+		messageLBL.setText("Vendor updated");
 	}
 	
 			public void updateState(String key, Object value) {
