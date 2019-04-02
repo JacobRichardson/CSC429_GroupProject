@@ -130,6 +130,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		else if(key.equals("VendorSelected") && Manager.getChoice() == "AddVIIT") {
 			//First need to go to inventory search view once it is implemented.
 			
+			Vendor.setSelectedVendorId((String)value);
 			//For now go to vendorPriceScreen.
 			createAndShowVendorIventoryPriceView();
 		}
