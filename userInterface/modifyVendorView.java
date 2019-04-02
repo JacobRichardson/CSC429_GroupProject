@@ -66,7 +66,6 @@ public class modifyVendorView extends View {
 	}
 	
 	private void populateFields() {
-		System.out.println(myModel.getState("Name"));
 		vendorTF.setText((String) myModel.getState("Name"));
 		phoneTF.setText((String) myModel.getState("PhoneNumber"));
 		statusCB.getItems().addAll("Active", "Inactive");
@@ -130,7 +129,10 @@ public class modifyVendorView extends View {
 	}
 	
 	protected void updateVendor() {
-		
+		Properties props = new Properties();
+		props.put("Name", vendorTF.getText());
+		props.put("PhoneNumber", phoneTF.getText());
+		props.put("Status", statusCB.getValue());
 	}
 	
 			public void updateState(String key, Object value) {
