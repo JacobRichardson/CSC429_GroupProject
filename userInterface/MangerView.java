@@ -42,6 +42,7 @@ public class MangerView extends View {
 	
 	private Button doneBTN;
 
+	
 	public MangerView(IModel model) {
 		super(model, "Manger View");
 		VBox container = new VBox(10);
@@ -99,12 +100,12 @@ public class MangerView extends View {
     	processInvoiceBTN = new Button("Process an Invoice from a Vendor");
     	fullInventoryBTN = new Button("Obtain a full current Inventory");
        	doneBTN = new Button("Done");
-       	
+
        	//Add buttons to grid.
        	grid.add(addIventoryItemTypeBTN,0,0);		 	grid.add(addVendorBTN,1,0);					 grid.add(deleteVendorInvetoryItemBTN,2,0);		grid.add(modifyStatusInventoryItemBTN,3,0);
        	grid.add(modifyIventoryItemTypeBTN,0,1);		grid.add(modifyVendorBTN,1,1);				 grid.add(processInvoiceBTN,2,1);	    		grid.add(reorderListBTN,3,1);
     	grid.add(deleteInventoryItemTypeBTN,0,2);  		grid.add(addVendorInventoryItemTypeBTN,1,2); grid.add(outOfInventoryBTN,2,2);				grid.add(fullInventoryBTN,3,2);
-       	grid.add(doneBTN, 0, 4);
+    	grid.add(doneBTN, 0, 4);
     	
        	
        	//Styles
@@ -204,7 +205,6 @@ public class MangerView extends View {
 		     	processAction(e);    
      	     }
 		});
-    	
     	
 		return grid;
 	}

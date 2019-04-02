@@ -91,20 +91,44 @@ public class Manager implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-		//Set choice to tbe key being passed in.
-		Manager.setChoice(key);
+		//Only set choice to the key if it is a key from the choice transaction screen.
 		
-		if(key.equals("ModifyVendor")||key.equals("AddVIIT"))
+		//Debug.
+		System.out.println("KEY:" + key);
+		System.out.println("Manger's chocie:" + Manager.getChoice());
+		
+		if(key.equals("ModifyVendor")||key.equals("AddVIIT")) {
+			Manager.setChoice(key);
 			createAndShowVendorSearch();
-		else if(key.equals("VendorSelectionScreen"))
+		}
+		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors(value);
-		else if(key.equals("VendorSelected")) //Needs history
-	        createAndShowModifyVendor((Vendor)value);
-
-		else if(key.equals("chooseActionScreen")||key.equals("cancel"))
+		}
+		else if(key.equals("VendorSelected")) {
+			
+			//Debug.
+			System.out.println("VENDOR SELECTED KEY!");
+			
+			//Use history.
+			if(Manager.getChoice() == "ModifyVendor") {
+				createAndShowModifyVendor((Vendor)value);
+			}
+			else if(Manager.getChoice() == "AddVIIT") {
+				//First need to go to inventory search view once it is implemented.
+				
+				//For now go to vendorPriceScreen.
+				createAndShowVendorIventoryPriceView();
+			}
+			
+			
+		}
+		else if(key.equals("chooseActionScreen")||key.equals("cancel")) {
 			createAndShowManagerView();
-		else
+		}
+		else {
 			System.out.println("No screen for key.");
+		}
+			
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -184,6 +208,9 @@ public class Manager implements IView, IModel
 			View newView = ViewFactory.createView("ManagerView", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
 			myViews.put("ManagerView", currentScene);
+			
+			//Reset choice.
+			Manager.setChoice("");
 		}
 				
 		swapToView(currentScene);
@@ -232,6 +259,21 @@ public class Manager implements IView, IModel
 		}
 		swapToView(localScene);
 	}
+    
+    private void createAndShowVendorIventoryPriceView () {
+    	
+    	System.out.println("CREATING VENDOR PRICE VIEW!");
+    	Scene localScene = myViews.get("VendorInventoryPrice");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("VendorInventoryPrice", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("VendorInventoryPrice", localScene);
+		}
+		swapToView(localScene);
+    }
 
 	
 //-----------------------------------------------------------------------------
