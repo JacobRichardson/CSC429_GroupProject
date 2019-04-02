@@ -28,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.InventoryItemType;
+import model.Manager;
 import model.Vendor;
 import model.VendorInventoryItemType;
 
@@ -96,7 +97,7 @@ public class VendorInventoryPriceView  extends View
 		//ADD COMPONTES TO GRID.
 		grid.add(priceLBL, 0, 0);				grid.add(priceTF, 1, 0);
 		grid.add(submitBTN, 0, 1);				grid.add(cancelBTN, 1, 1);
-		grid.add(messageLBL, 0, 4);
+		grid.add(messageLBL, 0, 4, 2, 1);
 		
 		//STYLE GRID.
 		
@@ -117,7 +118,7 @@ public class VendorInventoryPriceView  extends View
     	//Call process action.
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
-		     	processAction(e);    
+		    	 new Manager();   
      	     }
     	});
     
@@ -141,7 +142,7 @@ public class VendorInventoryPriceView  extends View
 			messageLBL.setText("Please enter price.");
 		}
 		//Check to make sure the number is positive.
-		else if(isDouble(priceTF.getText())) {
+		else if(!isDouble(priceTF.getText())) {
 			priceTF.requestFocus();
 			messageLBL.setText("Please enter a positive decimal number for the price.");
 		}
@@ -162,7 +163,7 @@ public class VendorInventoryPriceView  extends View
 			priceTF.setText("");
 			
 			//Display message.
-			displayMessage("Vendor Inventory Item Type has been entered!");
+			//displayMessage("Vendor Inventory Item Type has been entered!");
 		}
 				
 	}
@@ -175,9 +176,12 @@ public class VendorInventoryPriceView  extends View
 		//New properties object.
 		Properties props = new Properties();
 		
+		System.out.println("VendorId: " + vendorId);
+		
 		//Set the properties.
 		props.setProperty("VendorId", vendorId);
-		props.setProperty("InventoryItemTypeName", inventoryItemTypeName);
+		//TODO: Change this to be the inventory item type name.
+		props.setProperty("InventoryItemTypeName", "Bread");
 		props.setProperty("VendorPrice", price);
 		props.setProperty("DateOfLastUpdate", dateOfLastUpdate);
 		
@@ -186,9 +190,6 @@ public class VendorInventoryPriceView  extends View
 		
 		//Save into the database.
 		vip.update();
-		
-		//Debug.
-		System.out.println(vip.toString());
 		
 		//Switch to a screen if you want to.
 		//myModel.stateChangeRequest("VendorInventoryPrice", "");

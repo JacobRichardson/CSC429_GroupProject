@@ -18,7 +18,7 @@ import userInterface.ViewFactory;
 
 public class VendorInventoryItemType extends EntityBase implements IView 
 {
-	private static final String myTableName = "Vendor-InventoryItemType";
+	private static final String myTableName = "VendorInventoryItemType";
 
 	protected Properties dependencies;
 
@@ -87,6 +87,8 @@ public class VendorInventoryItemType extends EntityBase implements IView
 	//-----------------------------------------------------------------------------------
 	public void updateStateInDatabase() 
 	{
+		
+		
 		try
 		{
 			Integer vendorInventoryItemTypeId = insertAutoIncrementalPersistentState(mySchema, persistentState);
@@ -97,6 +99,7 @@ public class VendorInventoryItemType extends EntityBase implements IView
 		catch (SQLException ex)
 		{
 			updateStatusMessage = "Error in installing account data in database!";
+			System.out.println(ex.getMessage());
 		}
 		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
 	}
