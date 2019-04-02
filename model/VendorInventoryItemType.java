@@ -16,7 +16,7 @@ import impresario.IView;
 import userInterface.View;
 import userInterface.ViewFactory;
 
-public class VendorInventoryPrice extends EntityBase implements IView 
+public class VendorInventoryItemType extends EntityBase implements IView 
 {
 	private static final String myTableName = "Vendor-InventoryItemType";
 
@@ -30,7 +30,7 @@ public class VendorInventoryPrice extends EntityBase implements IView
 	// Can also be used to create a NEW Account (if the system it is part of
 	// allows for a new account to be set up)
 	//----------------------------------------------------------
-	public VendorInventoryPrice(Properties props)
+	public VendorInventoryItemType(Properties props)
 	{
 		super(myTableName);
 

@@ -29,7 +29,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.InventoryItemType;
 import model.Vendor;
-import model.VendorInventoryPrice;
+import model.VendorInventoryItemType;
 
 import java.time.LocalDate;
 
@@ -182,7 +182,7 @@ public class VendorInventoryPriceView  extends View
 		props.setProperty("DateOfLastUpdate", dateOfLastUpdate);
 		
 		//Create the Vendor Inventory Price object.
-		VendorInventoryPrice vip = new VendorInventoryPrice(props);
+		VendorInventoryItemType vip = new VendorInventoryItemType(props);
 		
 		//Save into the database.
 		vip.update();
