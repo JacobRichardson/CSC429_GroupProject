@@ -121,6 +121,8 @@ public class SearchVendorNamePhone extends View {
 		myModel.stateChangeRequest("VendorSelectionScreen", details);
 	}
 	
+	
+	
 			public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
