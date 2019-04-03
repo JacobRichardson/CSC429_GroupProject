@@ -111,6 +111,10 @@ public class Manager implements IView, IModel
 			
 			
 		}
+		else if(key.equals("FindInventoryItemTypeView")){
+			createAndShowFindInventoryItemTypeView();
+			System.out.println("test");
+		}
 		else if(key.equals("chooseActionScreen")||key.equals("cancel")) {
 			createAndShowManagerView();
 		}
@@ -249,6 +253,19 @@ public class Manager implements IView, IModel
 		}
 		swapToView(localScene);
 	}
+private void createAndShowFindInventoryItemTypeView() {
+    	
+    	Scene localScene = myViews.get("FindInventoryItemTypeView");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("FindInventoryItemTypeView", localScene);
+		}
+		swapToView(localScene);
+    }
 
 
 	
