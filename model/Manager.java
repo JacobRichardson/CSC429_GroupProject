@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.Properties;
 
 import javafx.stage.Stage;
+import userInterface.IITCollectionView;
 import userInterface.MainStageContainer;
 import userInterface.View;
 import userInterface.ViewFactory;
@@ -104,6 +105,9 @@ public class Manager implements IView, IModel
 		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors(value);
 		}
+		else if(key.equals("IITCollectionView")) {
+			searchIIT(value);
+		}
 		else if(key.equals("VendorSelected")) {
 			
 			//Debug.
@@ -111,9 +115,9 @@ public class Manager implements IView, IModel
 			
 			
 		}
-		else if(key.equals("FindInventoryItemTypeView")){
+		else if(key.equals("ModifyIIT")){
+			Manager.setChoice(key);
 			createAndShowFindInventoryItemTypeView();
-			System.out.println("test");
 		}
 		else if(key.equals("chooseActionScreen")||key.equals("cancel")) {
 			createAndShowManagerView();
@@ -134,6 +138,15 @@ public class Manager implements IView, IModel
 			createAndShowVendorCollection(v);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void searchIIT(Object value) {
+		try {
+			String history = Manager.getChoice();
+			IITCollection iIT = new IITCollection((String)value, history);
+			createAndShowIITCollectionView(iIT);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -211,6 +224,22 @@ public class Manager implements IView, IModel
 		
 	}
 	
+	private void createAndShowIITCollectionView(IITCollection iIT) {
+		Scene currentScene = (Scene)myViews.get("IITCollectionView");
+		
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			myViews.put("IITCollectionView", currentScene);
+		}
+				
+
+		// make the view visible by installing it into the frame
+		swapToView(currentScene);
+		
+	}
 	private void createAndShowVendorSearch() {
 		Scene currentScene = (Scene)myViews.get("searchVendor");
 		

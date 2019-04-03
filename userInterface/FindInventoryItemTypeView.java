@@ -62,7 +62,6 @@ public class FindInventoryItemTypeView extends View {
 	private void populateFields() {
 		itemTypeTF.setText("");
 		notesTF.setText("");
-		//statusCB.getItems().addAll("Active", "Inactive");
 		messageLBL.setText("");
 	}
 	private Node createTitle() {		
@@ -85,7 +84,7 @@ public class FindInventoryItemTypeView extends View {
     	grid.add(itemTypeLBL, 0, 0);
     	grid.add(andLBL, 0, 1);
     	grid.add(notesLBL, 0, 2);
-    	grid.add(messageLBL, 0, 3);
+    	grid.add(messageLBL, 0, 4);
     	
     	grid.add(itemTypeTF, 1, 0);
     	grid.add(notesTF, 1, 2);
@@ -108,17 +107,19 @@ grid.add(submitBTN, 0, 3);
     	return grid;
 	}
 	protected void processAction(Event e) {
-		if(e.getSource()==submitBTN)
-			getTypes();
-		else if(e.getSource()==cancelBTN)
+		if (e.getSource()==cancelBTN) {
+			populateFields();
 			myModel.stateChangeRequest("chooseActionScreen", null);
+		}
 		else if(itemTypeTF.getText().isEmpty() && notesTF.getText().isEmpty())
 			messageLBL.setText("ItemTypeName or Notes must be filled");
 		else
-			myModel.stateChangeRequest("chooseActionScreen", null);
+			getTypes();
 	}
 	protected void getTypes(){
-		
+		String query = "SELECT * FROM `InventoryItemType` WHERE ItemTypeName LIKE "
+				+"'%"+itemTypeTF.getText()+"%' AND Notes LIKE '%"+notesTF.getText()+"%'";
+		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {
 		

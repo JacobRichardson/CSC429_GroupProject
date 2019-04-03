@@ -28,6 +28,9 @@ public class ViewFactory {
 		else if(viewName.equals("FindInventoryItemTypeView") == true){
 			return new FindInventoryItemTypeView(model);
 		}
+		else if(viewName.equals("IITCollectionView") == true){
+			return new IITCollectionView(model);
+		}
 		else
 			return null;
 	}

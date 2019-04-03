@@ -221,7 +221,7 @@ public class MangerView extends View {
 		else if(e.getSource() == outOfInventoryBTN)
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("FindInventoryItemTypeView", null);
+			myModel.stateChangeRequest("ModifyIIT", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)

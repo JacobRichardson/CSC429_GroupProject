@@ -16,6 +16,26 @@ public class InventoryItemType extends EntityBase implements IView{
 	
 	private String updateStatusMessage = "";
 	
+	protected Properties dependencies;
+	
+	public InventoryItemType(Properties props)
+	{
+		super(myTableName);
+
+		setDependencies();
+		persistentState = new Properties();
+		Enumeration allKeys = props.propertyNames();
+		while (allKeys.hasMoreElements() == true)
+		{
+			String nextKey = (String)allKeys.nextElement();
+			String nextValue = props.getProperty(nextKey);
+			if (nextValue != null)
+			{
+				persistentState.setProperty(nextKey, nextValue);
+			}
+		}
+	}
+	
 	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
@@ -129,5 +149,35 @@ public class InventoryItemType extends EntityBase implements IView{
 	 */
 	public static void resetSelectedVendorId() {
 		InventoryItemType.selectedInventoryItemTypeName = "";
+	}
+	
+	public static int compare(InventoryItemType a, InventoryItemType b)
+	{
+		String aNum = (String)a.getState("ItemTypeName");
+		String bNum = (String)b.getState("ItemTypeName");
+
+		return aNum.compareTo(bNum);
+	}
+	
+	private void setDependencies()
+	{
+		dependencies = new Properties();
+	
+		myRegistry.setDependencies(dependencies);
+	}
+
+	public Vector<String> getEntryListView()
+	{
+		Vector<String> v = new Vector<String>();
+
+		v.addElement(persistentState.getProperty("ItemTypeName"));
+		v.addElement(persistentState.getProperty("Units"));
+		v.addElement(persistentState.getProperty("UnitMeasure"));
+		v.addElement(persistentState.getProperty("ValidityDays"));
+		v.addElement(persistentState.getProperty("ReorderPoint"));
+		v.addElement(persistentState.getProperty("Notes"));
+		v.addElement(persistentState.getProperty("Status"));
+		
+		return v;
 	}
 }
