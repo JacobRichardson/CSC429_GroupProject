@@ -1,0 +1,1 @@
+javac  –classpath classes;. RMS.java
