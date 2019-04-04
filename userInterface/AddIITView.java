@@ -147,7 +147,7 @@ public class AddIITView extends View {
 	protected void processAction(Event e) {
 		
 		//First check to see if the fields are empty.
-		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty() || statusTF.getText().isEmpty())
+		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty())
 			messageLBL.setText("All Item Type data must be filled");
 		//Then check to see if it is the submit button.
 		else if(e.getSource()==submitBTN)
@@ -168,7 +168,7 @@ public class AddIITView extends View {
 		props.setProperty("ValidityDays", validityDaysTF.getText());
 		props.setProperty("ReorderPoint", reorderPointTF.getText());
 		props.setProperty("Notes", notesTF.getText());
-		props.setProperty("Status", statusTF.getText());
+		props.setProperty("Status", (String) statusCB.getValue());
 		
 		//TODO: InventoryItemType model needs to be updated.
 		
