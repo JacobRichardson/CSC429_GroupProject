@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class iITTableModel {
 
 		private final SimpleStringProperty ItemTypeName;
-		private final SimpleStringProperty Unit;
+		private final SimpleStringProperty Units;
 		private final SimpleStringProperty UnitMeasure;
 		private final SimpleStringProperty ValidityDays;
 		private final SimpleStringProperty ReorderPoint;
@@ -16,7 +16,7 @@ public class iITTableModel {
 		public iITTableModel(Vector<String> data)
 		{
 			ItemTypeName =  new SimpleStringProperty(data.elementAt(0));
-			Unit =  new SimpleStringProperty(data.elementAt(1));
+			Units =  new SimpleStringProperty(data.elementAt(1));
 			UnitMeasure =  new SimpleStringProperty(data.elementAt(2));
 			ValidityDays =  new SimpleStringProperty(data.elementAt(3));
 			ReorderPoint =  new SimpleStringProperty(data.elementAt(4));
@@ -35,13 +35,13 @@ public class iITTableModel {
 	    }
 
 	    //----------------------------------------------------------------------------
-	    public String getUnit() {
-	        return Unit.get();
+	    public String getUnits() {
+	        return Units.get();
 	    }
 
 	    //----------------------------------------------------------------------------
-	    public void setUnit(String n) {
-	        Unit.set(n);
+	    public void setUnits(String n) {
+	        Units.set(n);
 	    }
 
 	    //----------------------------------------------------------------------------
