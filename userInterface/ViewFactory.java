@@ -25,6 +25,12 @@ public class ViewFactory {
 		else if(viewName.equals("VendorInventoryPrice") == true) {
 			return new VendorInventoryPriceView(model);
 		}
+		else if (viewName.equals("searchInventoryItemType")) {
+			return new SearchInventoryItemType(model);
+		}
+		else if (viewName.equals("InventoryItemTypeCollection")) {
+			return new InventoryItemTypeCollectionView(model);
+		}
 		else
 			return null;
 	}
