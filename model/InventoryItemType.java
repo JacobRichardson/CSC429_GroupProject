@@ -16,6 +16,9 @@ public class InventoryItemType extends EntityBase implements IView{
 	
 	private String updateStatusMessage = "";
 	
+	//TODO: The constructor of this needs to match the constructor of the vendor.
+	//		It needs to take in a properties object.
+	
 	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		

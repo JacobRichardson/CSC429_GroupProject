@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.Manager;
-import model.Vendor;
+import model.InventoryItemType;
 
 public class AddIITView extends View {
 	//TextFields
@@ -39,7 +39,7 @@ public class AddIITView extends View {
 	private TextField notesTF = new TextField();
 	private TextField statusTF = new TextField();
 	//Buttons
-	private Button submitBTN;
+	private Button submitBTN = new Button("Submit");
 	private Button cancelBTN = new Button("Cancel");
 	//Labels
 	private Label typeNameLBL = new Label("Item Type Name");
@@ -100,42 +100,84 @@ public class AddIITView extends View {
     	grid.setVgap(10);
     	grid.setPadding(new Insets(25, 25, 25, 25));
     	
-    	grid.add(vendorLBL, 0, 0);
-    	grid.add(phoneLBL, 0, 1);
-    	grid.add(statusLBL, 0, 2);
-    	grid.add(messageLBL, 0, 3);
+    	//Add the components to the grid.
     	
-    	grid.add(vendorTF, 1, 0);
-    	grid.add(phoneTF, 1, 1);
-    	grid.add(statusCB, 1, 2);
+    	//Add the labels.
+    	grid.add(typeNameLBL, 0, 0);
+    	grid.add(unitsLBL, 0, 1);
+    	grid.add(unitMeasureLBL, 0, 2);
+    	grid.add(validityDaysLBL, 0, 3);
+    	grid.add(reorderPointLBL, 0, 4);
+    	grid.add(notesLBL, 0, 5);
+    	grid.add(statusLBL, 0, 6);
     	
-    	submitBTN = new Button("Submit");
+    	//Add the text fields.
+    	grid.add(typeNameTF, 1, 0);
+    	grid.add(unitsTF, 1, 1);
+    	grid.add(unitMeasureTF, 1, 2);
+     	grid.add(validityDaysTF, 1, 3);
+    	grid.add(reorderPointTF, 1, 4);
+    	grid.add(notesTF, 1, 5);
+    	grid.add(statusTF, 1, 6);
+    	
+    	//Add the button.
+    	grid.add(submitBTN,0,7);
+    	grid.add(cancelBTN, 1, 7);
+    	
+    	//Event handlers.
+    	
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
-  	});
-    	grid.add(submitBTN, 0, 3);
+    	});
     	
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	new Manager();   
      	     }
- 	});
-    	grid.add(cancelBTN, 1, 3);
+    	});
+    	
     	return grid;
 	}
+	
+	
 	//Process action from submit button
 	protected void processAction(Event e) {
-		if(e.getSource()==submitBTN)
-			updateVendor();
-		else if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty() || statusTF.getText().isEmpty())
+		
+		//First check to see if the fields are empty.
+		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty() || statusTF.getText().isEmpty())
 			messageLBL.setText("All Item Type data must be filled");
-		else
-			myModel.stateChangeRequest("chooseActionScreen", null);
+		//Then check to see if it is the submit button.
+		else if(e.getSource()==submitBTN)
+			addInventoryItemType();
 	}
 	
-	protected void updateVendor() {
+	protected void addInventoryItemType() {
+		
+		//Process adding the inventory item type.
+		
+		//New properties object.
+		Properties props = new Properties();
+		
+		//Set the values.
+		props.setProperty("ItemTypeName", typeNameTF.getText());
+		props.setProperty("Units", unitsTF.getText());
+		props.setProperty("UnitMeasure", unitMeasureTF.getText());
+		props.setProperty("ValidityDays", validityDaysTF.getText());
+		props.setProperty("ReorderPoint", reorderPointTF.getText());
+		props.setProperty("Notes", notesTF.getText());
+		props.setProperty("Status", statusTF.getText());
+		
+		//TODO: InventoryItemType model needs to be updated.
+		
+		//Create the inventory item type.
+		//InventoryItemType iit = new InventoryItemType(props);
+		
+		//Save it into the database.
+		//itt.update();
+		
+		//Display message on GUI.
 		
 	}
 	
