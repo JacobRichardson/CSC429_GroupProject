@@ -1,8 +1,5 @@
 package userInterface;
 
-import java.util.Properties;
-import java.util.regex.Pattern;
-
 import impresario.IModel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
@@ -27,21 +24,23 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import java.util.Properties;
 
-public class SearchVendorNamePhone extends View {
-	
-	private TextField vendorTF = new TextField();
-	private TextField phoneTF = new TextField();
+public class FindInventoryItemTypeView extends View {
+
+	private TextField itemTypeTF = new TextField();
+	private TextField notesTF = new TextField();
 	
 	private Button submitBTN;
-	private Button cancelBTN = new Button("Cancel");
+	private Button cancelBTN;
 	
-	private Label vendorLBL = new Label("Vendor");
-	private Label phoneLBL= new Label("Phone Number");
+	private Label itemTypeLBL = new Label("Part of ItemTypeName:");
+	private Label andLBL = new Label("And/Or");
+	private Label notesLBL = new Label("Part of Notes:");
 	private Label messageLBL = new Label();
 	
-	public SearchVendorNamePhone(IModel model) {
-		super(model, "EnterBookView");
+	public FindInventoryItemTypeView(IModel model){
+		super(model, "FindInventoryItemTypeView");
 		
 		VBox container = new VBox(10);
 
@@ -60,13 +59,12 @@ public class SearchVendorNamePhone extends View {
 		myModel.subscribe("LoginError", this);
 
 	}
-	
 	private void populateFields() {
-		vendorTF.setText("");
-		phoneTF.setText("");
+		itemTypeTF.setText("");
+		notesTF.setText("");
+		//statusCB.getItems().addAll("Active", "Inactive");
 		messageLBL.setText("");
 	}
-	
 	private Node createTitle() {		
 		Text titleText = new Text("       Restaurant Inventory Managment         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -84,12 +82,13 @@ public class SearchVendorNamePhone extends View {
     	grid.setVgap(10);
     	grid.setPadding(new Insets(25, 25, 25, 25));
     	
-    	grid.add(vendorLBL, 0, 0);
-    	grid.add(phoneLBL, 0, 1);
-    	grid.add(messageLBL, 0, 4);
+    	grid.add(itemTypeLBL, 0, 0);
+    	grid.add(andLBL, 0, 1);
+    	grid.add(notesLBL, 0, 2);
+    	grid.add(messageLBL, 0, 3);
     	
-    	grid.add(vendorTF, 1, 0);
-    	grid.add(phoneTF, 1, 1);
+    	grid.add(itemTypeTF, 1, 0);
+    	grid.add(notesTF, 1, 2);
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -97,34 +96,31 @@ public class SearchVendorNamePhone extends View {
  		     	processAction(e);    
       	     }
   	});
-    	grid.add(submitBTN, 0, 2);
+grid.add(submitBTN, 0, 3);
     	
+		cancelBTN = new Button("Cancel");
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
  	});
-    	grid.add(cancelBTN, 1, 2);
+    	grid.add(cancelBTN, 1, 3);
     	return grid;
 	}
-	
 	protected void processAction(Event e) {
-		if(e.getSource() == cancelBTN)
-			myModel.stateChangeRequest("cancel", null);
-		else if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
-			messageLBL.setText("Please enter info.");
-			else
-				enterVendorDetails();
+		if(e.getSource()==submitBTN)
+			getTypes();
+		else if(e.getSource()==cancelBTN)
+			myModel.stateChangeRequest("chooseActionScreen", null);
+		else if(itemTypeTF.getText().isEmpty() && notesTF.getText().isEmpty())
+			messageLBL.setText("ItemTypeName or Notes must be filled");
+		else
+			myModel.stateChangeRequest("chooseActionScreen", null);
 	}
-	private void enterVendorDetails(){
-		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
-		myModel.stateChangeRequest("VendorSelectionScreen", details);
+	protected void getTypes(){
+		
 	}
-	
-	
-	
-			public void updateState(String key, Object value) {
-		// TODO Auto-generated method stub
+	public void updateState(String key, Object value) {
 		
 	}
 }

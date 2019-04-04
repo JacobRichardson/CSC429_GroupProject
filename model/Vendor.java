@@ -114,7 +114,9 @@ public class Vendor extends EntityBase implements IView
 	//----------------------------------------------------------
 	public Object getState(String key)
 	{
-		if (key.equals("Name") == true)
+		if(key.equals("Id") == true)
+			return persistentState.getProperty(key);
+		else if (key.equals("Name") == true)
 			return persistentState.getProperty(key);
 		else if((key.equals("PhoneNumber") == true))
 			return persistentState.getProperty(key);

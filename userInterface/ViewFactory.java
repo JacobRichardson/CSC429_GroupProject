@@ -9,7 +9,7 @@ public class ViewFactory {
 	{
 		if(viewName.equals("ManagerView") == true)
 		{
-			return new MangerView(model);
+			return new ManagerView(model);
 		}
 		else if(viewName.equals("searchVendor") == true)
 		{
@@ -25,11 +25,14 @@ public class ViewFactory {
 		else if(viewName.equals("VendorInventoryPrice") == true) {
 			return new VendorInventoryPriceView(model);
 		}
-		else if (viewName.equals("searchInventoryItemType")) {
-			return new SearchInventoryItemType(model);
+		else if(viewName.equals("FindInventoryItemTypeView") == true){
+			return new FindInventoryItemTypeView(model);
 		}
-		else if (viewName.equals("InventoryItemTypeCollection")) {
-			return new InventoryItemTypeCollectionView(model);
+		else if(viewName.equals("AddVendor") == true) {
+			return new addVendorView(model);
+		}
+		else if(viewName.equals("AddIIT") == true) {
+			return new AddIITView(model);
 		}
 		else
 			return null;

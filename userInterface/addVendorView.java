@@ -1,7 +1,6 @@
 package userInterface;
 
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 import impresario.IModel;
 import javafx.geometry.Insets;
@@ -18,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,8 +27,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import model.Manager;
+import model.Vendor;
 
-public class SearchVendorNamePhone extends View {
+public class addVendorView extends View {
 	
 	private TextField vendorTF = new TextField();
 	private TextField phoneTF = new TextField();
@@ -36,11 +38,15 @@ public class SearchVendorNamePhone extends View {
 	private Button submitBTN;
 	private Button cancelBTN = new Button("Cancel");
 	
-	private Label vendorLBL = new Label("Vendor");
+	private Label vendorLBL = new Label("Vendor Name");
 	private Label phoneLBL= new Label("Phone Number");
-	private Label messageLBL = new Label();
+	private Label statusLBL= new Label("Status");
 	
-	public SearchVendorNamePhone(IModel model) {
+	private ComboBox statusCB = new ComboBox();
+	private Label messageLBL = new Label();
+	private String Id;
+	
+	public addVendorView(IModel model) {
 		super(model, "EnterBookView");
 		
 		VBox container = new VBox(10);
@@ -62,8 +68,11 @@ public class SearchVendorNamePhone extends View {
 	}
 	
 	private void populateFields() {
-		vendorTF.setText("");
-		phoneTF.setText("");
+		Id=""+myModel.getState("Id");
+		vendorTF.setText((String) myModel.getState("Name"));
+		phoneTF.setText((String) myModel.getState("PhoneNumber"));
+		statusCB.getItems().addAll("Active", "Inactive");
+		statusCB.setValue(myModel.getState("Status"));
 		messageLBL.setText("");
 	}
 	
@@ -86,10 +95,12 @@ public class SearchVendorNamePhone extends View {
     	
     	grid.add(vendorLBL, 0, 0);
     	grid.add(phoneLBL, 0, 1);
+    	grid.add(statusLBL, 0, 2);
     	grid.add(messageLBL, 0, 4);
     	
     	grid.add(vendorTF, 1, 0);
     	grid.add(phoneTF, 1, 1);
+    	grid.add(statusCB, 1, 2);
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -97,34 +108,72 @@ public class SearchVendorNamePhone extends View {
  		     	processAction(e);    
       	     }
   	});
-    	grid.add(submitBTN, 0, 2);
+    	grid.add(submitBTN, 0, 3);
     	
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
-		     	processAction(e);    
+		     	new Manager();   
      	     }
  	});
-    	grid.add(cancelBTN, 1, 2);
+    	grid.add(cancelBTN, 1, 3);
+    	
+    vendorTF.setOnAction(new EventHandler<ActionEvent>() {
+		     public void handle(ActionEvent e) {
+		      messageLBL.setText("");
+    	     }
+    });
+    
+    phoneTF.setOnAction(new EventHandler<ActionEvent>() {
+	     public void handle(ActionEvent e) {
+
+	      messageLBL.setText("");
+	     }
+});
+    	
     	return grid;
 	}
 	
 	protected void processAction(Event e) {
-		if(e.getSource() == cancelBTN)
-			myModel.stateChangeRequest("cancel", null);
-		else if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
-			messageLBL.setText("Please enter info.");
-			else
-				enterVendorDetails();
-	}
-	private void enterVendorDetails(){
-		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
-		myModel.stateChangeRequest("VendorSelectionScreen", details);
+		if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
+			messageLBL.setText("All vendor data must be filled");
+		else if(!checkPhone(phoneTF.getText()) || phoneTF.getText().length()!=12)
+			messageLBL.setText("Please enter phone number \nin xxx-xxx-xxxx");
+			
+		else addVendor();
 	}
 	
+	protected void addVendor() {
+		
+		Properties props = new Properties();
+		props.setProperty("Name", vendorTF.getText());
+		props.setProperty("PhoneNumber", phoneTF.getText());
+		props.setProperty("Status", (String) statusCB.getValue());
+		Vendor v= new Vendor(props);
+		v.update();
+		messageLBL.setText("Vendor added.");
+	}
 	
+	public boolean checkPhone(String num) {
+		//585-111-1111
+		for(int i=0; i<num.length(); i++) {
+			if((i==3||i==7) && num.charAt(i)!='-') 
+				return false;
+			else if(!(num.charAt(i)>='0' && num.charAt(i)<='9') && i!=3 && i!=7) 
+				return false;
+		}
+		return true;
+	}
 	
 			public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
 	}
+			
+			public void mouseClicked(MouseEvent click)
+			{
+				if(click.getClickCount() >= 1)
+				{
+					messageLBL.setText("");
+				}
+			}
 }
