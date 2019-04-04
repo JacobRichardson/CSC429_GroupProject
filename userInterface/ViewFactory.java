@@ -37,6 +37,12 @@ public class ViewFactory {
 		else if(viewName.equals("AddIIT") == true) {
 			return new AddIITView(model);
 		}
+		else if(viewName.equals("iitDelete") == true) {
+			return new addVendorView(model);
+		}
+		else if(viewName.equals("ittModify") == true) {
+			return new AddIITView(model);
+		}
 		else
 			return null;
 	}

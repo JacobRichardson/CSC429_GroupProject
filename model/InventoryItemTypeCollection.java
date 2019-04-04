@@ -12,6 +12,9 @@ import event.Event;
 import database.*;
 
 import impresario.IView;
+import javafx.scene.Scene;
+import userInterface.View;
+import userInterface.ViewFactory;
 
 //==============================================================
 public class InventoryItemTypeCollection  extends EntityBase implements IView
@@ -111,10 +114,44 @@ public class InventoryItemTypeCollection  extends EntityBase implements IView
 	public void stateChangeRequest(String key, Object value)
 	{
 		// Class is invariant, so this method does not change any attributes
-
+		//I BELEIVE YOU HAVE TO MOVE THIS TO InventoryItemType.
+		if(key == "ModifyIIT")
+		{
+			createAndShowModifyInventoryItemTypeView((InventoryItemType) value);
+		}
+		else if(key == "AddIIT")
+		{
+			createAndShowDeleteInventoryItemTypeView((InventoryItemType) value);
+		}
 		myRegistry.updateSubscribers(key, this);
 	}
 
+	private void createAndShowModifyInventoryItemTypeView(InventoryItemType iit) {
+    	Scene localScene = (Scene)myViews.get("ittModify");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("ittModify", iit); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("ittModify", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	private void createAndShowDeleteInventoryItemTypeView(InventoryItemType iit) {
+    	Scene localScene = (Scene)myViews.get("iitDelete");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("iitDelete", iit); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("iitDelete", localScene);
+		}
+		swapToView(localScene);
+	}
+	
 	/** Called via the IView relationship */
 	//----------------------------------------------------------
 	public void updateState(String key, Object value)
