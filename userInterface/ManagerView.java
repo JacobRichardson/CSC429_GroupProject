@@ -25,7 +25,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class MangerView extends View {
+public class ManagerView extends View {
 	
 	private Button addIventoryItemTypeBTN;
 	private Button modifyVendorBTN;
@@ -47,7 +47,7 @@ public class MangerView extends View {
 	private Button doneBTN;
 
 	
-	public MangerView(IModel model) {
+	public ManagerView(IModel model) {
 		super(model, "Manger View");
 		VBox container = new VBox(10);
 
