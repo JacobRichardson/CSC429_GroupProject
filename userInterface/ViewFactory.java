@@ -31,6 +31,12 @@ public class ViewFactory {
 		else if(viewName.equals("IITCollectionView") == true){
 			return new IITCollectionView(model);
 		}
+		else if(viewName.equals("AddVendor") == true) {
+			return new addVendorView(model);
+		}
+		else if(viewName.equals("AddIIT") == true) {
+			return new AddIITView(model);
+		}
 		else
 			return null;
 	}
