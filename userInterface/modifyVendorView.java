@@ -159,8 +159,11 @@ public class modifyVendorView extends View {
 			if((i==3||i==7) && num.charAt(i)!='-') 
 				return false;
 			else if(num.charAt(i)<='0' && num.charAt(i)>='9') 
+			else if(!(num.charAt(i)>='0' && num.charAt(i)<='9') && i!=3 && i!=7) 
 				return false;
+			System.out.println(num.charAt(i));
 		}
+
 		return true;
 	}
 	
