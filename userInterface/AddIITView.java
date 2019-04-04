@@ -37,7 +37,7 @@ public class AddIITView extends View {
 	private TextField validityDaysTF = new TextField();
 	private TextField reorderPointTF = new TextField();
 	private TextField notesTF = new TextField();
-	private TextField statusTF = new TextField();
+	private ComboBox statusCB = new ComboBox();
 	//Buttons
 	private Button submitBTN = new Button("Submit");
 	private Button cancelBTN = new Button("Cancel");
@@ -80,7 +80,8 @@ public class AddIITView extends View {
 		validityDaysTF.setText("");
 		reorderPointTF.setText("");
 		notesTF.setText("");
-		statusTF.setText("");
+		statusCB.getItems().addAll("Active", "Inactive");
+		statusCB.setValue(myModel.getState("Status"));
 	}
 	//Make the title of the screen
 	private Node createTitle() {		
@@ -118,7 +119,7 @@ public class AddIITView extends View {
      	grid.add(validityDaysTF, 1, 3);
     	grid.add(reorderPointTF, 1, 4);
     	grid.add(notesTF, 1, 5);
-    	grid.add(statusTF, 1, 6);
+    	grid.add(statusCB, 1, 6);
     	
     	//Add the button.
     	grid.add(submitBTN,0,7);
