@@ -16,30 +16,12 @@ public class InventoryItemType extends EntityBase implements IView{
 	
 	private String updateStatusMessage = "";
 	
-	protected Properties dependencies;
-	
-	public InventoryItemType(Properties props)
-	{
-		super(myTableName);
-
-		setDependencies();
-		persistentState = new Properties();
-		Enumeration allKeys = props.propertyNames();
-		while (allKeys.hasMoreElements() == true)
-		{
-			String nextKey = (String)allKeys.nextElement();
-			String nextValue = props.getProperty(nextKey);
-			if (nextValue != null)
-			{
-				persistentState.setProperty(nextKey, nextValue);
-			}
-		}
-	}
+	//TODO: The constructor of this needs to match the constructor of the vendor.
+	//		It needs to take in a properties object.
 	
 	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
-		setDependencies();
 		String query = "SELECT * FROM " + myTableName + " WHERE (ItemTypeName = '" + itemTypeName + "')";
 
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
@@ -96,7 +78,6 @@ public class InventoryItemType extends EntityBase implements IView{
 		
 			}	
 		} catch (SQLException e) {
-			
 			updateStatusMessage = "Error in deleting InventoryItemType data in database!";
 		}
 		
@@ -151,12 +132,5 @@ public class InventoryItemType extends EntityBase implements IView{
 	 */
 	public static void resetSelectedVendorId() {
 		InventoryItemType.selectedInventoryItemTypeName = "";
-	}
-	
-	private void setDependencies()
-	{
-		dependencies = new Properties();
-	
-		myRegistry.setDependencies(dependencies);
 	}
 }
