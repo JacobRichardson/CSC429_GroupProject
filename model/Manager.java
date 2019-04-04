@@ -104,12 +104,18 @@ public class Manager implements IView, IModel
 		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors(value);
 		}
+		else if (key.equals("InventoryItemTypeSelectionScreen")) {
+			searchInventoryItemType(value);
+		}
 		else if(key.equals("VendorSelected")) {
 			
 			//Debug.
 			System.out.println("VENDOR SELECTED KEY!");
 			
 			
+		} else if (key.equals("deleteInventoryItemType")) {
+			Manager.setChoice(key);
+			createAndShowInventoryItemTypeSearch();
 		}
 		else if(key.equals("FindInventoryItemTypeView")){
 			createAndShowFindInventoryItemTypeView();
@@ -143,8 +149,17 @@ public class Manager implements IView, IModel
 			e.printStackTrace();
 		}
 	}
-
-
+	
+	private void searchInventoryItemType(Object value) {
+		try {
+			String history=Manager.getChoice();
+			InventoryItemTypeSearchCollection v=new InventoryItemTypeSearchCollection((String)value, history);
+			createAndShowInventoryItemTypeCollection(v);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/** Called via the IView relationship */
 	//----------------------------------------------------------
@@ -234,6 +249,22 @@ public class Manager implements IView, IModel
 		
 	}
 	
+	private void createAndShowInventoryItemTypeSearch() {
+		Scene currentScene = (Scene)myViews.get("searchInventoryItemType");
+		
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("searchInventoryItemType", this); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			myViews.put("searchInventoryItemType", currentScene);
+		}
+				
+
+		// make the view visible by installing it into the frame
+		swapToView(currentScene);
+	}
+	
 	private void createAndShowVendorCollection(VendorSearchCollection v) {
 		Scene localScene = myViews.get("vendorCollection");
 
@@ -243,6 +274,19 @@ public class Manager implements IView, IModel
 			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
 			localScene = new Scene(newView);
 			myViews.put("vendorCollection", localScene);
+		}	
+		swapToView(localScene);
+	}
+	
+	private void createAndShowInventoryItemTypeCollection(InventoryItemTypeSearchCollection v) {
+		Scene localScene = myViews.get("InventoryItemTypeCollection");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("InventoryItemTypeCollection", v); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			myViews.put("InventoryItemTypeCollection", localScene);
 		}	
 		swapToView(localScene);
 	}
@@ -259,34 +303,6 @@ public class Manager implements IView, IModel
 		}
 		swapToView(localScene);
 	}
-private void createAndShowFindInventoryItemTypeView() {
-    	
-    	Scene localScene = myViews.get("FindInventoryItemTypeView");
-
-		if (localScene == null)
-		{
-			// create our initial view
-		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    myViews.put("FindInventoryItemTypeView", localScene);
-		}
-		swapToView(localScene);
-    }
-	
-	private void createAndShowAddVendorView () {
-		
-	 	Scene localScene = myViews.get("AddVendor");
-
-			if (localScene == null)
-			{
-				// create our initial view
-			    View newView = ViewFactory.createView("AddVendor", this); // USE VIEW FACTORY
-			    localScene = new Scene(newView);
-			    myViews.put("AddVendor", localScene);
-			}
-			swapToView(localScene);
-	}
-
 	
 	private void createAndShowAddInventoryItemTypeView () {
 		

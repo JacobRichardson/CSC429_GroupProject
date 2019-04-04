@@ -158,7 +158,7 @@ public class addVendorView extends View {
 		for(int i=0; i<num.length(); i++) {
 			if((i==3||i==7) && num.charAt(i)!='-') 
 				return false;
-			else if(num.charAt(i)<='0' && num.charAt(i)>='9') 
+			else if(!(num.charAt(i)>='0' && num.charAt(i)<='9') && i!=3 && i!=7) 
 				return false;
 		}
 		return true;
