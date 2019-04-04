@@ -104,12 +104,6 @@ public class Manager implements IView, IModel
 		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors(value);
 		}
-		//add vendor
-		/*
-		else if(key.equals("?")) {
-			searchVendors(value);
-		}
-		*/
 		else if(key.equals("VendorSelected")) {
 			
 			//Debug.
@@ -120,13 +114,10 @@ public class Manager implements IView, IModel
 		else if(key.equals("FindInventoryItemTypeView")){
 			createAndShowFindInventoryItemTypeView();
 			System.out.println("test");
-			
-			
 		}
 		else if(key.equals("chooseActionScreen")||key.equals("cancel")) {
 			createAndShowManagerView();
 		}
-		
 		else {
 			System.out.println("No screen for key.");
 		}

@@ -28,9 +28,6 @@ public class ViewFactory {
 		else if(viewName.equals("FindInventoryItemTypeView") == true){
 			return new FindInventoryItemTypeView(model);
 		}
-		else if(viewName.equals("addVendorView") == true){
-			return new addVendorView(model);
-		}
 		else
 			return null;
 	}
