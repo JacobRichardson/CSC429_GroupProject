@@ -105,9 +105,17 @@ public class InventoryItemType extends EntityBase implements IView{
 		
 	}
 
-	public Object getState(String key) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getState(String key)
+	{
+		if(key.equals("ItemTypeName") == true)
+			return persistentState.getProperty(key);
+		else if (key.equals("Units") == true)
+			return persistentState.getProperty(key);
+		else if((key.equals("UnitMeasure") == true))
+			return persistentState.getProperty(key);
+		else if((key.equals("Status") == true))
+			return persistentState.getProperty(key);
+		else return persistentState.getProperty(key);
 	}
 
 	public void stateChangeRequest(String key, Object value) {

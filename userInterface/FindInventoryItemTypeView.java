@@ -118,7 +118,7 @@ grid.add(submitBTN, 0, 3);
 	}
 	protected void getTypes(){
 		String query = "SELECT * FROM `InventoryItemType` WHERE ItemTypeName LIKE "
-				+"'%"+itemTypeTF.getText()+"%' AND Notes LIKE '%"+notesTF.getText()+"%'";
+				+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {
