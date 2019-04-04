@@ -37,7 +37,7 @@ public class AddIITView extends View {
 	private TextField validityDaysTF = new TextField();
 	private TextField reorderPointTF = new TextField();
 	private TextField notesTF = new TextField();
-	private TextField statusTF = new TextField();
+	private ComboBox statusCB = new ComboBox();
 	//Buttons
 	private Button submitBTN = new Button("Submit");
 	private Button cancelBTN = new Button("Cancel");
@@ -80,7 +80,8 @@ public class AddIITView extends View {
 		validityDaysTF.setText("");
 		reorderPointTF.setText("");
 		notesTF.setText("");
-		statusTF.setText("");
+		statusCB.getItems().addAll("Active", "Inactive");
+		statusCB.setValue(myModel.getState("Status"));
 	}
 	//Make the title of the screen
 	private Node createTitle() {		
@@ -118,7 +119,7 @@ public class AddIITView extends View {
      	grid.add(validityDaysTF, 1, 3);
     	grid.add(reorderPointTF, 1, 4);
     	grid.add(notesTF, 1, 5);
-    	grid.add(statusTF, 1, 6);
+    	grid.add(statusCB, 1, 6);
     	
     	//Add the button.
     	grid.add(submitBTN,0,7);
@@ -146,7 +147,7 @@ public class AddIITView extends View {
 	protected void processAction(Event e) {
 		
 		//First check to see if the fields are empty.
-		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty() || statusTF.getText().isEmpty())
+		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty())
 			messageLBL.setText("All Item Type data must be filled");
 		//Then check to see if it is the submit button.
 		else if(e.getSource()==submitBTN)
@@ -167,7 +168,7 @@ public class AddIITView extends View {
 		props.setProperty("ValidityDays", validityDaysTF.getText());
 		props.setProperty("ReorderPoint", reorderPointTF.getText());
 		props.setProperty("Notes", notesTF.getText());
-		props.setProperty("Status", statusTF.getText());
+		props.setProperty("Status", (String) statusCB.getValue());
 		
 		//TODO: InventoryItemType model needs to be updated.
 		
