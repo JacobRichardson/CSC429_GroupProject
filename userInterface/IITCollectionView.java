@@ -38,11 +38,10 @@ import model.IITCollection;
 import model.InventoryItemType;
 import model.Vendor;
 import model.VendorSearchCollection;
-import model.iITTableModel;
 
 public class IITCollectionView extends View {
 	
-	protected TableView<iITTableModel> iITTable;
+	protected TableView<IITTableModel> iITTable;
 	protected Button cancelBTN;
 	protected Button submitBTN;
 	
@@ -72,7 +71,7 @@ public class IITCollectionView extends View {
 	protected void getEntryTableModelValues()
 	{
 		
-		ObservableList<iITTableModel> tableData = FXCollections.observableArrayList();
+		ObservableList<IITTableModel> tableData = FXCollections.observableArrayList();
 		try
 		{
 			IITCollection iITCollection = (IITCollection)myModel.getState("IITCollection");
@@ -84,7 +83,7 @@ public class IITCollectionView extends View {
 				InventoryItemType nextIIT= (InventoryItemType)entries.nextElement();
 				Vector<String> view = nextIIT.getEntryListView();
 				// add this list entry to the list
-				iITTableModel nextTableRowData = new iITTableModel(view);
+				IITTableModel nextTableRowData = new IITTableModel(view);
 				tableData.add(nextTableRowData);
 				
 			}
@@ -131,43 +130,43 @@ public class IITCollectionView extends View {
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-		iITTable = new TableView<iITTableModel>();
+		iITTable = new TableView<IITTableModel>();
 		iITTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
 		TableColumn itemTypeNameColumn = new TableColumn("ItemTypeName") ;
 		itemTypeNameColumn.setMinWidth(50);
 		itemTypeNameColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("ItemTypeName"));
+	                new PropertyValueFactory<IITTableModel, String>("ItemTypeName"));
 		
 		TableColumn unitsColumn = new TableColumn("Units") ;
 		unitsColumn.setMinWidth(125);
 		unitsColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("Units"));
+	                new PropertyValueFactory<IITTableModel, String>("Units"));
 		  
 		TableColumn unitMeasureColumn = new TableColumn("UnitMeasure") ;
 		unitMeasureColumn.setMinWidth(100);
 		unitMeasureColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("UnitMeasure"));
+	                new PropertyValueFactory<IITTableModel, String>("UnitMeasure"));
 		
 		TableColumn validityDaysColumn = new TableColumn("ValidityDays") ;
 		validityDaysColumn.setMinWidth(100);
 		validityDaysColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("ValidityDays"));
+	                new PropertyValueFactory<IITTableModel, String>("ValidityDays"));
 		
 		TableColumn reorderPointColumn = new TableColumn("ReorderPoint") ;
 		reorderPointColumn.setMinWidth(100);
 		reorderPointColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("ReorderPoint"));
+	                new PropertyValueFactory<IITTableModel, String>("ReorderPoint"));
 		
 		TableColumn notesColumn = new TableColumn("Notes") ;
 		notesColumn.setMinWidth(100);
 		notesColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("Notes"));
+	                new PropertyValueFactory<IITTableModel, String>("Notes"));
 		
 		TableColumn statusColumn = new TableColumn("Status") ;
 		statusColumn.setMinWidth(50);
 		statusColumn.setCellValueFactory(
-	                new PropertyValueFactory<iITTableModel, String>("Status"));
+	                new PropertyValueFactory<IITTableModel, String>("Status"));
 
 
 
@@ -230,7 +229,7 @@ public class IITCollectionView extends View {
 	//--------------------------------------------------------------------------
 	protected void processIITSelected()
 	{
-		iITTableModel selectedItem = iITTable.getSelectionModel().getSelectedItem();
+		IITTableModel selectedItem = iITTable.getSelectionModel().getSelectedItem();
 		
 		if(selectedItem != null)
 		{

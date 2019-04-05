@@ -125,8 +125,8 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		if(history=="ModifyIIT") {
 			modifyIIT((String)value);
 		}
-			else {
-				
+			else if(history=="DeleteIIT"){
+				deleteIIT((String)value);
 			}
 		myRegistry.updateSubscribers(key, this);
 	}
@@ -157,6 +157,16 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		}
 	}
 	
+	public void deleteIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			createAndShowDeleteIIT(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void createAndShowModifyIIT(InventoryItemType iIT) {
     	Scene localScene = (Scene)myViews.get("ModifyIITView");
 
@@ -166,6 +176,19 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		    View newView = ViewFactory.createView("ModifyIITView", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("ModifyIITView", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	private void createAndShowDeleteIIT(InventoryItemType iIT) {
+    	Scene localScene = (Scene)myViews.get("iitDelete");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("iitDelete", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("iitDelete", localScene);
 		}
 		swapToView(localScene);
 	}

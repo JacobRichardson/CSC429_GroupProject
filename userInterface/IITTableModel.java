@@ -1,8 +1,8 @@
-package model;
+package userInterface;
 import java.util.Vector;
 import javafx.beans.property.SimpleStringProperty;
 
-public class iITTableModel {
+public class IITTableModel {
 
 		private final SimpleStringProperty ItemTypeName;
 		private final SimpleStringProperty Units;
@@ -13,7 +13,7 @@ public class iITTableModel {
 		private final SimpleStringProperty Status;
 
 		//----------------------------------------------------------------------------
-		public iITTableModel(Vector<String> data)
+		public IITTableModel(Vector<String> data)
 		{
 			ItemTypeName =  new SimpleStringProperty(data.elementAt(0));
 			Units =  new SimpleStringProperty(data.elementAt(1));

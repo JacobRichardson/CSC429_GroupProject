@@ -115,7 +115,7 @@ public class Manager implements IView, IModel
 			
 			
 		}
-		else if(key.equals("ModifyIIT")){
+		else if(key.equals("ModifyIIT") || key.equals("DeleteIIT") ){
 			Manager.setChoice(key);
 			createAndShowFindInventoryItemTypeView();
 		}

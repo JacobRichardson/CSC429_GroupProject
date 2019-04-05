@@ -258,8 +258,8 @@ public class ManagerView extends View {
 			myModel.stateChangeRequest("AddVendor", null);
 		else if(e.getSource() == addIventoryItemTypeBTN)
 			myModel.stateChangeRequest("AddIIT", null);
-		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("", null);
+		else if(e.getSource() == deleteInventoryItemTypeBTN)
+			myModel.stateChangeRequest("DeleteIIT", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
