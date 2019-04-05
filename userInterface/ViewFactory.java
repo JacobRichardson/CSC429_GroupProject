@@ -38,7 +38,7 @@ public class ViewFactory {
 			return new AddIITView(model);
 		}
 		else if(viewName.equals("iitDelete") == true) {
-			return new addVendorView(model);
+			return new DeleteInventoryItemTypeView(model);
 		}
 		else if(viewName.equals("ittModify") == true) {
 			return new AddIITView(model);
