@@ -81,6 +81,29 @@ public class InventoryItemType extends EntityBase implements IView{
 		}
 	}
 	
+	public void update() {
+		updateStateInDatabase();
+	}
+	
+	public void updateStateInDatabase() {
+		try
+		{
+			if (persistentState.getProperty("ItemTypeName") != null)
+			{
+				Properties whereClause = new Properties();
+				whereClause.setProperty("ItemTypeName",
+				persistentState.getProperty("ItemTypeName"));
+				updatePersistentState(mySchema, persistentState, whereClause);
+				updateStatusMessage = "Item Inventory Type data for : " + persistentState.getProperty("ItemTypeName") + " updated successfully in database!";
+			}
+		}
+		catch (SQLException ex)
+		{
+			updateStatusMessage = "Error in installing account data in database!";
+		}
+		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
+	}
+	
 	public void delete() {
 		
 		try {
@@ -112,6 +135,12 @@ public class InventoryItemType extends EntityBase implements IView{
 		else if (key.equals("Units") == true)
 			return persistentState.getProperty(key);
 		else if((key.equals("UnitMeasure") == true))
+			return persistentState.getProperty(key);
+		else  if(key.equals("ValidityDays"))
+			return persistentState.getProperty(key);
+		else if(key.equals("ReorderPoint"))
+			return persistentState.getProperty(key);
+		else if(key.equals("Notes"))
 			return persistentState.getProperty(key);
 		else if((key.equals("Status") == true))
 			return persistentState.getProperty(key);
