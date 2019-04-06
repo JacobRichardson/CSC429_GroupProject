@@ -26,59 +26,59 @@ public class DeleteInventoryItemTypeView extends View {
 	private Button yes = new Button("YES");
 	private Button no = new Button("NO");
 	protected MessageView statusLog;
-	
+
 	public DeleteInventoryItemTypeView(IModel model) {
 		super(model, "DeleteInventoryItemTypeView");
-		
+
 		VBox container = new VBox(10);
 
 		container.setPadding(new Insets(15, 5, 5, 5));
 
 		// create a Node (Text) for showing the title
 		container.getChildren().add(createTitle());
-		
+
 		container.getChildren().add(createFormContents());
-		
+
 		container.getChildren().add(createStatusLog("                                            "));
-		
+
 		getChildren().add(container);
 	}
-	
+
 	private Node createFormContents() {
 		GridPane grid = new GridPane();
-    	grid.setAlignment(Pos.CENTER);
-   		grid.setHgap(10);
-    	grid.setVgap(10);
-    	grid.setPadding(new Insets(25, 25, 25, 25));
-    	
-    	label.setText("Do you wand to delete this item ?");
-    	
-    	yes.setOnAction(new EventHandler<ActionEvent>() {
- 		     public void handle(ActionEvent e) {
- 		     	processAction(e);    
-      	     }
-    	});
-    	
-    	no.setOnAction(new EventHandler<ActionEvent>() {
-		     public void handle(ActionEvent e) {
-		     	processAction(e);    
-     	     }
-   	});
-    	
-    	grid.add(label, 1, 0);;
-    	grid.add(yes, 0, 1);
-    	grid.add(no, 2, 1);
-    	
-    	return grid;
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+
+		label.setText("Do you wand to delete this item ?");
+
+		yes.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+
+		no.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+
+		grid.add(label, 1, 0);
+		;
+		grid.add(yes, 0, 1);
+		grid.add(no, 2, 1);
+
+		return grid;
 	}
-	
-	private Node createTitle() {		
+
+	private Node createTitle() {
 		Text titleText = new Text("       Restaurant Inventory Managment         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
-		
-	
+
 		return titleText;
 	}
 
@@ -92,44 +92,39 @@ public class DeleteInventoryItemTypeView extends View {
 				displayMessage("Success");
 			} catch (InvalidPrimaryKeyException e1) {
 				// TODO Auto-generated catch block
-				//e1.printStackTrace();
+				// e1.printStackTrace();
 			}
 		} else {
 			new Manager();
 		}
 	}
-	
-	@Override
+
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	//--------------------------------------------------------------------------
-		protected MessageView createStatusLog(String initialMessage)
-		{
-			statusLog = new MessageView(initialMessage);
 
-			return statusLog;
-		}
+	// --------------------------------------------------------------------------
+	protected MessageView createStatusLog(String initialMessage) {
+		statusLog = new MessageView(initialMessage);
 
+		return statusLog;
+	}
 
-		/**
-		 * Display info message
-		 */
-		//----------------------------------------------------------
-		public void displayMessage(String message)
-		{
-			statusLog.displayMessage(message);
-		}
+	/**
+	 * Display info message
+	 */
+	// ----------------------------------------------------------
+	public void displayMessage(String message) {
+		statusLog.displayMessage(message);
+	}
 
-		/**
-		 * Clear error message
-		 */
-		//----------------------------------------------------------
-		public void clearErrorMessage()
-		{
-			statusLog.clearErrorMessage();
-		}
-	
+	/**
+	 * Clear error message
+	 */
+	// ----------------------------------------------------------
+	public void clearErrorMessage() {
+		statusLog.clearErrorMessage();
+	}
+
 }

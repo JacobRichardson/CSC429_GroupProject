@@ -1,4 +1,5 @@
 package userInterface;
+
 //imports
 import java.util.Properties;
 
@@ -30,7 +31,7 @@ import model.Manager;
 import model.InventoryItemType;
 
 public class AddIITView extends View {
-	//TextFields
+	// TextFields
 	private TextField typeNameTF = new TextField();
 	private TextField unitsTF = new TextField();
 	private TextField unitMeasureTF = new TextField();
@@ -38,22 +39,23 @@ public class AddIITView extends View {
 	private TextField reorderPointTF = new TextField();
 	private TextField notesTF = new TextField();
 	private ComboBox statusCB = new ComboBox();
-	//Buttons
+	// Buttons
 	private Button submitBTN = new Button("Submit");
 	private Button cancelBTN = new Button("Cancel");
-	//Labels
+	// Labels
 	private Label typeNameLBL = new Label("Item Type Name");
-	private Label unitsLBL= new Label("Units");
-	private Label unitMeasureLBL= new Label("Unit Measure");
-	private Label validityDaysLBL= new Label("Validity Days");
-	private Label reorderPointLBL= new Label("Reorder Point");
-	private Label notesLBL= new Label("Notes");
-	private Label statusLBL= new Label("Status");
+	private Label unitsLBL = new Label("Units");
+	private Label unitMeasureLBL = new Label("Unit Measure");
+	private Label validityDaysLBL = new Label("Validity Days");
+	private Label reorderPointLBL = new Label("Reorder Point");
+	private Label notesLBL = new Label("Notes");
+	private Label statusLBL = new Label("Status");
 	private Label messageLBL = new Label("");
-	//Constructor
+
+	// Constructor
 	public AddIITView(IModel model) {
 		super(model, "EnterBookView");
-		
+
 		VBox container = new VBox(10);
 
 		container.setPadding(new Insets(15, 5, 5, 5));
@@ -71,7 +73,8 @@ public class AddIITView extends View {
 		myModel.subscribe("LoginError", this);
 
 	}
-	//Fill fields on screen
+
+	// Fill fields on screen
 	private void populateFields() {
 		System.out.println(myModel.getState("Name"));
 		typeNameTF.setText("");
@@ -83,85 +86,99 @@ public class AddIITView extends View {
 		statusCB.getItems().addAll("Active", "Inactive");
 		statusCB.setValue(myModel.getState("Status"));
 	}
-	//Make the title of the screen
-	private Node createTitle() {		
+
+	// Make the title of the screen
+	private Node createTitle() {
 		Text titleText = new Text("       Restaurant Inventory Managment         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
-		
-	
+
 		return titleText;
 	}
-	//Place objects on the screen
+
+	// Place objects on the screen
 	private Node createFormContents() {
 		GridPane grid = new GridPane();
-    	grid.setAlignment(Pos.CENTER);
-   		grid.setHgap(10);
-    	grid.setVgap(10);
-    	grid.setPadding(new Insets(25, 25, 25, 25));
-    	
-    	//Add the components to the grid.
-    	
-    	//Add the labels.
-    	grid.add(typeNameLBL, 0, 0);
-    	grid.add(unitsLBL, 0, 1);
-    	grid.add(unitMeasureLBL, 0, 2);
-    	grid.add(validityDaysLBL, 0, 3);
-    	grid.add(reorderPointLBL, 0, 4);
-    	grid.add(notesLBL, 0, 5);
-    	grid.add(statusLBL, 0, 6);
-    	
-    	//Add the text fields.
-    	grid.add(typeNameTF, 1, 0);
-    	grid.add(unitsTF, 1, 1);
-    	grid.add(unitMeasureTF, 1, 2);
-     	grid.add(validityDaysTF, 1, 3);
-    	grid.add(reorderPointTF, 1, 4);
-    	grid.add(notesTF, 1, 5);
-    	grid.add(statusCB, 1, 6);
-    	
-    	//Add the button.
-    	grid.add(submitBTN,0,7);
-    	grid.add(cancelBTN, 1, 7);
-    	
-    	//Event handlers.
-    	
-    	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
- 		     public void handle(ActionEvent e) {
- 		     	processAction(e);    
-      	     }
-    	});
-    	
-    	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
-		     public void handle(ActionEvent e) {
-		     	new Manager();   
-     	     }
-    	});
-    	
-    	return grid;
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
+
+		// Add the components to the grid.
+
+		// Add the labels.
+		grid.add(typeNameLBL, 0, 0);
+		grid.add(unitsLBL, 0, 1);
+		grid.add(unitMeasureLBL, 0, 2);
+		grid.add(validityDaysLBL, 0, 3);
+		grid.add(reorderPointLBL, 0, 4);
+		grid.add(notesLBL, 0, 5);
+		grid.add(statusLBL, 0, 6);
+
+		// Add the text fields.
+		grid.add(typeNameTF, 1, 0);
+		grid.add(unitsTF, 1, 1);
+		grid.add(unitMeasureTF, 1, 2);
+		grid.add(validityDaysTF, 1, 3);
+		grid.add(reorderPointTF, 1, 4);
+		grid.add(notesTF, 1, 5);
+		grid.add(statusCB, 1, 6);
+
+		// Add the button.
+		grid.add(submitBTN, 0, 7);
+		grid.add(cancelBTN, 1, 7);
+
+		// Add the message label.
+		grid.add(messageLBL, 0, 8);
+
+		// Event handlers.
+
+		submitBTN.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+
+		cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				new Manager();
+			}
+		});
+
+		return grid;
 	}
-	
-	
-	//Process action from submit button
+
+	// Process action from submit button
 	protected void processAction(Event e) {
-		
-		//First check to see if the fields are empty.
-		if(typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty())
+
+		// First check to see if the fields are empty.
+		if (typeNameTF.getText().isEmpty() || unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty()
+				|| validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty()
+				|| notesTF.getText().isEmpty())
 			messageLBL.setText("All Item Type data must be filled");
-		//Then check to see if it is the submit button.
-		else if(e.getSource()==submitBTN)
+		// Then check to see if it is the submit button.
+		else if (e.getSource() == submitBTN)
 			addInventoryItemType();
 	}
-	
+
 	protected void addInventoryItemType() {
-		
-		//Process adding the inventory item type.
-		
-		//New properties object.
+
+		System.out.println("ADDING IIT");
+		// Process adding the inventory item type.
+
+		// New properties object.
 		Properties props = new Properties();
-		
-		//Set the values.
+
+		System.out.println(typeNameTF.getText());
+		System.out.println(unitsTF.getText());
+		System.out.println(unitMeasureTF.getText());
+		System.out.println(validityDaysTF.getText());
+		System.out.println(reorderPointTF.getText());
+		System.out.println(notesTF.getText());
+		System.out.println(statusCB.getValue());
+
+		// Set the values.
 		props.setProperty("ItemTypeName", typeNameTF.getText());
 		props.setProperty("Units", unitsTF.getText());
 		props.setProperty("UnitMeasure", unitMeasureTF.getText());
@@ -169,21 +186,19 @@ public class AddIITView extends View {
 		props.setProperty("ReorderPoint", reorderPointTF.getText());
 		props.setProperty("Notes", notesTF.getText());
 		props.setProperty("Status", (String) statusCB.getValue());
-		
-		//TODO: InventoryItemType model needs to be updated.
-		
-		//Create the inventory item type.
-		//InventoryItemType iit = new InventoryItemType(props);
-		
-		//Save it into the database.
-		//itt.update();
-		
-		//Display message on GUI.
-		
+
+		// Create the inventory item type.
+		InventoryItemType iit = new InventoryItemType(props);
+
+		// Save it into the database.
+		iit.update();
+
+		// Display message on GUI.
+		messageLBL.setText("Inventory Item Type added.");
 	}
-	
-			public void updateState(String key, Object value) {
+
+	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
