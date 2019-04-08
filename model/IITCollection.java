@@ -125,9 +125,13 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		if(history=="ModifyIIT") {
 			modifyIIT((String)value);
 		}
-			else if(history=="DeleteIIT"){
-				deleteIIT((String)value);
-			}
+		else if(history=="DeleteIIT"){
+			deleteIIT((String)value);
+		}
+		else if(history =="AddVIIT") {
+			System.out.println("HITORY == AddVIIT");
+			addVIIT((String)value);
+		}
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -167,6 +171,17 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		}
 	}
 	
+	public void addVIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+			createAndShowPriceView(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	private void createAndShowModifyIIT(InventoryItemType iIT) {
     	Scene localScene = (Scene)myViews.get("ModifyIITView");
 
@@ -193,6 +208,19 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		swapToView(localScene);
 	}
 	
+	private void createAndShowPriceView(InventoryItemType iIT) {
+    	Scene localScene = (Scene)myViews.get("VendorInventoryPrice");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("VendorInventoryPrice", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("VendorInventoryPrice", localScene);
+		}
+		swapToView(localScene);
+	}
+	
 	public void swapToView(Scene newScene)
 	{		
 		if (newScene == null)
@@ -212,5 +240,3 @@ public class IITCollection  extends EntityBase implements IView, IModel
 
 	}
 }
-	
-

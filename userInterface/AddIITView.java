@@ -130,7 +130,7 @@ public class AddIITView extends View {
 		grid.add(cancelBTN, 1, 7);
 
 		// Add the message label.
-		grid.add(messageLBL, 0, 8);
+		grid.add(messageLBL, 0, 8, 2, 1);
 
 		// Event handlers.
 

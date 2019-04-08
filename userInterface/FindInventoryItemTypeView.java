@@ -24,6 +24,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import model.Manager;
+
 import java.util.Properties;
 
 public class FindInventoryItemTypeView extends View {
@@ -109,7 +111,7 @@ grid.add(submitBTN, 0, 3);
 	protected void processAction(Event e) {
 		if (e.getSource()==cancelBTN) {
 			populateFields();
-			myModel.stateChangeRequest("chooseActionScreen", null);
+			new Manager();
 		}
 		else if(itemTypeTF.getText().isEmpty() && notesTF.getText().isEmpty())
 			messageLBL.setText("ItemTypeName or Notes must be filled");
@@ -119,6 +121,7 @@ grid.add(submitBTN, 0, 3);
 	protected void getTypes(){
 		String query = "SELECT * FROM `InventoryItemType` WHERE ItemTypeName LIKE "
 				+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
+		System.out.println(myModel);
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {

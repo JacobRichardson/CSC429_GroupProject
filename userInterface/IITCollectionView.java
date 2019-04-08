@@ -221,7 +221,6 @@ public class IITCollectionView extends View {
 			 * won't call the manager stateChangeRequest for some reason. This needs to be
 			 * looked into.
 			 */
-			System.out.println("test!");
 			myModel.stateChangeRequest("iitSelected", selectedItemTypeName);
 		}
 	}

@@ -163,7 +163,7 @@ public class VendorInventoryPriceView  extends View
 			priceTF.setText("");
 			
 			//Display message.
-			//displayMessage("Vendor Inventory Item Type has been entered!");
+			 messageLBL.setText("Vendor Inventory Item Type has been entered!");
 		}
 				
 	}
@@ -176,12 +176,11 @@ public class VendorInventoryPriceView  extends View
 		//New properties object.
 		Properties props = new Properties();
 		
-		System.out.println("VendorId: " + vendorId);
+		//System.out.println("VendorId: " + vendorId);
 		
 		//Set the properties.
 		props.setProperty("VendorId", vendorId);
-		//TODO: Change this to be the inventory item type name.
-		props.setProperty("InventoryItemTypeName", "Bread");
+		props.setProperty("InventoryItemTypeName", inventoryItemTypeName);
 		props.setProperty("VendorPrice", price);
 		props.setProperty("DateOfLastUpdate", dateOfLastUpdate);
 		
@@ -191,8 +190,6 @@ public class VendorInventoryPriceView  extends View
 		//Save into the database.
 		vip.update();
 		
-		//Switch to a screen if you want to.
-		//myModel.stateChangeRequest("VendorInventoryPrice", "");
 	}
 	
 	public void updateState(String key, Object value) {

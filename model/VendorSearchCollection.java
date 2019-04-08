@@ -128,15 +128,19 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			modifyVendor((String)value);
 		}
 		else if(key.equals("VendorSelected") && Manager.getChoice() == "AddVIIT") {
-			//First need to go to inventory search view once it is implemented.
-			
+
 			Vendor.setSelectedVendorId((String)value);
-			//For now go to vendorPriceScreen.
-			createAndShowVendorIventoryPriceView();
+			createAndShowIventoryItemTypeSearch();
 		}
-			else {
+		else if(key.equals("IITCollectionView")) {
 				
+			try {
+				createAndShowInventoryCollectionView((String) value);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -180,21 +184,39 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	}
 	
     
-    private void createAndShowVendorIventoryPriceView () {
+    private void createAndShowIventoryItemTypeSearch () {
     	
-    	System.out.println("CREATING VENDOR PRICE VIEW!");
-    	Scene localScene = myViews.get("VendorInventoryPrice");
+    	System.out.println("CREATING INVENTORY SEARCH VIEW");
+    	Scene localScene = myViews.get("FindInventoryItemTypeView");
 
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("VendorInventoryPrice", this); // USE VIEW FACTORY
+		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
-		    myViews.put("VendorInventoryPrice", localScene);
+		    myViews.put("FindInventoryItemTypeView", localScene);
 		}
 		swapToView(localScene);
     }
 	
+    private void createAndShowInventoryCollectionView (String value) throws Exception {
+    	
+    	System.out.println("CREATING INVENTORY COLLECTION VIEW");
+    	Scene localScene = myViews.get("IITCollectionView");
+    	
+    	String history = Manager.getChoice();
+		IITCollection iIT = new IITCollection((String)value, history);
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("IITCollectionView", localScene);
+		}
+		swapToView(localScene);
+    }
+    
 	public void swapToView(Scene newScene)
 	{		
 		if (newScene == null)

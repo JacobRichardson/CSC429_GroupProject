@@ -95,8 +95,8 @@ public class Manager implements IView, IModel
 		//Only set choice to the key if it is a key from the choice transaction screen.
 		
 		//Debug.
-		System.out.println("KEY:" + key);
-		System.out.println("Manger's chocie:" + Manager.getChoice());
+		//System.out.println("KEY:" + key);
+		//System.out.println("Manger's chocie:" + Manager.getChoice());
 		
 		if(key.equals("ModifyVendor")||key.equals("AddVIIT")) {
 			Manager.setChoice(key);
@@ -111,7 +111,7 @@ public class Manager implements IView, IModel
 		else if(key.equals("VendorSelected")) {
 			
 			//Debug.
-			System.out.println("VENDOR SELECTED KEY!");
+			//System.out.println("VENDOR SELECTED KEY!");
 			
 			
 		}
