@@ -67,7 +67,7 @@ public class FindInventoryItemTypeView extends View {
 		messageLBL.setText("");
 	}
 	private Node createTitle() {		
-		Text titleText = new Text("       Restaurant Inventory Managment         ");
+		Text titleText = new Text("       Restaurant Inventory Management         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
@@ -119,8 +119,18 @@ grid.add(submitBTN, 0, 3);
 			getTypes();
 	}
 	protected void getTypes(){
-		String query = "SELECT * FROM `InventoryItemType` WHERE ItemTypeName LIKE "
-				+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
+		String query = "SELECT * FROM `InventoryItemType` WHERE ";
+		if(itemTypeTF.getText().trim().isEmpty()) {
+			query+="Notes LIKE '%"+notesTF.getText()+"%'";
+		}
+		else if(notesTF.getText().trim().isEmpty()) {
+			query +="ItemTypeName LIKE '%"+itemTypeTF.getText()+"%'";
+		}
+		else {
+			query+="ItemTypeName LIKE "
+			+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
+		}
+		
 		System.out.println(myModel);
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}

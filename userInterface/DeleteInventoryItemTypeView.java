@@ -51,7 +51,7 @@ public class DeleteInventoryItemTypeView extends View {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		label.setText("Do you wand to delete this item ?");
+		label.setText("Do you want to delete this item?");
 
 		yes.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -74,7 +74,7 @@ public class DeleteInventoryItemTypeView extends View {
 	}
 
 	private Node createTitle() {
-		Text titleText = new Text("       Restaurant Inventory Managment         ");
+		Text titleText = new Text("       Restaurant Inventory Management         ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);

@@ -44,7 +44,7 @@ public class RMS extends Application
 	{
 
            // Create the top-level container (main frame) and add contents to it.
-	   MainStageContainer.setStage(primaryStage, "Resturant managment System");
+	   MainStageContainer.setStage(primaryStage, "Restaurant Management System");
 	   mainStage = MainStageContainer.getInstance();
 
 	   // Finish setting up the stage (ENABLE THE GUI TO BE CLOSED USING THE TOP RIGHT
