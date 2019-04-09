@@ -156,7 +156,7 @@ public class ModifyIITView extends View {
 			messageLBL.setText("All Item Type data must be filled");
 		// Then check to see if it is the submit button.
 		else if (!isInteger(unitsTF.getText()))
-			messageLBL.setText("Please enter a positive Integer \nnumber for units");
+			messageLBL.setText("Please enter a Integer \nnumber for units");
 		else if (e.getSource() == submitBTN)
 			modifyInventoryItemType();
 	}

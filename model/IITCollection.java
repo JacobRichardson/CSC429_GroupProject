@@ -129,7 +129,6 @@ public class IITCollection  extends EntityBase implements IView, IModel
 			deleteIIT((String)value);
 		}
 		else if(history =="AddVIIT") {
-			System.out.println("HITORY == AddVIIT");
 			addVIIT((String)value);
 		}
 		myRegistry.updateSubscribers(key, this);

@@ -76,7 +76,6 @@ public class AddIITView extends View {
 
 	// Fill fields on screen
 	private void populateFields() {
-		System.out.println(myModel.getState("Name"));
 		typeNameTF.setText("");
 		unitsTF.setText("");
 		unitMeasureTF.setText("");
@@ -84,7 +83,7 @@ public class AddIITView extends View {
 		reorderPointTF.setText("");
 		notesTF.setText("");
 		statusCB.getItems().addAll("Active", "Inactive");
-		statusCB.setValue(myModel.getState("Status"));
+		statusCB.setValue("Active");
 	}
 
 	// Make the title of the screen
@@ -157,6 +156,15 @@ public class AddIITView extends View {
 				|| validityDaysTF.getText().isEmpty() || reorderPointTF.getText().isEmpty()
 				|| notesTF.getText().isEmpty())
 			messageLBL.setText("All Item Type data must be filled");
+		else if(!isInt(unitsTF.getText())) {
+			messageLBL.setText("Units must be an integer.");
+		}
+		else if(!isInt(validityDaysTF.getText())) {
+			messageLBL.setText("Validity days must be an integer.");
+		}
+		else if(!isInt(reorderPointTF.getText())) {
+			messageLBL.setText("Reorder point must be an integer.");
+		}
 		// Then check to see if it is the submit button.
 		else if (e.getSource() == submitBTN)
 			addInventoryItemType();
@@ -164,7 +172,6 @@ public class AddIITView extends View {
 
 	protected void addInventoryItemType() {
 
-		System.out.println("ADDING IIT");
 		// Process adding the inventory item type.
 
 		// New properties object.
@@ -193,6 +200,7 @@ public class AddIITView extends View {
 		// Save it into the database.
 		iit.update();
 
+
 		// Display message on GUI.
 		messageLBL.setText("Inventory Item Type added.");
 	}
@@ -201,4 +209,22 @@ public class AddIITView extends View {
 		// TODO Auto-generated method stub
 
 	}
+	
+	//Method to test is a string is a int.
+	private boolean isInt (String s) {
+		try {
+			if(Integer.parseInt(s) < 0) {
+				return false;
+			}
+		}
+		catch(NumberFormatException e) {
+			return false;
+		}
+		catch(NullPointerException e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

@@ -96,7 +96,6 @@ public class DeleteInventoryItemTypeView extends View {
 		if (e.getSource() == yes) {
 			InventoryItemType iit;
 			try {
-				System.out.println("totototo");
 				iit = new InventoryItemType(myModel.getState("ItemTypeName").toString());
 				iit.delete();
 				displayMessage("Success");

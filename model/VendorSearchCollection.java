@@ -186,7 +186,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
     
     private void createAndShowIventoryItemTypeSearch () {
     	
-    	System.out.println("CREATING INVENTORY SEARCH VIEW");
     	Scene localScene = myViews.get("FindInventoryItemTypeView");
 
 		if (localScene == null)
@@ -201,7 +200,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	
     private void createAndShowInventoryCollectionView (String value) throws Exception {
     	
-    	System.out.println("CREATING INVENTORY COLLECTION VIEW");
     	Scene localScene = myViews.get("IITCollectionView");
     	
     	String history = Manager.getChoice();

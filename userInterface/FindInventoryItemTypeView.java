@@ -96,15 +96,15 @@ public class FindInventoryItemTypeView extends View {
  		     public void handle(ActionEvent e) {
  		     	processAction(e);    
       	     }
-  	});
-grid.add(submitBTN, 0, 3);
+    	});
+    	grid.add(submitBTN, 0, 3);
     	
 		cancelBTN = new Button("Cancel");
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
- 	});
+    	});
     	grid.add(cancelBTN, 1, 3);
     	return grid;
 	}
@@ -131,7 +131,6 @@ grid.add(submitBTN, 0, 3);
 			+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
 		}
 		
-		System.out.println(myModel);
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {
