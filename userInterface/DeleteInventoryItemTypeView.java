@@ -25,6 +25,7 @@ public class DeleteInventoryItemTypeView extends View {
 	private Label label = new Label();
 	private Button yes = new Button("YES");
 	private Button no = new Button("NO");
+	private Button cancel = new Button("CANCEL");
 	protected MessageView statusLog;
 
 	public DeleteInventoryItemTypeView(IModel model) {
@@ -64,11 +65,20 @@ public class DeleteInventoryItemTypeView extends View {
 				processAction(e);
 			}
 		});
+		
+		cancel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+		
+		cancel.setAlignment(Pos.CENTER);
 
 		grid.add(label, 1, 0);
 		;
 		grid.add(yes, 0, 1);
 		grid.add(no, 2, 1);
+		grid.add(cancel, 2, 5);
 
 		return grid;
 	}
