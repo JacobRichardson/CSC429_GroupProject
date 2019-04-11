@@ -48,10 +48,10 @@ public class VendorInventoryItemType extends EntityBase implements IView
 		}
 	}
 
-	public VendorInventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
+	public VendorInventoryItemType(String vendorId, String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
-		String query = "SELECT * FROM " + myTableName + " WHERE (ItemTypeName = '" + itemTypeName + "')";
+		String query = "SELECT * FROM " + myTableName + " WHERE (VendorId = " + vendorId + ") AND (ItemTypeName = '" + itemTypeName + "')";
 
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 

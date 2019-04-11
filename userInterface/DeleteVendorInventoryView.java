@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import model.InventoryItemType;
+import model.VendorInventoryItemType;
 import model.Manager;
 
 public class DeleteVendorInventoryView extends View {
@@ -94,10 +94,10 @@ public class DeleteVendorInventoryView extends View {
 
 	protected void processAction(Event e) {
 		if (e.getSource() == yes) {
-			InventoryItemType iit;
+			VendorInventoryItemType viit;
 			try {
-				iit = new InventoryItemType(myModel.getState("ItemTypeName").toString());
-				iit.delete();
+				viit = new VendorInventoryItemType(myModel.getState("VendorId").toString(), myModel.getState("ItemTypeName").toString());
+				viit.delete();
 				displayMessage("Success");
 			} catch (InvalidPrimaryKeyException e1) {
 				// TODO Auto-generated catch block
