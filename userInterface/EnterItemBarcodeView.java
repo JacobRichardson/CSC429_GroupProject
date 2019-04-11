@@ -111,5 +111,10 @@ public class EnterItemBarcodeView extends View {
 		protected void confirmItemRemoval() {
 			
 		}
+
+		public void updateState(String key, Object value) {
+			// TODO Auto-generated method stub
+			
+		}
 	
 }
