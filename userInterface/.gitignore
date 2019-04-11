@@ -120,6 +120,12 @@
 /DeleteVendorInventoryView$2.class
 /DeleteVendorInventoryView$3.class
 /DeleteVendorInventoryView.class
+<<<<<<< HEAD
+=======
+/EnterVendorInfoView.class
+/EnterVendorInfoView$1.class
+/EnterVendorInfoView$2.class
+>>>>>>> dbd003bb2bcd4618b930a386e6646665b9391b90
 /EnterIITView$1.class
 /EnterIITView$2.class
 /EnterIITView.class

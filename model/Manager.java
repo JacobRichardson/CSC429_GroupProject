@@ -98,9 +98,8 @@ public class Manager implements IView, IModel
 		//System.out.println("KEY:" + key);
 		//System.out.println("Manger's chocie:" + Manager.getChoice());
 		
-		if(key.equals("ModifyVendor")||key.equals("AddVIIT") || key.equals("deleteVIIT")) {
+		if(key.equals("ModifyVendor")||key.equals("AddVIIT") || key.equals("deleteVIIT") || key.equals("processInvoice")) {
 			Manager.setChoice(key);
-			System.out.println(key);
 			createAndShowVendorSearch();
 		}
 		else if(key.equals("VendorSelectionScreen")) {
@@ -331,6 +330,7 @@ private void createAndShowFindInventoryItemTypeView() {
 			}
 			swapToView(localScene);
 	}
+	
 	
 //-----------------------------------------------------------------------------
 
