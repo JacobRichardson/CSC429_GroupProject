@@ -100,8 +100,7 @@ public class DeleteVendorInventoryView extends View {
 				viit.delete();
 				displayMessage("Success");
 			} catch (InvalidPrimaryKeyException e1) {
-				// TODO Auto-generated catch block
-				// e1.printStackTrace();
+				displayMessage("Vendor does not sell this Item Type");
 			}
 		} else {
 			new Manager();
