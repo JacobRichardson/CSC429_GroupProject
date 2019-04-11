@@ -127,7 +127,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		if(history=="ModifyVendor") {
 			modifyVendor((String)value);
 		}
-		else if(key.equals("VendorSelected") && Manager.getChoice() == "AddVIIT") {
+		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT") || Manager.getChoice() == "deleteVIIT" ) {
 
 			Vendor.setSelectedVendorId((String)value);
 			createAndShowIventoryItemTypeSearch();
