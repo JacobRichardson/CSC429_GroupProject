@@ -95,7 +95,6 @@ public class FindIITView extends View {
 		}
 	}
 	
-	@Override
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		

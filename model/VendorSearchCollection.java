@@ -141,6 +141,13 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 				e.printStackTrace();
 			}
 		}
+		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
+			
+			System.out.println("choice equals process invoice");
+			//Go to submit item type name screen.
+			
+		}
+		
 		myRegistry.updateSubscribers(key, this);
 	}
 

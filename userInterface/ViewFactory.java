@@ -28,7 +28,10 @@ public class ViewFactory {
 			return new DeleteInventoryItemTypeView(model);
 		} else if (viewName.equals("ModifyIITView") == true) {
 			return new ModifyIITView(model);
-		} else
+		} else if (viewName.equals("processInvoice") == true) {
+			return new SearchVendorNamePhone(model);
+		}
+		else
 			return null;
 	}
 
