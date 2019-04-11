@@ -145,7 +145,13 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			
 			System.out.println("choice equals process invoice");
 			//Go to submit item type name screen.
-			
+			try {
+				Vendor.setSelectedVendorId((String)value);
+				createAndShowEnterIITView();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		myRegistry.updateSubscribers(key, this);
@@ -218,6 +224,21 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		    View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("IITCollectionView", localScene);
+		}
+		swapToView(localScene);
+    }
+    
+    private void createAndShowEnterIITView () throws Exception {
+    	
+    	System.out.println("CREATE AND SHOW ENTER IIT VIEW!!!!");
+    	Scene localScene = myViews.get("enterIIT");
+    	
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("enterIIT", null); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("enterIIT", localScene);
 		}
 		swapToView(localScene);
     }

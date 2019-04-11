@@ -18,6 +18,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Manager;
+import model.Vendor;
+import model.VendorInventoryItemType;
+import java.util.*;
+
+import exception.InvalidPrimaryKeyException;
 
 public class EnterIITView extends View {
 
@@ -82,6 +87,33 @@ public class EnterIITView extends View {
 
 	protected void processAction(Event e) {
 		if (e.getSource() == submit) {
+				
+			System.out.println("SUBMIT CLICKED!");
+			//SEARCH FOR VENDOR INVENTORY ITEM TYPE TO MAKE SURE THEY CAN SUPPLY THAT ITEM TYPE.
+			
+			//Get values.
+			String vendorId = Vendor.getSelectedVendorId();
+			String itemTypeName = nameTF.getText();
+			
+			try {
+				
+				VendorInventoryItemType viit = new VendorInventoryItemType(vendorId, itemTypeName);
+				
+				if(viit != null) {
+					//Proceed to next screen for notes and barcode.
+				}
+				
+			} catch (InvalidPrimaryKeyException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				
+				//Print error for entering wrong inventory item type name.
+			}
+			
+			
+
+			
+			
 		} else {
 			new Manager();
 		}
