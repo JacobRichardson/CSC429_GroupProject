@@ -141,6 +141,8 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 				e.printStackTrace();
 			}
 		}
+		else
+			System.out.print(key+" "+value);
 		myRegistry.updateSubscribers(key, this);
 	}
 
