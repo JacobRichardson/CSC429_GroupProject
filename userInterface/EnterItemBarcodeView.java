@@ -43,16 +43,13 @@ public class EnterItemBarcodeView extends View {
 
 		container.setPadding(new Insets(15, 5, 5, 5));
 
-		// create a Node (Text) for showing the title
 		container.getChildren().add(createTitle());
 
-		// create a Node (GridPane) for showing data entry fields
 		container.getChildren().add(createFormContents());
 		getChildren().add(container);
 
 		populateFields();
 
-		// STEP 0: Be sure you tell your model what keys you are interested in
 		myModel.subscribe("LoginError", this);
 	}
 	
@@ -70,7 +67,6 @@ public class EnterItemBarcodeView extends View {
 		return titleText;
 	}
 	
-	// Place objects on the screen
 		private Node createFormContents() {
 			GridPane grid = new GridPane();
 			grid.setAlignment(Pos.CENTER);
@@ -78,12 +74,9 @@ public class EnterItemBarcodeView extends View {
 			grid.setVgap(10);
 			grid.setPadding(new Insets(25, 25, 25, 25));
 
-			// Add the components to the grid.
-
-			// Add the labels.
 			grid.add(barcodeLBL, 0, 0);
-			grid.add(barcodeTF, 0, 1);
-			grid.add(submitBTN, 1, 0);
+			grid.add(barcodeTF, 1, 0);
+			grid.add(submitBTN, 0, 1);
 			grid.add(cancelBTN, 1, 1);
 			
 			submitBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -111,5 +104,8 @@ public class EnterItemBarcodeView extends View {
 		protected void confirmItemRemoval() {
 			
 		}
-	
+		
+		public void updateState(String key, Object value) {
+
+		}
 }
