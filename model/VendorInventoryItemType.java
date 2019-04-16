@@ -51,8 +51,11 @@ public class VendorInventoryItemType extends EntityBase implements IView
 	public VendorInventoryItemType(String vendorId, String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
-		String query = "SELECT * FROM " + myTableName + " WHERE (VendorId = " + vendorId + ") AND (ItemTypeName = '" + itemTypeName + "')";
+		//JACOB RICHARDSON : Changed to InventoryItemTypeName from ItemTypeName which is the wrong column header.
+		String query = "SELECT * FROM " + myTableName + " WHERE (VendorId = " + vendorId + ") AND (InventoryItemTypeName = '" + itemTypeName + "')";
 
+		System.out.println(query);
+		
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
 		// You must get one item at least
@@ -113,7 +116,6 @@ public class VendorInventoryItemType extends EntityBase implements IView
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-
 		myRegistry.updateSubscribers(key, this);
 	}
 

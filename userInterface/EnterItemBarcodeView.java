@@ -106,6 +106,7 @@ public class EnterItemBarcodeView extends View {
 		}
 		
 		public void updateState(String key, Object value) {
-
+			// TODO Auto-generated method stub
+			
 		}
 }

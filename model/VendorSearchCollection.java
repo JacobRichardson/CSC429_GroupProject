@@ -128,32 +128,36 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			modifyVendor((String)value);
 		}
 		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT") || Manager.getChoice() == "deleteVIIT" ) {
-
 			Vendor.setSelectedVendorId((String)value);
 			createAndShowIventoryItemTypeSearch();
 		}
 		else if(key.equals("IITCollectionView")) {
-				
+			searchIIT((String)key);
+		}
+		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
+			
+			System.out.println("choice equals process invoice");
+			//Go to submit item type name screen.
 			try {
-				createAndShowInventoryCollectionView((String) value);
+				Vendor.setSelectedVendorId((String)value);
+				createAndShowEnterIITView();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-<<<<<<< HEAD
 		else
 			System.out.print(key+" "+value);
-=======
-		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
-			
-			System.out.println("choice equals process invoice");
-			//Go to submit item type name screen.
-			
-		}
-		
->>>>>>> dbd003bb2bcd4618b930a386e6646665b9391b90
 		myRegistry.updateSubscribers(key, this);
+	}
+	
+	private void searchIIT(String s) {
+		try {
+			createAndShowInventoryCollectionView(new IITCollection(s,history));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** Called via the IView relationship */
@@ -210,19 +214,30 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		swapToView(localScene);
     }
 	
-    private void createAndShowInventoryCollectionView (String value) throws Exception {
-    	
+    private void createAndShowInventoryCollectionView (IITCollection iit){
     	Scene localScene = myViews.get("IITCollectionView");
-    	
-    	String history = Manager.getChoice();
-		IITCollection iIT = new IITCollection((String)value, history);
-
+		System.out.println("Creating collection view");
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+		    View newView = ViewFactory.createView("IITCollectionView", iit); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("IITCollectionView", localScene);
+		}
+		swapToView(localScene);
+    }
+    
+    private void createAndShowEnterIITView () throws Exception {
+    	
+    	System.out.println("CREATE AND SHOW ENTER IIT VIEW!!!!");
+    	Scene localScene = myViews.get("enterIIT");
+    	
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("enterIIT", null); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("enterIIT", localScene);
 		}
 		swapToView(localScene);
     }
