@@ -128,18 +128,11 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			modifyVendor((String)value);
 		}
 		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT") || Manager.getChoice() == "deleteVIIT" ) {
-
 			Vendor.setSelectedVendorId((String)value);
 			createAndShowIventoryItemTypeSearch();
 		}
 		else if(key.equals("IITCollectionView")) {
-				
-			try {
-				createAndShowInventoryCollectionView((String) value);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			searchIIT((String)key);
 		}
 		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
 			
@@ -155,8 +148,16 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}
 		else
 			System.out.print(key+" "+value);
-		
 		myRegistry.updateSubscribers(key, this);
+	}
+	
+	private void searchIIT(String s) {
+		try {
+			createAndShowInventoryCollectionView(new IITCollection(s,history));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** Called via the IView relationship */
@@ -213,17 +214,13 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		swapToView(localScene);
     }
 	
-    private void createAndShowInventoryCollectionView (String value) throws Exception {
-    	
+    private void createAndShowInventoryCollectionView (IITCollection iit){
     	Scene localScene = myViews.get("IITCollectionView");
-    	
-    	String history = Manager.getChoice();
-		IITCollection iIT = new IITCollection((String)value, history);
-
+		System.out.println("Creating collection view");
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+		    View newView = ViewFactory.createView("IITCollectionView", iit); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("IITCollectionView", localScene);
 		}

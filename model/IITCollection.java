@@ -131,6 +131,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		else if(history =="AddVIIT") {
 			addVIIT((String)value);
 		}
+		else if(history=="deleteVIIT")
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -171,6 +172,18 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	}
 	
 	public void addVIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+			createAndShowPriceView(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void deleteVIIT(String itemTypeName) {
 		try {
 			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
 			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);

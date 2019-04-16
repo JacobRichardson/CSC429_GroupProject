@@ -116,7 +116,6 @@ public class VendorInventoryItemType extends EntityBase implements IView
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-
 		myRegistry.updateSubscribers(key, this);
 	}
 
