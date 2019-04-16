@@ -31,6 +31,9 @@ public class ViewFactory {
 		} else if (viewName.equals("processInvoice") == true) {
 			return new SearchVendorNamePhone(model);
 		}
+		else if(viewName.equals("EnterItemBarcodeView") == true) {
+			return new EnterItemBarcodeView(model);
+		}
 		else if (viewName.equals("enterIIT") == true) {
 			return new EnterIITView(model);
 		}
