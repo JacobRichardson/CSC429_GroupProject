@@ -78,6 +78,7 @@ public class EnterItemBarcodeView extends View {
 			grid.add(barcodeTF, 1, 0);
 			grid.add(submitBTN, 0, 1);
 			grid.add(cancelBTN, 1, 1);
+			grid.add(messageLBL, 1, 2);
 			
 			submitBTN.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
@@ -95,7 +96,7 @@ public class EnterItemBarcodeView extends View {
 		}
 		
 		protected void processAction(Event e) {
-			if(barcodeTF.getText().length()<9 || barcodeTF.getText().length()>9) {
+			if(barcodeTF.getText().length() != 9) {
 				messageLBL.setText("Improper or missing barcode");
 			}
 			else
