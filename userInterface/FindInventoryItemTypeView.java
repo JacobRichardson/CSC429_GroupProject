@@ -130,7 +130,6 @@ public class FindInventoryItemTypeView extends View {
 			query+="ItemTypeName LIKE "
 			+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
 		}
-		
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {

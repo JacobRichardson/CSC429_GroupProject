@@ -131,7 +131,9 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		else if(history =="AddVIIT") {
 			addVIIT((String)value);
 		}
-		else if(history=="deleteVIIT")
+		else if(history=="deleteVIIT") {
+			System.out.println(key);
+		}
 		myRegistry.updateSubscribers(key, this);
 	}
 

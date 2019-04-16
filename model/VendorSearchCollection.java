@@ -123,15 +123,19 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
+		System.out.println(key);
 		// Class is invariant, so this method does not change any attributes
 		if(history=="ModifyVendor") {
+			System.out.println("Modify vendor");
 			modifyVendor((String)value);
 		}
 		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT") || Manager.getChoice() == "deleteVIIT" ) {
 			Vendor.setSelectedVendorId((String)value);
+			System.out.println("Vendor selected");
 			createAndShowIventoryItemTypeSearch();
 		}
 		else if(key.equals("IITCollectionView")) {
+			System.out.println("IIT Collection");
 			searchIIT((String)key);
 		}
 		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
@@ -216,7 +220,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	
     private void createAndShowInventoryCollectionView (IITCollection iit){
     	Scene localScene = myViews.get("IITCollectionView");
-		System.out.println("Creating collection view");
 		if (localScene == null)
 		{
 			// create our initial view
