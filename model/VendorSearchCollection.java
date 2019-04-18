@@ -136,7 +136,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}
 		else if(key.equals("IITCollectionView")) {
 			System.out.println("IIT Collection");
-			searchIIT((String)key);
+			searchIIT((String)value);
 		}
 		else if(key.equals("VendorSelected") && (Manager.getChoice() == "processInvoice")) {
 			
