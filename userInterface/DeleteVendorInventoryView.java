@@ -96,7 +96,7 @@ public class DeleteVendorInventoryView extends View {
 		if (e.getSource() == yes) {
 			VendorInventoryItemType viit;
 			try {
-				viit = new VendorInventoryItemType(myModel.getState("VendorId").toString(), myModel.getState("ItemTypeName").toString());
+				viit = new VendorInventoryItemType(myModel.getState("VendorId").toString(), myModel.getState("InventoryItemTypeName").toString());
 				viit.delete();
 				displayMessage("Success");
 			} catch (InvalidPrimaryKeyException e1) {

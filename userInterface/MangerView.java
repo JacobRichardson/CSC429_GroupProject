@@ -39,6 +39,9 @@ public class MangerView extends View {
 	private Button addVendorBTN;
 	private Button processInvoiceBTN;
 	private Button fullInventoryBTN;
+	
+	private Button testDeleteBTN;//ERASE WHEN DONE
+	
 	private Label addLBL;
 	private Label modifyLBL;
 	private Label deleteLBL;
@@ -103,7 +106,9 @@ public class MangerView extends View {
     	addVendorBTN = new Button("Vendor");
     	processInvoiceBTN = new Button("Process Invoice");
     	fullInventoryBTN = new Button("Current Inventory");
-       	doneBTN = new Button("Done");
+       	doneBTN = new Button("Done");//Delete this when done
+       	
+       	testDeleteBTN= new Button("Test Delete VIIT");
 
        	addLBL = new Label("Add");
        	modifyLBL = new Label("Modify");
@@ -119,7 +124,7 @@ public class MangerView extends View {
     	grid.add(deleteLBL,0,4);						grid.add(otherLBL,1,4);	
     	grid.add(deleteInventoryItemTypeBTN,0,5);		grid.add(fullInventoryBTN,1,5);
     	grid.add(deleteVendorInvetoryItemBTN,0,6);		grid.add(outOfInventoryBTN,1,6);
-     													grid.add(processInvoiceBTN,1,7);
+     	grid.add(testDeleteBTN, 0, 7);/*Delete This when done*/					grid.add(processInvoiceBTN,1,7);
      													grid.add(reorderListBTN,1,8);
     	
     	grid.add(doneBTN, 0, 9);
@@ -238,6 +243,11 @@ public class MangerView extends View {
      	     }
 		});
     	
+    	testDeleteBTN.setOnAction(new EventHandler<ActionEvent>() {//Delete when done
+		     public void handle(ActionEvent e) {
+		     	processAction(e);    
+    	     }
+		});
 		return grid;
 	}
 
@@ -274,6 +284,8 @@ public class MangerView extends View {
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("", null);
+		else if(e.getSource() == testDeleteBTN)//Delete this when done
+			myModel.stateChangeRequest("TestDeleteVIIT", null);
 		else
 			System.out.println(e);
 	}

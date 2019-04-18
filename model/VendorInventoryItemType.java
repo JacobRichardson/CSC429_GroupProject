@@ -151,17 +151,17 @@ public class VendorInventoryItemType extends EntityBase implements IView
 		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
 	}
 	
-public void delete() {
+	public void delete() {
 		
 		try {
-			
-			if (persistentState.getProperty("ItemTypeName") != null) {
+			System.out.println("Deleting");
+			if (persistentState.getProperty("InventoryItemTypeName") != null) {
 				
 				Properties whereClause = new Properties();
-				whereClause.setProperty("ItemTypeName",
-						persistentState.getProperty("ItemTypeName"));
+				whereClause.setProperty("InventoryItemTypeName",
+						persistentState.getProperty("InventoryItemTypeName"));
 					deletePersistentState(mySchema, whereClause);
-				updateStatusMessage = "InventoryItemType data for name: " + persistentState.getProperty("ItemTypeName") + " delete successfully in database!";
+				updateStatusMessage = "InventoryItemType data for name: " + persistentState.getProperty("InventoryItemTypeName") + " delete successfully in database!";
 		
 			}	
 		} catch (SQLException e) {
