@@ -40,6 +40,10 @@ public class ViewFactory {
 		else if(viewName.equals("DeleteVIIT")) {
 			return new DeleteVendorInventoryView(model);
 		}
+		//else if(viewName.equals("ConfirmItemRemovalView")) {
+		//	return new ConfirmItemRemovalView (model);
+		//}
+		
 		else
 			return null;
 	}
