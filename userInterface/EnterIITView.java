@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.InventoryItemType;
 import model.Manager;
 import model.Vendor;
 import model.VendorInventoryItemType;
@@ -99,8 +100,18 @@ public class EnterIITView extends View {
 				
 				VendorInventoryItemType viit = new VendorInventoryItemType(vendorId, itemTypeName);
 				
+				//TODO: Check length not null to see if 1 was found.
 				if(viit != null) {
+					
+					System.out.print("MY MODEL: " + myModel);
+					
+					InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+					
 					//Proceed to next screen for notes and barcode.
+					myModel.stateChangeRequest("EnterBarcodeNotes", itemTypeName);
+				}
+				else {
+					//Print an error message saying the VIIT was not found.
 				}
 				
 			} catch (InvalidPrimaryKeyException e1) {

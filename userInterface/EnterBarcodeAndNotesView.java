@@ -1,5 +1,7 @@
 package userInterface;
 
+import java.util.Properties;
+
 import impresario.IModel;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,9 +19,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.InventoryItemType;
 import model.Manager;
+import model.Vendor;
+import model.VendorInventoryItemType;
+import model.InventoryItem;
 
-public class FindIITView extends View {
+public class EnterBarcodeAndNotesView extends View {
 
 	private Label barcodeLabel = new Label();
 	private Label andLabel = new Label();
@@ -29,7 +35,7 @@ public class FindIITView extends View {
 	private TextField barcodeTF = new TextField();
 	private TextField notesTF = new TextField();
 	
-	public FindIITView(IModel model) {
+	public EnterBarcodeAndNotesView(IModel model) {
 		super(model, "FindIITView");
 		
 		VBox container = new VBox(10);
@@ -90,7 +96,38 @@ public class FindIITView extends View {
 
 	protected void processAction(Event e) {
 		if (e.getSource() == submit) {
+			
+			//Insert the inventory item into the db.
+			Properties props = new Properties();
+			
+			//System.out.println("VendorId: " + vendorId);
+			
+			//Set the properties.
+			props.setProperty("Barcode", barcodeTF.getText());
+			props.setProperty("VendorId", Vendor.getSelectedVendorId());
+			props.setProperty("InventoryItemTypeName", InventoryItemType.getSelectedInventoryItemTypeName());
+			
+			//TODO: SET TO CURRENT DATE!!!!!
+			props.setProperty("DateReceived", "2019/01/01");
+			props.setProperty("DateOfLastUse", "2019/01/01");
+			
+			props.setProperty("Notes", notesTF.getText());
+			props.setProperty("Status", "Available");
+			
+			//Create the Inventory Item object.
+			InventoryItem InventoryItem = new InventoryItem(props);
+			
+			InventoryItem.update();
+			
+			//TODO: DISPLAY MESSAGE.
+			
+			
+			//TODO: Make a model statechangerequest to go back to EnterIITView.
+			
+			
 		} else {
+			
+			//TODO: IMPLEMENT BACK.
 			new Manager();
 		}
 	}

@@ -43,7 +43,9 @@ public class ViewFactory {
 		//else if(viewName.equals("ConfirmItemRemovalView")) {
 		//	return new ConfirmItemRemovalView (model);
 		//}
-		
+		else if(viewName.equals("EnterItemBarcodeNotesView")) {
+			return new EnterBarcodeAndNotesView(model);
+		}
 		else
 			return null;
 	}

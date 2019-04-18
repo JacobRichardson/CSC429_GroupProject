@@ -123,7 +123,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-		
+
 		// Class is invariant, so this method does not change any attributes
 		if(history=="ModifyVendor" && value!=null) {
 			modifyVendor((String)value);
@@ -152,6 +152,17 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors((String) value);
 		}
+		else if(key.equals("EnterBarcodeNotes") ) {
+			
+			System.out.println("ENTER BARCODE VIEW!");
+			
+			try {
+				createAndShowEnterBarcodeNotesView();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 		else
 			System.out.print(key+" | "+value);
 		myRegistry.updateSubscribers(key, this);
@@ -240,7 +251,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("enterIIT", null); // USE VIEW FACTORY
+		    View newView = ViewFactory.createView("enterIIT", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("enterIIT", localScene);
 		}
@@ -284,7 +295,20 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}	
 		swapToView(localScene);
 	}
-    
+    private void createAndShowEnterBarcodeNotesView () throws Exception {
+    	
+    	System.out.println("CREATE AND SHOW ENTER BARCODE/NOTES VIEW!!!!");
+    	Scene localScene = myViews.get("EnterItemBarcodeNotesView");
+    	
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("EnterItemBarcodeNotesView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("EnterItemBarcodeNotesView", localScene);
+		}
+		swapToView(localScene);
+    }
 	public void swapToView(Scene newScene)
 	{		
 		if (newScene == null)
