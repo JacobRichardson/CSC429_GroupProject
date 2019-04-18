@@ -132,7 +132,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		else if(history =="AddVIIT") {
 			addVIIT((String)value);
 		}
-		else if(history=="deleteVIIT") {
+		else if(history=="deleteVIIT" && value!=null) {
 			deleteVIIT((String)value);
 		}
 		else if(key.equals("Back")) {

@@ -128,7 +128,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		if(history=="ModifyVendor" && value!=null) {
 			modifyVendor((String)value);
 		}
-		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT" || Manager.getChoice() == "deleteVIIT") ) {
+		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT" || Manager.getChoice() == "deleteVIIT")) {
 			Vendor.setSelectedVendorId((String)value);
 			createAndShowIventoryItemTypeSearch();
 		}
@@ -149,8 +149,11 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			System.out.println("Here");
 			createAndShowVendorSearch();
 		}
+		else if(key.equals("VendorSelectionScreen")) {
+			searchVendors((String) value);
+		}
 		else
-			System.out.print(key+" "+value);
+			System.out.print(key+" | "+value);
 		myRegistry.updateSubscribers(key, this);
 	}
 	
@@ -256,6 +259,30 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}
 		swapToView(currentScene);
 		
+	}
+    
+    private void searchVendors(Object value) {
+		try {
+			String history=Manager.getChoice();
+			VendorSearchCollection v=new VendorSearchCollection((String)value, history);
+			createAndShowVendorCollection(v);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+    
+    private void createAndShowVendorCollection(VendorSearchCollection v) {
+		Scene localScene = myViews.get("vendorCollection");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			myViews.put("vendorCollection", localScene);
+		}	
+		swapToView(localScene);
 	}
     
 	public void swapToView(Scene newScene)

@@ -111,7 +111,7 @@ public class FindInventoryItemTypeView extends View {
 	protected void processAction(Event e) {
 		if (e.getSource()==cancelBTN) {
 			populateFields();
-			new Manager();
+			myModel.stateChangeRequest("Back", null);
 		}
 		else if(itemTypeTF.getText().isEmpty() && notesTF.getText().isEmpty())
 			messageLBL.setText("ItemTypeName or Notes must be filled");
