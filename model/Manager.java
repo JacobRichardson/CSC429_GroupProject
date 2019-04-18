@@ -132,9 +132,6 @@ public class Manager implements IView, IModel
 		else if(key.equals("EnterItemBarcodeView")) {
 			createAndShowEnterItemBarcodeView();
 		}
-		else if(key.equals("TestDeleteVIIT")) {//Delete this when done
-			getVIIT();
-		}
 		else {
 			System.out.println("No screen for key.");
 		}
@@ -348,28 +345,7 @@ private void createAndShowFindInventoryItemTypeView() {
 			}
 			swapToView(localScene);
 	}
-	
-	private void getVIIT() {//Delete When done
-		try {
-			createAndShowDeleteVIIT(new VendorInventoryItemType("12","Wine"));
-		} catch (InvalidPrimaryKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private void createAndShowDeleteVIIT(VendorInventoryItemType v) {
-		Scene localScene = myViews.get("DeleteVIIT");
 
-		if (localScene == null)
-		{
-			// create our initial view
-		    View newView = ViewFactory.createView("DeleteVIIT", v); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    myViews.put("DeleteVIIT", localScene);
-		}
-		swapToView(localScene);
-	}
 	
 	
 //-----------------------------------------------------------------------------

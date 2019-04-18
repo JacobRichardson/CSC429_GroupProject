@@ -249,6 +249,7 @@ public class Vendor extends EntityBase implements IView
 	public static String getSelectedVendorId() {
 		return Vendor.selectedVendorId;
 	}
+	
 
 	/*
 	 * Sets the value of choice to an empty string.

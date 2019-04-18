@@ -18,7 +18,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.VendorInventoryItemType;
+import model.InventoryItemType;
 import model.Manager;
+import model.Vendor;
 
 public class DeleteVendorInventoryView extends View {
 
@@ -94,14 +96,9 @@ public class DeleteVendorInventoryView extends View {
 
 	protected void processAction(Event e) {
 		if (e.getSource() == yes) {
-			VendorInventoryItemType viit;
-			try {
-				viit = new VendorInventoryItemType(myModel.getState("VendorId").toString(), myModel.getState("InventoryItemTypeName").toString());
-				viit.delete();
-				displayMessage("Success");
-			} catch (InvalidPrimaryKeyException e1) {
-				displayMessage("Vendor does not sell this Item Type");
-			}
+			String vendorId = Vendor.getSelectedVendorId();
+			String inventoryItemTypeName = InventoryItemType.getSelectedInventoryItemTypeName();
+			deleteVIIT(vendorId,inventoryItemTypeName);
 		} else {
 			new Manager();
 		}
@@ -110,6 +107,21 @@ public class DeleteVendorInventoryView extends View {
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void deleteVIIT(String id, String name) {
+		VendorInventoryItemType viit;
+		try {
+			viit = new VendorInventoryItemType(id, name);
+			viit.delete();
+			label.setText("Successfuly deleted "+name+" from vendor.");
+		} catch (InvalidPrimaryKeyException e1) {
+			label.setText("Vendor does not sell item: "+name+". Deletion failed.");
+		}
+		
+		yes.setVisible(false);
+		no.setVisible(false);
+		cancel.setText("Done");
 	}
 
 	// --------------------------------------------------------------------------

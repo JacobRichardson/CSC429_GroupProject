@@ -121,6 +121,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
+		System.out.println(history);
 		// Class is invariant, so this method does not change any attributes
 		if(history=="ModifyIIT") {
 			modifyIIT((String)value);
@@ -132,7 +133,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 			addVIIT((String)value);
 		}
 		else if(history=="deleteVIIT") {
-			System.out.println(key);
+			deleteVIIT((String)value);
 		}
 		myRegistry.updateSubscribers(key, this);
 	}
@@ -189,7 +190,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		try {
 			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
 			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
-			createAndShowPriceView(iIT);
+			createAndShowDeleteVIIT(iIT);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -231,6 +232,20 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		    View newView = ViewFactory.createView("VendorInventoryPrice", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("VendorInventoryPrice", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	
+	private void createAndShowDeleteVIIT(InventoryItemType v) {
+		Scene localScene = myViews.get("DeleteVIIT");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("DeleteVIIT", v);
+		    localScene = new Scene(newView);
+		    myViews.put("DeleteVIIT", localScene);
 		}
 		swapToView(localScene);
 	}
