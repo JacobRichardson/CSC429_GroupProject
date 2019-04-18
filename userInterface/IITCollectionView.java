@@ -42,7 +42,7 @@ import model.VendorSearchCollection;
 public class IITCollectionView extends View {
 
 	protected TableView<IITTableModel> iITTable;
-	protected Button cancelBTN;
+	protected Button backBTN;
 	protected Button submitBTN;
 
 	protected MessageView statusLog;
@@ -169,19 +169,10 @@ public class IITCollectionView extends View {
 		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(iITTable);
 
-		cancelBTN = new Button("Cancel");
-		cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
+		backBTN = new Button("Back");
+		backBTN.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				/**
-				 * Process the Cancel button. The ultimate result of this action is that the
-				 * transaction will tell the teller to to switch to the transaction choice view.
-				 * BUT THAT IS NOT THIS VIEW'S CONCERN. It simply tells its model (controller)
-				 * that the transaction was canceled, and leaves it to the model to decide to
-				 * tell the teller to do the switch back.
-				 */
-				// ----------------------------------------------------------
-				clearErrorMessage();
-				new model.Manager();
+				myModel.stateChangeRequest("Back", null);
 			}
 		});
 
@@ -195,7 +186,7 @@ public class IITCollectionView extends View {
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
 		btnContainer.getChildren().add(submitBTN);
-		btnContainer.getChildren().add(cancelBTN);
+		btnContainer.getChildren().add(backBTN);
 
 		vbox.getChildren().add(grid);
 		vbox.getChildren().add(scrollPane);

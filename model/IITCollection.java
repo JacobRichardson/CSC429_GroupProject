@@ -123,7 +123,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	{
 		System.out.println(history);
 		// Class is invariant, so this method does not change any attributes
-		if(history=="ModifyIIT") {
+		if(history=="ModifyIIT" && value!=null) {
 			modifyIIT((String)value);
 		}
 		else if(history=="DeleteIIT"){
@@ -134,6 +134,9 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		}
 		else if(history=="deleteVIIT") {
 			deleteVIIT((String)value);
+		}
+		else if(key.equals("Back")) {
+			createAndShowFindInventoryItemTypeView();
 		}
 		myRegistry.updateSubscribers(key, this);
 	}
@@ -249,6 +252,20 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		}
 		swapToView(localScene);
 	}
+	
+private void createAndShowFindInventoryItemTypeView() {
+    	
+    	Scene localScene = myViews.get("FindInventoryItemTypeView");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("FindInventoryItemTypeView", localScene);
+		}
+		swapToView(localScene);
+    }
 	
 	public void swapToView(Scene newScene)
 	{		

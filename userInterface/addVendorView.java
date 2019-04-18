@@ -72,7 +72,7 @@ public class addVendorView extends View {
 		vendorTF.setText((String) myModel.getState("Name"));
 		phoneTF.setText((String) myModel.getState("PhoneNumber"));
 		statusCB.getItems().addAll("Active", "Inactive");
-		statusCB.setValue(myModel.getState("Status"));
+		statusCB.setValue("Active");
 		messageLBL.setText("");
 	}
 	

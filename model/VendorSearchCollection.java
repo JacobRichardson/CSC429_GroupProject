@@ -123,8 +123,9 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
+		
 		// Class is invariant, so this method does not change any attributes
-		if(history=="ModifyVendor") {
+		if(history=="ModifyVendor" && value!=null) {
 			modifyVendor((String)value);
 		}
 		else if(key.equals("VendorSelected") && ( Manager.getChoice() == "AddVIIT" || Manager.getChoice() == "deleteVIIT") ) {
@@ -143,6 +144,10 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else if(key.equals("Back")) {
+			System.out.println("Here");
+			createAndShowVendorSearch();
 		}
 		else
 			System.out.print(key+" "+value);
@@ -238,6 +243,20 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}
 		swapToView(localScene);
     }
+    
+    private void createAndShowVendorSearch() {
+		Scene currentScene = (Scene)myViews.get("searchVendor");
+		
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			myViews.put("searchVendor", currentScene);
+		}
+		swapToView(currentScene);
+		
+	}
     
 	public void swapToView(Scene newScene)
 	{		

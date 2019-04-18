@@ -37,6 +37,7 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
+import model.Manager;
 import model.Vendor;
 import model.VendorSearchCollection;
 
@@ -44,7 +45,7 @@ import model.VendorSearchCollection;
 public class vendorCollectionView extends View
 {
 	protected TableView<vendorTableModel> tableOfVendors;
-	protected Button cancelButton;
+	protected Button doneBTN;
 	protected Button submitButton;
 
 
@@ -180,19 +181,11 @@ public class vendorCollectionView extends View
 		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(tableOfVendors);
 
-		cancelButton = new Button("Cancel");
- 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+		doneBTN = new Button("Back");
+ 		doneBTN.setOnAction(new EventHandler<ActionEvent>() {
        		     public void handle(ActionEvent e) {
-					/**
-					 * Process the Cancel button.
-					 * The ultimate result of this action is that the transaction will tell the teller to
-					 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
-					 * It simply tells its model (controller) that the transaction was canceled, and leaves it
-					 * to the model to decide to tell the teller to do the switch back.
-			 		*/
-					//----------------------------------------------------------
-       		     	clearErrorMessage();
-       		     	new model.Manager();
+       		    	 System.out.println(myModel);
+       		    	 myModel.stateChangeRequest("Back", null);
             	  }
         	});
 
@@ -206,7 +199,7 @@ public class vendorCollectionView extends View
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
 		btnContainer.getChildren().add(submitButton);
-		btnContainer.getChildren().add(cancelButton);
+		btnContainer.getChildren().add(doneBTN);
 		
 		vbox.getChildren().add(grid);
 		vbox.getChildren().add(scrollPane);

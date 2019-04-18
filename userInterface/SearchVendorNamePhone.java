@@ -35,9 +35,10 @@ public class SearchVendorNamePhone extends View {
 	private TextField phoneTF = new TextField();
 	
 	private Button submitBTN;
-	private Button cancelBTN = new Button("Cancel");
+	private Button cancelBTN = new Button("Back");
 	
 	private Label vendorLBL = new Label("Vendor");
+	private Label optionLBL= new Label("And/or");
 	private Label phoneLBL= new Label("Phone Number");
 	private Label messageLBL = new Label();
 	
@@ -86,11 +87,12 @@ public class SearchVendorNamePhone extends View {
     	grid.setPadding(new Insets(25, 25, 25, 25));
     	
     	grid.add(vendorLBL, 0, 0);
-    	grid.add(phoneLBL, 0, 1);
+    	grid.add(optionLBL, 0, 1);
+    	grid.add(phoneLBL, 0, 2);
     	grid.add(messageLBL, 0, 4);
     	
     	grid.add(vendorTF, 1, 0);
-    	grid.add(phoneTF, 1, 1);
+    	grid.add(phoneTF, 1, 2);
     	
     	submitBTN = new Button("Submit");
     	submitBTN.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,28 +100,41 @@ public class SearchVendorNamePhone extends View {
  		     	processAction(e);    
       	     }
   	});
-    	grid.add(submitBTN, 0, 2);
+    	grid.add(submitBTN, 0, 3);
     	
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
      	     }
  	});
-    	grid.add(cancelBTN, 1, 2);
+    	grid.add(cancelBTN, 1, 3);
     	return grid;
 	}
 	
 	protected void processAction(Event e) {
 		if(e.getSource() == cancelBTN)
-			myModel.stateChangeRequest("cancel", null);
-		else if(vendorTF.getText().isEmpty() || phoneTF.getText().isEmpty())
+			myModel.stateChangeRequest("Back", null);
+		else if(vendorTF.getText().isEmpty() && phoneTF.getText().isEmpty())
 			messageLBL.setText("Please enter info.");
 			else
 				enterVendorDetails();
 	}
 	private void enterVendorDetails(){
-		String details= "Name like '%"+vendorTF.getText()+"%' and PhoneNumber Like '%"+phoneTF.getText()+"%'";
+		if(!vendorTF.getText().isEmpty() && phoneTF.getText().isEmpty()) {
+			//If only the vendor name is filled
+		String details= "Name like '%"+vendorTF.getText()+"%'";
 		myModel.stateChangeRequest("VendorSelectionScreen", details);
+		}
+		else if(vendorTF.getText().isEmpty() && !phoneTF.getText().isEmpty()) {
+			//If only the phone number is filled int
+			String details= "PhoneNumber like '%"+phoneTF.getText()+"%'";
+			myModel.stateChangeRequest("VendorSelectionScreen", details);
+		}
+		else {
+			//If they both contain data
+			String details="Name like '%"+vendorTF.getText()+"%' AND PhoneNumber like '%"+phoneTF.getText()+"%'";
+			myModel.stateChangeRequest("VendorSelectionScreen", details);
+		}
 	}
 	
 	

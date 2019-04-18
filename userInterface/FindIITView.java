@@ -25,7 +25,7 @@ public class FindIITView extends View {
 	private Label andLabel = new Label();
 	private Label notesLabel = new Label();
 	private Button submit = new Button("SUBMIT");
-	private Button cancel = new Button("CANCEL");
+	private Button cancel = new Button("Back");
 	private TextField barcodeTF = new TextField();
 	private TextField notesTF = new TextField();
 	

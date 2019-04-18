@@ -99,7 +99,7 @@ public class FindInventoryItemTypeView extends View {
     	});
     	grid.add(submitBTN, 0, 3);
     	
-		cancelBTN = new Button("Cancel");
+		cancelBTN = new Button("Back");
     	cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
 		     public void handle(ActionEvent e) {
 		     	processAction(e);    
