@@ -86,6 +86,7 @@ public class MangerView extends View {
 
 	private Node createFormContents() {
 		GridPane grid = new GridPane();
+
     	grid.setAlignment(Pos.CENTER);
    		grid.setHgap(50);
     	grid.setVgap(10);
@@ -129,7 +130,7 @@ public class MangerView extends View {
     	
     	
        	//Styles
-       	addIventoryItemTypeBTN.setMinWidth(200);
+       /*	addIventoryItemTypeBTN.setMinWidth(200);
     	addIventoryItemTypeBTN.setMinHeight(30);
     	modifyVendorBTN.setMinWidth(200);
     	modifyVendorBTN.setMinHeight(30);
@@ -154,7 +155,7 @@ public class MangerView extends View {
     	fullInventoryBTN.setMinWidth(200);
     	fullInventoryBTN.setMinHeight(30);
     	doneBTN.setMinHeight(30);
-    	doneBTN.setMinWidth(50);
+    	doneBTN.setMinWidth(50);*/
     	
     	addLBL.setFont(Font.font("Arial", FontWeight.BOLD, 20));
     	modifyLBL.setFont(Font.font("Arial", FontWeight.BOLD, 20));

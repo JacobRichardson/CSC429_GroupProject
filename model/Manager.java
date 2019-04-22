@@ -218,12 +218,12 @@ public class Manager implements IView, IModel
 //---------			Create and show methods			-----------------------------------------------------------------------------------------------//
 	private void createAndShowManagerView() {
 		Scene currentScene = (Scene)myViews.get("ManagerView");
-
 		if (currentScene == null)
 		{
 			// create our initial view
 			View newView = ViewFactory.createView("ManagerView", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
 			myViews.put("ManagerView", currentScene);
 			
 			//Reset choice.
