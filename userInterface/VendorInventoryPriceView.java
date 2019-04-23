@@ -138,8 +138,8 @@ public class VendorInventoryPriceView  extends View
 	
 	//Method to process all actions.
 	protected void processAction(Event e) {
-		
-		//If it is the cancle button request a cancel state change request.
+		System.out.println(myModel);
+		//If it is the cancel button request a cancel state change request.
 		if(e.getSource() == cancelBTN) {
 			myModel.stateChangeRequest("cancel", null);
 		}

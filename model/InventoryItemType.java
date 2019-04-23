@@ -2,15 +2,27 @@ package model;
 
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 
+import event.Event;
 import exception.InvalidPrimaryKeyException;
 import impresario.IView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userInterface.MainStageContainer;
+import userInterface.View;
+import userInterface.ViewFactory;
+import userInterface.WindowPosition;
 
 public class InventoryItemType extends EntityBase implements IView{
 
+	private String history;
 	private static final String myTableName = "InventoryItemType";
+	
+	private Hashtable<String, Scene> myViews;
+	private Stage	  	myStage;
 	
 	private static String selectedInventoryItemTypeName;
 	
@@ -21,7 +33,7 @@ public class InventoryItemType extends EntityBase implements IView{
 	public InventoryItemType(Properties props)
 	{
 		super(myTableName);
-
+		
 		setDependencies();
 		persistentState = new Properties();
 		Enumeration allKeys = props.propertyNames();
@@ -36,11 +48,13 @@ public class InventoryItemType extends EntityBase implements IView{
 		}
 	}
 	
-	public InventoryItemType(String itemTypeName) throws InvalidPrimaryKeyException {
+	public InventoryItemType(String itemTypeName, String history) throws InvalidPrimaryKeyException {
 		super(myTableName);
-		
+		this.history=history;
 		String query = "SELECT * FROM " + myTableName + " WHERE (ItemTypeName = '" + itemTypeName + "')";
 
+		myViews = new Hashtable<String, Scene>();
+		myStage = MainStageContainer.getInstance();
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
 		// You must get one item at least
@@ -155,8 +169,33 @@ public class InventoryItemType extends EntityBase implements IView{
 		else return persistentState.getProperty(key);
 	}
 
+	//----------------------------------------------View Changing----------------------------------------------\\
 	public void stateChangeRequest(String key, Object value) {
-		// TODO Auto-generated method stub
+		if(history=="ModifyIIT" && value!=null) {
+			modifyIIT((String)value);
+		}
+		else if(history=="DeleteIIT"){
+			deleteIIT((String)value);
+		}
+		else if(key.equals("Back"))
+			createAndShowFindInventoryItemTypeView();
+		else if(key.equals("BackIIT"))
+			createAndShowVendorSearch();
+		else if(key.equals("BackVendor")){
+			new Manager();
+		}
+		else if(key.equals("BackPrice")) {
+			createAndShowFindInventoryItemTypeView();
+		}
+		else if(key.equals("IITCollectionView")) {
+			iitSearch((String)value);
+		}
+		else if(history =="AddVIIT") {
+			addVIIT((String)value);
+		}
+		else if(history=="deleteVIIT" && value!=null) {
+			deleteVIIT((String)value);
+		}
 		
 	}
 
@@ -166,6 +205,194 @@ public class InventoryItemType extends EntityBase implements IView{
 		{
 			mySchema = getSchemaInfo(tableName);
 		}
+	}
+	
+	public void modifyIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
+			createAndShowModifyIIT(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void iitSearch(String q) {
+		try {
+			createAndShowIITCollectionView(new IITCollection(q, history));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
+			createAndShowDeleteIIT(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void addVIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
+			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+			createAndShowPriceView(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteVIIT(String itemTypeName) {
+		try {
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
+			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+			createAndShowDeleteVIIT(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void createAndShowModifyIIT(InventoryItemType iIT) {
+    	Scene localScene = (Scene)myViews.get("ModifyIITView");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("ModifyIITView", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("ModifyIITView", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	private void createAndShowDeleteIIT(InventoryItemType iIT) {
+    	Scene localScene = (Scene)myViews.get("iitDelete");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("iitDelete", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("iitDelete", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	private void createAndShowPriceView(InventoryItemType iIT) {
+    	Scene localScene = (Scene)myViews.get("VendorInventoryPrice");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("VendorInventoryPrice", iIT); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("VendorInventoryPrice", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	
+	private void createAndShowDeleteVIIT(InventoryItemType v) {
+		Scene localScene = myViews.get("DeleteVIIT");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("DeleteVIIT", v);
+		    localScene = new Scene(newView);
+		    myViews.put("DeleteVIIT", localScene);
+		}
+		swapToView(localScene);
+	}
+	
+	private void createAndShowFindInventoryItemTypeView() {
+    	
+    	Scene localScene = myViews.get("FindInventoryItemTypeView");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("FindInventoryItemTypeView", localScene);
+		}
+		swapToView(localScene);
+    }
+
+	private void createAndShowIITCollectionView(IITCollection iIT) {
+	Scene currentScene = (Scene)myViews.get("IITCollectionView");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("IITCollectionView", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
+
+	private void createAndShowVendorSearch() {
+	Scene currentScene = (Scene)myViews.get("searchVendor");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("searchVendor", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
+
+	private void createAndShowIITCollectionView() {
+	Scene currentScene = (Scene)myViews.get("IITCollectionView");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("IITCollectionView", this); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("IITCollectionView", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
+	
+	public void swapToView(Scene newScene)
+	{		
+		if (newScene == null)
+		{
+			System.out.println("Librarian.swapToView(): Missing view for display");
+			new Event(Event.getLeafLevelClassName(this), "swapToView",
+				"Missing view for display ", Event.ERROR);
+			return;
+		}
+
+		myStage.setScene(newScene);
+		myStage.sizeToScene();
+		
+			
+		//Place in center
+		WindowPosition.placeCenter(myStage);
+
 	}
 	
 	//------------------------------   SELECTED INVENTORY ITEM TYPE NAME METHODS - ---------------------------------------------//

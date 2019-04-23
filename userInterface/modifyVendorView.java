@@ -37,6 +37,7 @@ public class modifyVendorView extends View {
 	
 	private Button submitBTN;
 	private Button cancelBTN = new Button("Cancel");
+	private Button backBTN;
 	
 	private Label vendorLBL = new Label("Vendor Name");
 	private Label phoneLBL= new Label("Phone Number");
@@ -96,7 +97,7 @@ public class modifyVendorView extends View {
     	grid.add(vendorLBL, 0, 0);
     	grid.add(phoneLBL, 0, 1);
     	grid.add(statusLBL, 0, 2);
-    	grid.add(messageLBL, 0, 4);
+    	grid.add(messageLBL, 0, 5);
     	
     	grid.add(vendorTF, 1, 0);
     	grid.add(phoneTF, 1, 1);
@@ -122,6 +123,14 @@ public class modifyVendorView extends View {
 		      messageLBL.setText("");
     	     }
     });
+    
+    backBTN=new Button("Back");
+    backBTN.setOnAction(new EventHandler<ActionEvent>() {
+	     public void handle(ActionEvent e) {
+	      messageLBL.setText("");
+	     }
+    });
+    grid.add(backBTN, 0, 4);
     
     phoneTF.setOnAction(new EventHandler<ActionEvent>() {
 	     public void handle(ActionEvent e) {

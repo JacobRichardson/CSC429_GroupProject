@@ -169,7 +169,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	
 	public void modifyIIT(String itemTypeName) {
 		try {
-			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
 			createAndShowModifyIIT(iIT);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -188,7 +188,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	
 	public void deleteIIT(String itemTypeName) {
 		try {
-			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
 			createAndShowDeleteIIT(iIT);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -198,7 +198,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	
 	public void addVIIT(String itemTypeName) {
 		try {
-			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
 			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
 			createAndShowPriceView(iIT);
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	
 	public void deleteVIIT(String itemTypeName) {
 		try {
-			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
+			InventoryItemType iIT=new InventoryItemType((String)itemTypeName, history);
 			InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
 			createAndShowDeleteVIIT(iIT);
 		} catch (Exception e) {

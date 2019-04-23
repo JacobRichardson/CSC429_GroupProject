@@ -42,6 +42,7 @@ public class ModifyIITView extends View {
 	// Buttons
 	private Button submitBTN = new Button("Submit");
 	private Button cancelBTN = new Button("Cancel");
+	private Button backBTN = new Button("Back");
 	// Labels
 	private Label typeNameLBL;
 	private Label unitsLBL = new Label("Units");
@@ -125,14 +126,21 @@ public class ModifyIITView extends View {
 
 		// Add the button.
 		grid.add(submitBTN, 0, 7);
+		grid.add(backBTN, 0, 8);
 		grid.add(cancelBTN, 1, 7);
 
 		// Add message label.
-		grid.add(messageLBL, 0, 8, 2, 1);
+		grid.add(messageLBL, 0, 9, 2, 1);
 
 		// Event handlers.
 
 		submitBTN.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+		
+		backBTN.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				processAction(e);
 			}
