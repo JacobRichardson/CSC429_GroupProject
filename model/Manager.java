@@ -63,6 +63,7 @@ public class Manager implements IView, IModel
 
 		// Set up the initial view
 		createAndShowManagerView();
+		
 	}
 
 
@@ -245,6 +246,7 @@ public class Manager implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
 			myViews.put("IITCollectionView", currentScene);
 		}
 				
@@ -261,6 +263,7 @@ public class Manager implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
 			myViews.put("searchVendor", currentScene);
 		}
 				
@@ -278,6 +281,7 @@ public class Manager implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
 			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
 			myViews.put("vendorCollection", localScene);
 		}	
 		swapToView(localScene);
@@ -291,6 +295,7 @@ public class Manager implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("vendorModify", localScene);
 		}
 		swapToView(localScene);
@@ -304,6 +309,7 @@ private void createAndShowFindInventoryItemTypeView() {
 			// create our initial view
 		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("FindInventoryItemTypeView", localScene);
 		}
 		swapToView(localScene);
@@ -318,6 +324,7 @@ private void createAndShowFindInventoryItemTypeView() {
 				// create our initial view
 			    View newView = ViewFactory.createView("AddVendor", this); // USE VIEW FACTORY
 			    localScene = new Scene(newView);
+			    localScene.getStylesheets().add("style.css");
 			    myViews.put("AddVendor", localScene);
 			}
 			swapToView(localScene);
@@ -330,6 +337,7 @@ private void createAndShowFindInventoryItemTypeView() {
 			// create our initial view
 		    View newView = ViewFactory.createView("EnterItemBarcodeView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("EnterItemBarcodeView", localScene);
 		}
 		swapToView(localScene);
@@ -344,6 +352,7 @@ private void createAndShowFindInventoryItemTypeView() {
 				// create our initial view
 			    View newView = ViewFactory.createView("AddIIT", this); // USE VIEW FACTORY
 			    localScene = new Scene(newView);
+			    localScene.getStylesheets().add("style.css");
 			    myViews.put("AddIIT", localScene);
 			}
 			swapToView(localScene);

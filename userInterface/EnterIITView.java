@@ -91,17 +91,16 @@ public class EnterIITView extends View {
 	protected void processAction(Event e) {
 		if (e.getSource() == submit) {
 				
-			//SEARCH FOR VENDOR INVENTORY ITEM TYPE TO MAKE SURE THEY CAN SUPPLY THAT ITEM TYPE.
-			
 			//Get values.
 			String vendorId = Vendor.getSelectedVendorId();
 			String itemTypeName = nameTF.getText();
 			
 			try {
 				
+				//Create the VIIT.
 				VendorInventoryItemType viit = new VendorInventoryItemType(vendorId, itemTypeName);
 				
-				//TODO: Check length not null to see if 1 was found.
+				//Make sure it is not null.
 				if(viit != null) {
 				
 					//Set the item type name.
@@ -115,17 +114,10 @@ public class EnterIITView extends View {
 					myModel.stateChangeRequest("EnterBarcodeNotes", itemTypeName);
 				}
 			} catch (InvalidPrimaryKeyException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				
+
 				//Print error for entering wrong inventory item type name.
 				messageLBL.setText("Please enter a valid Inventory Item Type Name");
 			}
-			
-			
-
-			
-			
 		} else {
 			new Manager();
 		}

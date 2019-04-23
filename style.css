@@ -1,4 +1,16 @@
+.root {
+	-fx-font-size: 20px;
+}
 .button {
-    -fx-pref-width: 200px;
+    -fx-pref-width: 350px;
     -fx-perf-height: 30px;
+    -fx-color: #5276b2;
+}
+.label {
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	
+}
+.red {
+	-fx-color: #d62717;
 }

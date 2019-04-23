@@ -77,10 +77,7 @@ public class MangerView extends View {
 	private Node createTitle() {		
 		Text titleText = new Text("       Restaurant Management System      ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
-		titleText.setTextAlignment(TextAlignment.CENTER);
-		
-		
-	
+		titleText.setTextAlignment(TextAlignment.CENTER);	
 		return titleText;
 	}
 
@@ -129,33 +126,6 @@ public class MangerView extends View {
     	grid.add(doneBTN, 0, 9);
     	
     	
-       	//Styles
-       /*	addIventoryItemTypeBTN.setMinWidth(200);
-    	addIventoryItemTypeBTN.setMinHeight(30);
-    	modifyVendorBTN.setMinWidth(200);
-    	modifyVendorBTN.setMinHeight(30);
-    	outOfInventoryBTN.setMinWidth(200);
-    	outOfInventoryBTN.setMinHeight(30);
-    	modifyIventoryItemTypeBTN.setMinWidth(200);
-    	modifyIventoryItemTypeBTN.setMinHeight(30);
-    	addVendorInventoryItemTypeBTN.setMinWidth(200);
-    	addVendorInventoryItemTypeBTN.setMinHeight(30);
-    	modifyStatusInventoryItemBTN.setMinWidth(200);
-    	modifyStatusInventoryItemBTN.setMinHeight(30);
-    	deleteInventoryItemTypeBTN.setMinWidth(200);
-    	deleteInventoryItemTypeBTN.setMinHeight(30);
-    	deleteVendorInvetoryItemBTN.setMinWidth(200);
-    	deleteVendorInvetoryItemBTN.setMinHeight(30);
-    	reorderListBTN.setMinWidth(200);
-    	reorderListBTN.setMinHeight(30);
-    	addVendorBTN.setMinWidth(200);
-    	addVendorBTN.setMinHeight(30);
-    	processInvoiceBTN.setMinWidth(200);
-    	processInvoiceBTN.setMinHeight(30);
-    	fullInventoryBTN.setMinWidth(200);
-    	fullInventoryBTN.setMinHeight(30);
-    	doneBTN.setMinHeight(30);
-    	doneBTN.setMinWidth(50);*/
     	
     	addLBL.setFont(Font.font("Arial", FontWeight.BOLD, 20));
     	modifyLBL.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -170,6 +140,9 @@ public class MangerView extends View {
     	deleteLBL.setAlignment(Pos.CENTER);
     	otherLBL.setMaxWidth(Double.MAX_VALUE);
     	otherLBL.setAlignment(Pos.CENTER);
+    	
+    	//Apply styles
+    	doneBTN.getStyleClass().add("red");
     	
        	//EVENT HANDLERS
     	
