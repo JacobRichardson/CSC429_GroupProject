@@ -1,5 +1,6 @@
 package userInterface;
 
+import java.time.LocalDate;
 import java.util.Properties;
 
 import impresario.IModel;
@@ -95,35 +96,33 @@ public class EnterBarcodeAndNotesView extends View {
 	}
 
 	protected void processAction(Event e) {
+
 		if (e.getSource() == submit) {
 			
 			//Insert the inventory item into the db.
 			Properties props = new Properties();
 			
-			//System.out.println("VendorId: " + vendorId);
-			
 			//Set the properties.
 			props.setProperty("Barcode", barcodeTF.getText());
 			props.setProperty("VendorId", Vendor.getSelectedVendorId());
 			props.setProperty("InventoryItemTypeName", InventoryItemType.getSelectedInventoryItemTypeName());
-			
-			//TODO: SET TO CURRENT DATE!!!!!
-			props.setProperty("DateReceived", "2019/01/01");
-			props.setProperty("DateOfLastUse", "2019/01/01");
-			
+			props.setProperty("DateReceived",  LocalDate.now().toString());
+			props.setProperty("DateOfLastUse",  LocalDate.now().toString());
 			props.setProperty("Notes", notesTF.getText());
 			props.setProperty("Status", "Available");
 			
 			//Create the Inventory Item object.
 			InventoryItem InventoryItem = new InventoryItem(props);
 			
+			//Save it into the database.
 			InventoryItem.update();
 			
-			//TODO: DISPLAY MESSAGE.
+			//Clear fields.
+			barcodeTF.setText("");
+			notesTF.setText("");
 			
-			
-			//TODO: Make a model statechangerequest to go back to EnterIITView.
-			
+			//Swtich back to the EIITView.
+			myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
 			
 		} else {
 			
