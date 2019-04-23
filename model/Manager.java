@@ -120,7 +120,7 @@ public class Manager implements IView, IModel
 			Manager.setChoice(key);
 			createAndShowFindInventoryItemTypeView();
 		}
-		else if(key.equals("chooseActionScreen")||key.equals("cancel") || key.equals("Back")) {
+		else if(key.equals("chooseActionScreen")||key.equals("cancel") || key.equals("BackVendor")|| key.equals("BackIIT")) {
 			createAndShowManagerView();
 		}
 		else if(key.equals("AddVendor")) {

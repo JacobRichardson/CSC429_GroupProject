@@ -113,7 +113,7 @@ public class SearchVendorNamePhone extends View {
 	
 	protected void processAction(Event e) {
 		if(e.getSource() == cancelBTN)
-			myModel.stateChangeRequest("Back", null);
+			myModel.stateChangeRequest("BackVendor", null);
 		else if(vendorTF.getText().isEmpty() && phoneTF.getText().isEmpty())
 			messageLBL.setText("Please enter info.");
 			else

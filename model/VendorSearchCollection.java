@@ -146,9 +146,10 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			}
 		}
 		else if(key.equals("Back")) {
-			System.out.println("Here");
 			createAndShowVendorSearch();
 		}
+		else if(key.equals("BackIIT"))
+			createAndShowVendorCollection();
 		else if(key.equals("VendorSelectionScreen")) {
 			searchVendors((String) value);
 		}
@@ -163,6 +164,9 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 				e.printStackTrace();
 			}
 		}	
+		else if(key.equals("BackVendor")) {
+			new Manager();
+		}
 		else
 			System.out.print(key+" | "+value);
 		myRegistry.updateSubscribers(key, this);
@@ -309,6 +313,20 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 		}
 		swapToView(localScene);
     }
+    
+    private void createAndShowVendorCollection() {
+		Scene localScene = myViews.get("vendorCollection");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("vendorCollection", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			myViews.put("vendorCollection", localScene);
+		}	
+		swapToView(localScene);
+	}
+    
 	public void swapToView(Scene newScene)
 	{		
 		if (newScene == null)

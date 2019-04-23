@@ -111,7 +111,7 @@ public class FindInventoryItemTypeView extends View {
 	protected void processAction(Event e) {
 		if (e.getSource()==cancelBTN) {
 			populateFields();
-			myModel.stateChangeRequest("Back", null);
+			myModel.stateChangeRequest("BackIIT", null);
 		}
 		else if(itemTypeTF.getText().isEmpty() && notesTF.getText().isEmpty())
 			messageLBL.setText("ItemTypeName or Notes must be filled");
@@ -119,7 +119,7 @@ public class FindInventoryItemTypeView extends View {
 			getTypes();
 	}
 	protected void getTypes(){
-		String query = "SELECT * FROM `InventoryItemType` WHERE ";
+		String query = "SELECT * FROM InventoryItemType WHERE ";
 		if(itemTypeTF.getText().trim().isEmpty()) {
 			query+="Notes LIKE '%"+notesTF.getText()+"%'";
 		}
@@ -130,6 +130,7 @@ public class FindInventoryItemTypeView extends View {
 			query+="ItemTypeName LIKE "
 			+"'%"+itemTypeTF.getText()+"%' OR Notes LIKE '%"+notesTF.getText()+"%'";
 		}
+		System.out.println(myModel);
 		myModel.stateChangeRequest("IITCollectionView", query);
 	}
 	public void updateState(String key, Object value) {

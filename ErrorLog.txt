@@ -48,3 +48,9 @@
 [4/18/19 10:30 AM]|IITCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'IITCollectionView' at line 1>
 [4/18/19 5:43 PM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'wine' in 'where clause'>
 [4/18/19 5:50 PM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Wine' in 'where clause'>
+[4/23/19 10:03 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Wine' in 'where clause'>
+[4/23/19 10:06 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Bread' in 'where clause'>
+[4/23/19 10:06 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Fl' in 'where clause'>
+[4/23/19 10:09 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'bread' in 'where clause'>
+[4/23/19 10:26 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Bread' in 'where clause'>
+[4/23/19 10:28 AM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'Bread' in 'where clause'>

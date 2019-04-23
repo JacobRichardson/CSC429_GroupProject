@@ -121,7 +121,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-		System.out.println(history);
+		System.out.println(key);
 		// Class is invariant, so this method does not change any attributes
 		if(history=="ModifyIIT" && value!=null) {
 			modifyIIT((String)value);
@@ -129,14 +129,24 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		else if(history=="DeleteIIT"){
 			deleteIIT((String)value);
 		}
+		else if(key.equals("Back"))
+			createAndShowFindInventoryItemTypeView();
+		else if(key.equals("BackIIT"))
+			createAndShowVendorSearch();
+		else if(key.equals("BackVendor")){
+			new Manager();
+		}
+		else if(key.equals("BackPrice")) {
+			createAndShowIITCollectionView();
+		}
+		else if(key.equals("IITCollectionView")) {
+			iitSearch((String)value);
+		}
 		else if(history =="AddVIIT") {
 			addVIIT((String)value);
 		}
 		else if(history=="deleteVIIT" && value!=null) {
 			deleteVIIT((String)value);
-		}
-		else if(key.equals("Back")) {
-			createAndShowFindInventoryItemTypeView();
 		}
 		myRegistry.updateSubscribers(key, this);
 	}
@@ -161,6 +171,15 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		try {
 			InventoryItemType iIT=new InventoryItemType((String)itemTypeName);
 			createAndShowModifyIIT(iIT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void iitSearch(String q) {
+		try {
+			createAndShowIITCollectionView(new IITCollection(q, history));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -266,6 +285,57 @@ private void createAndShowFindInventoryItemTypeView() {
 		}
 		swapToView(localScene);
     }
+
+private void createAndShowIITCollectionView(IITCollection iIT) {
+	Scene currentScene = (Scene)myViews.get("IITCollectionView");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("IITCollectionView", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
+
+private void createAndShowVendorSearch() {
+	Scene currentScene = (Scene)myViews.get("searchVendor");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("searchVendor", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
+
+private void createAndShowIITCollectionView() {
+	Scene currentScene = (Scene)myViews.get("IITCollectionView");
+	
+	if (currentScene == null)
+	{
+		// create our initial view
+		View newView = ViewFactory.createView("IITCollectionView", this); // USE VIEW FACTORY
+		currentScene = new Scene(newView);
+		myViews.put("IITCollectionView", currentScene);
+	}
+			
+
+	// make the view visible by installing it into the frame
+	swapToView(currentScene);
+	
+}
 	
 	public void swapToView(Scene newScene)
 	{		

@@ -41,6 +41,7 @@ public class VendorInventoryPriceView  extends View
 	private TextField priceTF;
 	private Button submitBTN;
 	private Button cancelBTN;
+	private Button backBTN;
 	private Label priceLBL;
 	private Label messageLBL;
 	
@@ -93,10 +94,12 @@ public class VendorInventoryPriceView  extends View
 		messageLBL = new Label();
 		cancelBTN = new Button("Cancel");
 	  	submitBTN = new Button("Submit");
+	  	backBTN= new Button("Back");
 		
 		//ADD COMPONTES TO GRID.
 		grid.add(priceLBL, 0, 0);				grid.add(priceTF, 1, 0);
 		grid.add(submitBTN, 0, 1);				grid.add(cancelBTN, 1, 1);
+		grid.add(backBTN, 0, 2);
 		grid.add(messageLBL, 0, 4, 2, 1);
 		
 		//STYLE GRID.
@@ -121,6 +124,12 @@ public class VendorInventoryPriceView  extends View
 		    	 new Manager();   
      	     }
     	});
+    	
+    	backBTN.setOnAction(new EventHandler<ActionEvent>() {
+		     public void handle(ActionEvent e) {
+		     	processAction(e);    
+     	     }
+   	});
     
     	//Return the grid.
     	return grid;
@@ -134,6 +143,8 @@ public class VendorInventoryPriceView  extends View
 		if(e.getSource() == cancelBTN) {
 			myModel.stateChangeRequest("cancel", null);
 		}
+		else if(e.getSource() == backBTN)
+			myModel.stateChangeRequest("BackPrice", null);
 		//If the text field is emtpy.
 		else if(priceTF.getText().isEmpty()) {
 			//Focus on the text field

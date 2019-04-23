@@ -52,7 +52,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			if (size != 1)
 			{
 				throw new InvalidPrimaryKeyException("Multiple InventoryItemType matching name : "
-					+ size + " found.");
+					+ itemTypeName + " found.");
 			}
 			else
 			{
