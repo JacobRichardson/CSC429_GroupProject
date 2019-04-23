@@ -103,11 +103,10 @@ public class EnterItemBarcodeView extends View {
 				confirmItemRemoval();
 		}
 		protected void confirmItemRemoval() {
-			
+			myModel.stateChangeRequest("ConfirmItemRemovalView", barcodeTF.getText());
 		}
 		
 		public void updateState(String key, Object value) {
-			// TODO Auto-generated method stub
 			
 		}
 }
