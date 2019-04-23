@@ -115,10 +115,10 @@ public class vendorCollectionView extends View
 		container.setAlignment(Pos.CENTER);	
 
 		Text titleText = new Text(" Restuarant Management System ");
-		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 		titleText.setWrappingWidth(300);
 		titleText.setTextAlignment(TextAlignment.CENTER);
-		titleText.setFill(Color.DARKGREEN);
+		
 		container.getChildren().add(titleText);
 		
 		return container;

@@ -79,9 +79,9 @@ public class modifyVendorView extends View {
 	
 	private Node createTitle() {		
 		Text titleText = new Text("       Restaurant Inventory Management         ");
-		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 		titleText.setTextAlignment(TextAlignment.CENTER);
-		titleText.setFill(Color.DARKGREEN);
+		
 		
 	
 		return titleText;
