@@ -154,9 +154,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			searchVendors((String) value);
 		}
 		else if(key.equals("EnterBarcodeNotes") ) {
-			
-			System.out.println("ENTER BARCODE VIEW!");
-			
 			try {
 				createAndShowEnterBarcodeNotesView();
 			} catch (Exception e) {
@@ -249,7 +246,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
     
     private void createAndShowEnterIITView () throws Exception {
     	
-    	System.out.println("CREATE AND SHOW ENTER IIT VIEW!!!!");
     	Scene localScene = myViews.get("enterIIT");
     	
 		if (localScene == null)
