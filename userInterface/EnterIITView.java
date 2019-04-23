@@ -28,6 +28,7 @@ import exception.InvalidPrimaryKeyException;
 public class EnterIITView extends View {
 
 	private Label label = new Label();
+	private Label messageLBL = new Label();
 	private Button submit = new Button("SUBMIT");
 	private Button cancel = new Button("CANCEL");
 	private TextField nameTF = new TextField();
@@ -73,6 +74,7 @@ public class EnterIITView extends View {
 		grid.add(nameTF, 2, 0);
 		grid.add(submit, 0, 2);
 		grid.add(cancel, 2, 2);
+		grid.add(messageLBL, 0, 3, 3, 3);
 
 		return grid;
 	}
@@ -89,7 +91,6 @@ public class EnterIITView extends View {
 	protected void processAction(Event e) {
 		if (e.getSource() == submit) {
 				
-			System.out.println("SUBMIT CLICKED!");
 			//SEARCH FOR VENDOR INVENTORY ITEM TYPE TO MAKE SURE THEY CAN SUPPLY THAT ITEM TYPE.
 			
 			//Get values.
@@ -102,23 +103,23 @@ public class EnterIITView extends View {
 				
 				//TODO: Check length not null to see if 1 was found.
 				if(viit != null) {
-					
-					System.out.print("MY MODEL: " + myModel);
-					
+				
+					//Set the item type name.
 					InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+					
+					//Reset the items.
+					nameTF.setText("");
+					messageLBL.setText("");
 					
 					//Proceed to next screen for notes and barcode.
 					myModel.stateChangeRequest("EnterBarcodeNotes", itemTypeName);
 				}
-				else {
-					//Print an error message saying the VIIT was not found.
-				}
-				
 			} catch (InvalidPrimaryKeyException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				
 				//Print error for entering wrong inventory item type name.
+				messageLBL.setText("Please enter a valid Inventory Item Type Name");
 			}
 			
 			
