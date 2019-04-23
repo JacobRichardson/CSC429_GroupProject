@@ -1,6 +1,9 @@
 package userInterface;
 
 import javafx.event.Event;
+
+import java.util.Properties;
+
 import exception.InvalidPrimaryKeyException;
 import impresario.IModel;
 import javafx.event.ActionEvent;
@@ -93,16 +96,21 @@ public class DeleteInventoryItemTypeView extends View {
 	}
 
 	protected void processAction(Event e) {
+		Properties props = new Properties();
 		if (e.getSource() == yes) {
 			InventoryItemType iit;
-			try {
-				iit = new InventoryItemType(myModel.getState("ItemTypeName").toString());
-				iit.delete();
-				displayMessage("Success");
-			} catch (InvalidPrimaryKeyException e1) {
-				// TODO Auto-generated catch block
-				// e1.printStackTrace();
-			}
+			props.setProperty("Units", (String) myModel.getState("Units"));
+			props.setProperty("UnitMeasure", (String) myModel.getState("UnitMeasure"));
+			props.setProperty("ValidityDays", (String) myModel.getState("ValidityDays"));
+			props.setProperty("ReorderPoint", (String) myModel.getState("ReorderPoint"));
+			props.setProperty("Notes", (String) myModel.getState("Notes"));
+			props.setProperty("Status", "InActive");
+			InventoryItemType i = new InventoryItemType(props);
+			i.update();
+			displayMessage("Success");
+			yes.setVisible(false);
+			no.setVisible(false);
+			cancel.setText("Done");
 		} else {
 			new Manager();
 		}
