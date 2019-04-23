@@ -132,6 +132,9 @@ public class Manager implements IView, IModel
 		else if(key.equals("EnterItemBarcodeView")) {
 			createAndShowEnterItemBarcodeView();
 		}
+		else if(key.equals("ConfirmItemRemovalView")) {
+			createAndShowConfirmItemRemovalView();
+		}
 		else {
 			System.out.println("No screen for key.");
 		}
@@ -345,7 +348,19 @@ private void createAndShowFindInventoryItemTypeView() {
 			}
 			swapToView(localScene);
 	}
+	
+	private void createAndShowConfirmItemRemovalView() {
+		Scene localScene = myViews.get("ConfirmItemRemovalView");
 
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("ConfirmItemRemovalView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("ConfirmItemRemovalView", localScene);
+		}
+		swapToView(localScene);
+}
 	
 	
 //-----------------------------------------------------------------------------

@@ -60,8 +60,7 @@ public class ConfirmItemRemovalView extends View {
 	
 	public ConfirmItemRemovalView(IModel model) {
 		super(model, "ConfirmItemRemovalView");
-	}
-
+	
 	
 	VBox container = new VBox(10);
 
