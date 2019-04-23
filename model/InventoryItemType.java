@@ -177,8 +177,10 @@ public class InventoryItemType extends EntityBase implements IView{
 		else if(history=="DeleteIIT"){
 			deleteIIT((String)value);
 		}
-		else if(key.equals("Back"))
+		else if(key.equals("BackMIIT"))
 			createAndShowFindInventoryItemTypeView();
+		else if(history=="ModifyVendor")
+			new Manager();
 		else if(key.equals("BackIIT"))
 			createAndShowVendorSearch();
 		else if(key.equals("BackVendor")){

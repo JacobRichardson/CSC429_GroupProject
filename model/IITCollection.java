@@ -131,6 +131,8 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		}
 		else if(key.equals("Back"))
 			createAndShowFindInventoryItemTypeView();
+		else if(key.equals("BackIIT") && history=="ModifyVendor")
+			new Manager();
 		else if(key.equals("BackIIT"))
 			createAndShowVendorSearch();
 		else if(key.equals("BackVendor")){
