@@ -55,7 +55,7 @@ public class ConfirmItemRemovalView extends View {
 	private Label label = new Label();
 	private Button confirm = new Button("CONFIRM");
 	private Button cancel = new Button("CANCEL");
-	private TextField nameTF = new TextField();
+	
 	
 	
 	public ConfirmItemRemovalView(IModel model) {
@@ -81,23 +81,23 @@ private Node createFormContents() {
 	grid.setVgap(10);
 	grid.setPadding(new Insets(25, 25, 25, 25));
 
-	label.setText("Inventory Item Type Name : ");
+	label.setText("Take This Item Out Of Inventory?");
 
+/*
 	confirm.setOnAction(new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
 			processAction(e);
 		}
 	});
-
+*/
 	cancel.setOnAction(new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
-			processAction(e);
+			new Manager();
 		}
 	});
 	
 
-	grid.add(label, 0, 0);
-	grid.add(nameTF, 2, 0);
+	grid.add(label, 0, 0);	
 	grid.add(confirm, 0, 2);
 	grid.add(cancel, 2, 2);
 
@@ -113,39 +113,28 @@ private Node createTitle() {
 	return titleText;
 }
 
+/*
 protected void processAction(Event e) {
-	if (e.getSource() == confirm) {
-			
-		System.out.println("SUBMIT CLICKED!");
-		//SEARCH FOR VENDOR INVENTORY ITEM TYPE TO MAKE SURE THEY CAN SUPPLY THAT ITEM TYPE.
-		
-		//Get values.
-		String vendorId = Vendor.getSelectedVendorId();
-		String itemTypeName = nameTF.getText();
-		
-		try {
-			
-			VendorInventoryItemType viit = new VendorInventoryItemType(vendorId, itemTypeName);
-			
-			if(viit != null) {
-				//Proceed to next screen for notes and barcode.
-			}
-			
-		} catch (InvalidPrimaryKeyException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			
-			//Print error for entering wrong inventory item type name.
-		}
-		
-		
-
-		
-		
-	} else {
-		new Manager();
+	if(barcodeTF.getText().length() != 9) {
+		messageLBL.setText("Improper or missing barcode");
 	}
+	else
+		confirmItemRemoval();
 }
+
+protected void confirmItemRemoval() {
+	myModel.stateChangeRequest("EnterItemView", barcodeTF.getText());
+}
+
+*/
+		
+		
+			
+		
+		
+	
+	
+
 	
 	
 	
