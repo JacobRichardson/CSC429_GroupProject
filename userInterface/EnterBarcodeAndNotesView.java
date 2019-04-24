@@ -115,7 +115,7 @@ public class EnterBarcodeAndNotesView extends View {
 			InventoryItem InventoryItem = new InventoryItem(props);
 			
 			//Save it into the database.
-			InventoryItem.update();
+			InventoryItem.update(barcodeTF.getText());
 			
 			//Clear fields.
 			barcodeTF.setText("");

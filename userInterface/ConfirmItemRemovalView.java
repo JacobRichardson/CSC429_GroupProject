@@ -1,8 +1,11 @@
 package userInterface;
 
-
 import java.util.Enumeration;
+import java.util.Properties;
 import java.util.Vector;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import exception.InvalidPrimaryKeyException;
 import impresario.IModel;
@@ -37,6 +40,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.IITCollection;
+import model.InventoryItem;
 import model.InventoryItemType;
 import model.Manager;
 import model.Vendor;
@@ -44,14 +48,9 @@ import model.VendorInventoryItemType;
 import model.VendorSearchCollection;
 
 
-//NOT
-//FINISHED
-
-
-
-
 public class ConfirmItemRemovalView extends View {
 
+	private InventoryItemType iit;
 	private Label label = new Label();
 	private Button confirm = new Button("CONFIRM");
 	private Button cancel = new Button("CANCEL");
@@ -80,16 +79,50 @@ private Node createFormContents() {
 	grid.setHgap(10);
 	grid.setVgap(10);
 	grid.setPadding(new Insets(25, 25, 25, 25));
+	if(!(myModel.getState("Barcode") == null) && myModel.getState("Status").equals("Available")) {
+	
+	try {
+		iit = new InventoryItemType((String)myModel.getState("InventoryItemTypeName"), "");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		int validityDays = Integer.parseInt((String)iit.getState("ValidityDays"));
 
-	label.setText("Take This Item Out Of Inventory?");
+		LocalDate today = LocalDate.now();
+		LocalDate received = LocalDate.parse((String)myModel.getState("DateReceived"));
+		System.out.println("received = " + received);
+		int diff = (int) ChronoUnit.DAYS.between(received, today);
+		System.out.println("diff = " + diff);
+		System.out.println("validityDays = " + validityDays);
+		if(diff > validityDays) {
+			label.setText(myModel.getState("Notes") + " is/are expired and its status has been updated.");
+			confirm.setVisible(false);
+			updateItem(false);
+		}
+		else
+			label.setText("Take "+myModel.getState("Notes")+" Out Of Inventory?");
+			
+	}
+	
+	else if(myModel.getState("Barcode") == null) {
+		label.setText("No item found with that barcode.");
+		confirm.setVisible(false);
+	}
+	else if(!myModel.getState("Status").equals("Available")) {
+		label.setText("Item is unavailable for use.");
+		confirm.setVisible(false);
+	}
 
-/*
+
 	confirm.setOnAction(new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
 			processAction(e);
+			label.setText("Item taken out of inventory");
+			System.out.println("Updated");
 		}
 	});
-*/
+
 	cancel.setOnAction(new EventHandler<ActionEvent>() {
 		public void handle(ActionEvent e) {
 			new Manager();
@@ -104,44 +137,44 @@ private Node createFormContents() {
 	return grid;
 }
 
-private Node createTitle() {
-	Text titleText = new Text("       Restaurant Inventory Management         ");
-	titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
-	titleText.setTextAlignment(TextAlignment.CENTER);
+	private Node createTitle() {
+		Text titleText = new Text("       Restaurant Inventory Management         ");
+		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
+		titleText.setTextAlignment(TextAlignment.CENTER);
 	
 
-	return titleText;
-}
-
-/*
-protected void processAction(Event e) {
-	if(barcodeTF.getText().length() != 9) {
-		messageLBL.setText("Improper or missing barcode");
+		return titleText;
 	}
-	else
-		confirmItemRemoval();
-}
-
-protected void confirmItemRemoval() {
-	myModel.stateChangeRequest("EnterItemView", barcodeTF.getText());
-}
-
-*/
-		
-		
-			
-		
-		
-	
-	
-
-	
-	
-	
-	
 	
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	protected void processAction(Event e) {
+		if(e.getSource() == confirm)
+			updateItem(true);
+	}
+	
+	protected void updateItem(boolean bool) {
+		Properties props = new Properties();
+		props.setProperty("Barcode", (String)myModel.getState("Barcode"));
+		props.setProperty("VendorId", (String)myModel.getState("VendorId"));
+		props.setProperty("InventoryItemTypeName", (String)myModel.getState("InventoryItemTypeName"));
+		props.setProperty("DateReceived", (String)myModel.getState("DateReceived"));
+		if(bool) {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			props.setProperty("DateOfLastUse", (String)dtf.format(LocalDate.now()));
+		}
+		else {
+			props.setProperty("DateOfLastUse", (String)myModel.getState("DateOfLastUse"));
+		}
+		props.setProperty("Notes", (String)myModel.getState("Notes"));
+		if(bool)
+			props.setProperty("Status", "Used");
+		else
+			props.setProperty("Status", "Expired");
+		InventoryItem item= new InventoryItem(props);
+		item.update((String)myModel.getState("Barcode"));
 	}
 }

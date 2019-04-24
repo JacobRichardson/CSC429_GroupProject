@@ -132,9 +132,11 @@ public class Manager implements IView, IModel
 		}
 		else if(key.equals("EnterItemBarcodeView")) {
 			createAndShowEnterItemBarcodeView();
+			Manager.setChoice(key);
 		}
 		else if(key.equals("ConfirmItemRemovalView")) {
-			createAndShowConfirmItemRemovalView();
+			getInventoryItem(value);
+			//createAndShowConfirmItemRemovalView(value);
 		}
 		else {
 			System.out.println("No screen for key.");
@@ -160,6 +162,15 @@ public class Manager implements IView, IModel
 			String history = Manager.getChoice();
 			IITCollection iIT = new IITCollection((String)value, history);
 			createAndShowIITCollectionView(iIT);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void getInventoryItem(Object value) {
+		try {	
+			InventoryItem item = new InventoryItem((String)value);
+			createAndShowConfirmItemRemovalView(item);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -358,13 +369,13 @@ private void createAndShowFindInventoryItemTypeView() {
 			swapToView(localScene);
 	}
 	
-	private void createAndShowConfirmItemRemovalView() {
+	private void createAndShowConfirmItemRemovalView(InventoryItem value) {
 		Scene localScene = myViews.get("ConfirmItemRemovalView");
 
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("ConfirmItemRemovalView", this); // USE VIEW FACTORY
+		    View newView = ViewFactory.createView("ConfirmItemRemovalView", value); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("ConfirmItemRemovalView", localScene);
 		}
