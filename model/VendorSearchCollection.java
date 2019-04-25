@@ -303,7 +303,6 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 	}
     private void createAndShowEnterBarcodeNotesView () throws Exception {
     	
-    	System.out.println("CREATE AND SHOW ENTER BARCODE/NOTES VIEW!!!!");
     	Scene localScene = myViews.get("EnterItemBarcodeNotesView");
     	
 		if (localScene == null)

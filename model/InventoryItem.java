@@ -89,6 +89,7 @@ public class InventoryItem extends EntityBase implements IView{
 	{
 		super(myTableName);
 
+
 		setDependencies();
 		persistentState = new Properties();
 		Enumeration allKeys = props.propertyNames();
@@ -101,14 +102,15 @@ public class InventoryItem extends EntityBase implements IView{
 				persistentState.setProperty(nextKey, nextValue);
 			}
 		}
+
 	}
 	
 	
-	public void update(String barcode) {
+	public void update(String barcode) throws SQLException {
 		updateStateInDatabase(barcode);
 	}
 	
-	public void updateStateInDatabase(String barcode) {
+	public void updateStateInDatabase(String barcode) throws SQLException {
 		try
 		{
 			if (persistentState.getProperty("Barcode") != null && Manager.getChoice() != "EnterItemBarcodeView")
@@ -128,8 +130,8 @@ public class InventoryItem extends EntityBase implements IView{
 		}
 		catch (SQLException ex)
 		{
-			
 			updateStatusMessage = "Error in installing account data in database!";
+			throw ex;
 		}
 		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
 	}

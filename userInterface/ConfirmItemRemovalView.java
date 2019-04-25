@@ -3,6 +3,7 @@ package userInterface;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
+import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -186,6 +187,11 @@ private Node createFormContents() {
 		else
 			props.setProperty("Status", "Expired");
 		InventoryItem item= new InventoryItem(props);
-		item.update((String)myModel.getState("Barcode"));
+		try {
+			item.update((String)myModel.getState("Barcode"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

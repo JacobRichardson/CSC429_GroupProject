@@ -33,6 +33,7 @@ public class InventoryItemType extends EntityBase implements IView{
 	public InventoryItemType(Properties props)
 	{
 		super(myTableName);
+
 		
 		setDependencies();
 		persistentState = new Properties();
@@ -46,6 +47,7 @@ public class InventoryItemType extends EntityBase implements IView{
 				persistentState.setProperty(nextKey, nextValue);
 			}
 		}
+
 	}
 	
 	public InventoryItemType(String itemTypeName, String history) throws InvalidPrimaryKeyException {

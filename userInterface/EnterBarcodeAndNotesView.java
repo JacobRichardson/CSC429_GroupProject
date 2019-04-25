@@ -1,8 +1,10 @@
 package userInterface;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Properties;
 
+import exception.InvalidPrimaryKeyException;
 import impresario.IModel;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -31,6 +33,7 @@ public class EnterBarcodeAndNotesView extends View {
 	private Label barcodeLabel = new Label();
 	private Label andLabel = new Label();
 	private Label notesLabel = new Label();
+	private Label messageLBL = new Label();
 	private Button submit = new Button("SUBMIT");
 	private Button cancel = new Button("Back");
 	private TextField barcodeTF = new TextField();
@@ -82,6 +85,7 @@ public class EnterBarcodeAndNotesView extends View {
 		grid.add(notesTF, 2, 2);
 		grid.add(submit, 0, 4);
 		grid.add(cancel, 2, 4);
+		grid.add(messageLBL, 0, 5, 5, 5);
 
 		return grid;
 	}
@@ -97,7 +101,14 @@ public class EnterBarcodeAndNotesView extends View {
 
 	protected void processAction(Event e) {
 
-		if (e.getSource() == submit) {
+			
+		if(barcodeTF.getText().length() != 9) {
+			messageLBL.setText("Barcode must be of legnth 9.");
+		}
+		else if(!isInteger(barcodeTF.getText())) {
+			messageLBL.setText("Barcode must be an integer.");
+		}
+		else if (e.getSource() == submit) {
 			
 			//Insert the inventory item into the db.
 			Properties props = new Properties();
@@ -111,18 +122,36 @@ public class EnterBarcodeAndNotesView extends View {
 			props.setProperty("Notes", notesTF.getText());
 			props.setProperty("Status", "Available");
 			
-			//Create the Inventory Item object.
-			InventoryItem InventoryItem = new InventoryItem(props);
-			
-			//Save it into the database.
-			InventoryItem.update(barcodeTF.getText());
+
+				
+			try {
+				
+				//Create the Inventory Item object.
+				InventoryItem InventoryItem = new InventoryItem(props);
+				
+				//Save it into the database.
+				InventoryItem.update(barcodeTF.getText());
+				
+				//Swtich back to the EIITView.
+				myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
+				
+			} catch (SQLException ex) {
+				
+				//If the error code is 1062
+				if(ex.getErrorCode() == 1062) {
+					//Set message label.
+					messageLBL.setText("Please enter a unique barcode.");
+				} else {
+					//Set message label to a generic statement.
+					messageLBL.setText("Please enter a valid barcode.");
+				}
+				
+			}
 			
 			//Clear fields.
 			barcodeTF.setText("");
 			notesTF.setText("");
-			
-			//Swtich back to the EIITView.
-			myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
+
 			
 		} else {
 			
@@ -134,6 +163,15 @@ public class EnterBarcodeAndNotesView extends View {
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isInteger(String s) {
+		try {  
+		    Integer.parseInt(s);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
 	}
 
 	

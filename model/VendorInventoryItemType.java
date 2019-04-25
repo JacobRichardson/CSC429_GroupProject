@@ -51,10 +51,10 @@ public class VendorInventoryItemType extends EntityBase implements IView
 	public VendorInventoryItemType(String vendorId, String itemTypeName) throws InvalidPrimaryKeyException {
 		super(myTableName);
 		
-		//JACOB RICHARDSON : Changed to InventoryItemTypeName from ItemTypeName which is the wrong column header.
 		String query = "SELECT * FROM " + myTableName + " WHERE (VendorId = " + vendorId + ") AND (InventoryItemTypeName = '" + itemTypeName + "')";
 
-		System.out.println(query);
+		//DEBUG:
+		//System.out.println(query);
 		
 		Vector<Properties> allDataRetrieved = getSelectQueryResult(query);
 
