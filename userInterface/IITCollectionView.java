@@ -128,31 +128,31 @@ public class IITCollectionView extends View {
 		iITTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		TableColumn itemTypeNameColumn = new TableColumn("ItemTypeName");
-		itemTypeNameColumn.setMinWidth(50);
+		itemTypeNameColumn.setMinWidth(150);
 		itemTypeNameColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("ItemTypeName"));
 
 		TableColumn unitsColumn = new TableColumn("Units");
-		unitsColumn.setMinWidth(125);
+		unitsColumn.setMinWidth(175);
 		unitsColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("Units"));
 
 		TableColumn unitMeasureColumn = new TableColumn("UnitMeasure");
-		unitMeasureColumn.setMinWidth(100);
+		unitMeasureColumn.setMinWidth(200);
 		unitMeasureColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("UnitMeasure"));
 
 		TableColumn validityDaysColumn = new TableColumn("ValidityDays");
-		validityDaysColumn.setMinWidth(100);
+		validityDaysColumn.setMinWidth(200);
 		validityDaysColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("ValidityDays"));
 
 		TableColumn reorderPointColumn = new TableColumn("ReorderPoint");
-		reorderPointColumn.setMinWidth(100);
+		reorderPointColumn.setMinWidth(200);
 		reorderPointColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("ReorderPoint"));
 
 		TableColumn notesColumn = new TableColumn("Notes");
-		notesColumn.setMinWidth(100);
+		notesColumn.setMinWidth(200);
 		notesColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("Notes"));
 
 		TableColumn statusColumn = new TableColumn("Status");
-		statusColumn.setMinWidth(50);
+		statusColumn.setMinWidth(100);
 		statusColumn.setCellValueFactory(new PropertyValueFactory<IITTableModel, String>("Status"));
 
 		iITTable.getColumns().addAll(itemTypeNameColumn, unitsColumn, unitMeasureColumn, validityDaysColumn,
@@ -166,7 +166,6 @@ public class IITCollectionView extends View {
 			}
 		});
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(iITTable);
 
 		backBTN = new Button("Back");

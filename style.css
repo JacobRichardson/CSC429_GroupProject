@@ -14,3 +14,12 @@
 .red {
 	-fx-color: #d62717;
 }
+
+.table-view, .table-column { 
+  -fx-font-size: 15px;
+}
+
+.scroll-pane{
+    -fx-perf-width:1250px;
+  -fx-perf-height:1000px;
+}

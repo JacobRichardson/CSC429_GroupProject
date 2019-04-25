@@ -146,22 +146,22 @@ public class vendorCollectionView extends View
 		tableOfVendors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 	
 		TableColumn IdColumn = new TableColumn("Id") ;
-		IdColumn.setMinWidth(50);
+		IdColumn.setMinWidth(200);
 		IdColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("Id"));
 		
 		TableColumn nameColumn = new TableColumn("Name") ;
-		nameColumn.setMinWidth(125);
+		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("Name"));
 		  
 		TableColumn phoneNumberColumn = new TableColumn("PhoneNumber") ;
-		phoneNumberColumn.setMinWidth(100);
+		phoneNumberColumn.setMinWidth(300);
 		phoneNumberColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("PhoneNumber"));
 		
 		TableColumn statusColumn = new TableColumn("Status") ;
-		statusColumn.setMinWidth(50);
+		statusColumn.setMinWidth(200);
 		statusColumn.setCellValueFactory(
 	                new PropertyValueFactory<vendorTableModel, String>("Status"));
 
@@ -178,7 +178,6 @@ public class vendorCollectionView extends View
 			}
 		});
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setPrefSize(115, 150);
 		scrollPane.setContent(tableOfVendors);
 
 		doneBTN = new Button("Back");
