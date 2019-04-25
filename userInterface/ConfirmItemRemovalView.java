@@ -52,8 +52,9 @@ public class ConfirmItemRemovalView extends View {
 
 	private InventoryItemType iit;
 	private Label label = new Label();
-	private Button confirm = new Button("CONFIRM");
-	private Button cancel = new Button("CANCEL");
+	private Button confirm = new Button("Confirm");
+	private Button cancel = new Button("Cancel");
+	private Button back = new Button("Back");
 	
 	
 	
@@ -129,9 +130,16 @@ private Node createFormContents() {
 		}
 	});
 	
+	back.setOnAction(new EventHandler<ActionEvent>() {
+		public void handle(ActionEvent e) {
+			processAction(e);
+		}
+	});
+	
 
 	grid.add(label, 0, 0);	
 	grid.add(confirm, 0, 2);
+	grid.add(back, 1, 2);
 	grid.add(cancel, 2, 2);
 
 	return grid;
@@ -152,8 +160,11 @@ private Node createFormContents() {
 	}
 	
 	protected void processAction(Event e) {
-		if(e.getSource() == confirm)
+		if(e.getSource() == confirm) {
 			updateItem(true);
+		}
+		else if(e.getSource() == back)
+			myModel.stateChangeRequest("Back", null);
 	}
 	
 	protected void updateItem(boolean bool) {

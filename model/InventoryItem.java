@@ -2,15 +2,26 @@ package model;
 
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 
+import event.Event;
 import exception.InvalidPrimaryKeyException;
 import impresario.IView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userInterface.MainStageContainer;
+import userInterface.View;
+import userInterface.ViewFactory;
+import userInterface.WindowPosition;
 
 public class InventoryItem extends EntityBase implements IView{
 
 	private static final String myTableName = "InventoryItem";
+	private Hashtable<String, Scene> myViews;
+	private Stage	  	myStage;
+	
 	
 	private Vector<InventoryItem>items;
 	
@@ -21,6 +32,9 @@ public class InventoryItem extends EntityBase implements IView{
 	public InventoryItem(String barcode) throws InvalidPrimaryKeyException
 	{
 		super(myTableName);
+		
+		myStage = MainStageContainer.getInstance();
+		myViews = new Hashtable<String, Scene>();
 
 		setDependencies();
 		String query = "SELECT * FROM InventoryItem WHERE Barcode=" + barcode;
@@ -168,8 +182,8 @@ public class InventoryItem extends EntityBase implements IView{
 	}
 
 	public void stateChangeRequest(String key, Object value) {
-		// TODO Auto-generated method stub
-		
+		if(key.equals("Back"))
+			createAndShowEnterItemBarcodeView();		
 	}
 
 	@Override
@@ -196,7 +210,37 @@ public class InventoryItem extends EntityBase implements IView{
 	
 		myRegistry.setDependencies(dependencies);
 	}
+	private void createAndShowEnterItemBarcodeView() {
+		Scene localScene = myViews.get("EnterItemBarcodeView");
 
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("EnterItemBarcodeView", this); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
+		    myViews.put("EnterItemBarcodeView", localScene);
+		}
+		swapToView(localScene);
+	}
+	public void swapToView(Scene newScene)
+	{		
+		if (newScene == null)
+		{
+			System.out.println("Librarian.swapToView(): Missing view for display");
+			new Event(Event.getLeafLevelClassName(this), "swapToView",
+				"Missing view for display ", Event.ERROR);
+			return;
+		}
+
+		myStage.setScene(newScene);
+		myStage.sizeToScene();
+		
+			
+		//Place in center
+		WindowPosition.placeCenter(myStage);
+
+	}
 	public Vector<String> getEntryListView()
 	{
 		Vector<String> v = new Vector<String>();
