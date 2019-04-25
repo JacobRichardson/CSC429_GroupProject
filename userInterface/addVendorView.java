@@ -150,6 +150,8 @@ public class addVendorView extends View {
 		props.setProperty("Status", (String) statusCB.getValue());
 		Vendor v= new Vendor(props);
 		v.update();
+		submitBTN.setVisible(false);
+		cancelBTN.setText("Back");
 		messageLBL.setText("Vendor added.");
 	}
 	

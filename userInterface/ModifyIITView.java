@@ -191,6 +191,9 @@ public class ModifyIITView extends View {
 		i.update();
 
 		messageLBL.setText("Inventory Item Type Updated!");
+		submitBTN.setVisible(false);
+		backBTN.setVisible(false);
+		cancelBTN.setText("Back");
 	}
 
 	public void updateState(String key, Object value) {

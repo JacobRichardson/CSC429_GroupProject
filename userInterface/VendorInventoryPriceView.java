@@ -175,6 +175,9 @@ public class VendorInventoryPriceView  extends View
 			
 			//Display message.
 			 messageLBL.setText("Vendor Inventory Item Type has been entered!");
+			 submitBTN.setVisible(false);
+			 cancelBTN.setText("Done");
+			 backBTN.setVisible(false);
 		}
 				
 	}

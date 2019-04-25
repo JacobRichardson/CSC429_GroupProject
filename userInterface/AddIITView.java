@@ -202,6 +202,8 @@ public class AddIITView extends View {
 
 
 		// Display message on GUI.
+		submitBTN.setVisible(false);
+		cancelBTN.setText("Back");
 		messageLBL.setText("Inventory Item Type added.");
 	}
 

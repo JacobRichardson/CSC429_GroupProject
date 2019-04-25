@@ -160,6 +160,9 @@ public class modifyVendorView extends View {
 		Vendor v= new Vendor(props);
 		v.update();
 		messageLBL.setText("Vendor updated");
+		submitBTN.setVisible(false);
+		backBTN.setVisible(false);
+		cancelBTN.setText("Back");
 	}
 	
 	public boolean checkPhone(String num) {
