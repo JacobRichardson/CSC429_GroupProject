@@ -212,6 +212,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("vendorModify", v); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("vendorModify", localScene);
 		}
 		swapToView(localScene);
@@ -227,6 +228,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("FindInventoryItemTypeView", localScene);
 		}
 		swapToView(localScene);
@@ -239,6 +241,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("IITCollectionView", iit); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("IITCollectionView", localScene);
 		}
 		swapToView(localScene);
@@ -253,6 +256,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("enterIIT", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("enterIIT", localScene);
 		}
 		swapToView(localScene);
@@ -266,6 +270,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
 			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
 			myViews.put("searchVendor", currentScene);
 		}
 		swapToView(currentScene);
@@ -291,6 +296,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
 			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
 			myViews.put("vendorCollection", localScene);
 		}	
 		swapToView(localScene);
@@ -305,6 +311,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 		    View newView = ViewFactory.createView("EnterItemBarcodeNotesView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("EnterItemBarcodeNotesView", localScene);
 		}
 		swapToView(localScene);
@@ -318,6 +325,7 @@ public class VendorSearchCollection  extends EntityBase implements IView, IModel
 			// create our initial view
 			View newView = ViewFactory.createView("vendorCollection", this); // USE VIEW FACTORY
 			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
 			myViews.put("vendorCollection", localScene);
 		}	
 		swapToView(localScene);

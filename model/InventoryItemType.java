@@ -268,6 +268,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			// create our initial view
 		    View newView = ViewFactory.createView("ModifyIITView", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("ModifyIITView", localScene);
 		}
 		swapToView(localScene);
@@ -281,6 +282,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			// create our initial view
 		    View newView = ViewFactory.createView("iitDelete", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("iitDelete", localScene);
 		}
 		swapToView(localScene);
@@ -294,6 +296,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			// create our initial view
 		    View newView = ViewFactory.createView("VendorInventoryPrice", iIT); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("VendorInventoryPrice", localScene);
 		}
 		swapToView(localScene);
@@ -308,6 +311,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			// create our initial view
 		    View newView = ViewFactory.createView("DeleteVIIT", v);
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("DeleteVIIT", localScene);
 		}
 		swapToView(localScene);
@@ -322,6 +326,7 @@ public class InventoryItemType extends EntityBase implements IView{
 			// create our initial view
 		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
+		    localScene.getStylesheets().add("style.css");
 		    myViews.put("FindInventoryItemTypeView", localScene);
 		}
 		swapToView(localScene);
@@ -335,6 +340,7 @@ public class InventoryItemType extends EntityBase implements IView{
 		// create our initial view
 		View newView = ViewFactory.createView("IITCollectionView", iIT); // USE VIEW FACTORY
 		currentScene = new Scene(newView);
+		currentScene.getStylesheets().add("style.css");
 		myViews.put("IITCollectionView", currentScene);
 	}
 			
@@ -352,6 +358,7 @@ public class InventoryItemType extends EntityBase implements IView{
 		// create our initial view
 		View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
 		currentScene = new Scene(newView);
+		currentScene.getStylesheets().add("style.css");
 		myViews.put("searchVendor", currentScene);
 	}
 			
@@ -369,6 +376,7 @@ public class InventoryItemType extends EntityBase implements IView{
 		// create our initial view
 		View newView = ViewFactory.createView("IITCollectionView", this); // USE VIEW FACTORY
 		currentScene = new Scene(newView);
+		currentScene.getStylesheets().add("style.css");
 		myViews.put("IITCollectionView", currentScene);
 	}
 			

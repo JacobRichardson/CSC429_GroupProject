@@ -44,7 +44,7 @@ public class EnterItemBarcodeView extends View {
 		container.setPadding(new Insets(15, 5, 5, 5));
 
 		container.getChildren().add(createTitle());
-
+		
 		container.getChildren().add(createFormContents());
 		getChildren().add(container);
 
