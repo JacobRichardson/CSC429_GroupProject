@@ -378,6 +378,7 @@ private void createAndShowFindInventoryItemTypeView() {
 		    View newView = ViewFactory.createView("ConfirmItemRemovalView", value); // USE VIEW FACTORY
 		    localScene = new Scene(newView);
 		    myViews.put("ConfirmItemRemovalView", localScene);
+		    localScene.getStylesheets().add("style.css");
 		}
 		swapToView(localScene);
 }
