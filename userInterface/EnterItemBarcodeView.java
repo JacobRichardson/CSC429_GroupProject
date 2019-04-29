@@ -16,6 +16,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -84,6 +86,18 @@ public class EnterItemBarcodeView extends View {
 				public void handle(ActionEvent e) {
 					processAction(e);
 				}
+			});
+			
+			barcodeTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
+				@Override
+				public void handle(KeyEvent k) {
+					if(k.getCode().equals(KeyCode.ENTER) && barcodeTF.getText().length() != 9)
+						messageLBL.setText("Improper or missing barcode");
+					else if(k.getCode().equals(KeyCode.ENTER)) {
+						confirmItemRemoval();
+					}
+				}
+				
 			});
 
 			cancelBTN.setOnAction(new EventHandler<ActionEvent>() {
