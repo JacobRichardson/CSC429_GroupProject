@@ -114,7 +114,7 @@ public class EnterIITView extends View {
 					myModel.stateChangeRequest("EnterBarcodeNotes", itemTypeName);
 				}
 			} catch (InvalidPrimaryKeyException e1) {
-
+				
 				//Print error for entering wrong inventory item type name.
 				messageLBL.setText("Please enter a valid Inventory Item Type Name");
 			}

@@ -107,7 +107,7 @@ public class DeleteInventoryItemTypeView extends View {
 			props.setProperty("Status", "InActive");
 			InventoryItemType i = new InventoryItemType(props);
 			i.update();
-			displayMessage("Success");
+			label.setText("Success!");
 			yes.setVisible(false);
 			no.setVisible(false);
 			cancel.setText("Done");

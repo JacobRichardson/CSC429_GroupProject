@@ -35,7 +35,7 @@ public class EnterBarcodeAndNotesView extends View {
 	private Label notesLabel = new Label();
 	private Label messageLBL = new Label();
 	private Button submit = new Button("SUBMIT");
-	private Button cancel = new Button("Back");
+	private Button cancel = new Button("CANCEL");
 	private TextField barcodeTF = new TextField();
 	private TextField notesTF = new TextField();
 	
@@ -102,13 +102,17 @@ public class EnterBarcodeAndNotesView extends View {
 	protected void processAction(Event e) {
 
 			
-		if(barcodeTF.getText().length() != 9) {
-			messageLBL.setText("Barcode must be of legnth 9.");
-		}
-		else if(!isInteger(barcodeTF.getText())) {
-			messageLBL.setText("Barcode must be an integer.");
-		}
-		else if (e.getSource() == submit) {
+
+		if (e.getSource() == submit) {
+			
+			if(barcodeTF.getText().length() != 9) {
+				messageLBL.setText("Barcode must be of legnth 9.");
+				return;
+			}
+			else if(!isInteger(barcodeTF.getText())) {
+				messageLBL.setText("Barcode must be an integer.");
+				return;
+			}
 			
 			//Insert the inventory item into the db.
 			Properties props = new Properties();
@@ -132,6 +136,10 @@ public class EnterBarcodeAndNotesView extends View {
 				//Save it into the database.
 				InventoryItem.update(barcodeTF.getText());
 				
+				//Clear fields.
+				barcodeTF.setText("");
+				notesTF.setText("");
+				
 				//Swtich back to the EIITView.
 				myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
 				
@@ -147,11 +155,6 @@ public class EnterBarcodeAndNotesView extends View {
 				}
 				
 			}
-			
-			//Clear fields.
-			barcodeTF.setText("");
-			notesTF.setText("");
-
 			
 		} else {
 			
