@@ -163,6 +163,7 @@ private Node createFormContents() {
 	protected void processAction(Event e) {
 		if(e.getSource() == confirm) {
 			updateItem(true);
+			confirm.setVisible(false);
 		}
 		else if(e.getSource() == back)
 			myModel.stateChangeRequest("Back", null);

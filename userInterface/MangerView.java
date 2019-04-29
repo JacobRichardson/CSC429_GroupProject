@@ -93,13 +93,13 @@ public class MangerView extends View {
     	//Initialize Components.
     	addIventoryItemTypeBTN = new Button("Inventory Item Type");
     	modifyVendorBTN = new Button("Vendor");
-    	outOfInventoryBTN = new Button("Take an Item out of Inventory");
+    	outOfInventoryBTN = new Button("Take an Item Out of Inventory");
     	modifyIventoryItemTypeBTN = new Button("Inventory Item Type");
     	addVendorInventoryItemTypeBTN = new Button("Vendor Inventory Item Type");
     	modifyStatusInventoryItemBTN = new Button("Status of an Inventory Item");
     	deleteInventoryItemTypeBTN = new Button("Inventory Item Type");
     	deleteVendorInvetoryItemBTN = new Button("Vendor Inventory Item Type");
-    	reorderListBTN = new Button("Reorder list");
+    	reorderListBTN = new Button("Reorder List");
     	addVendorBTN = new Button("Vendor");
     	processInvoiceBTN = new Button("Process Invoice");
     	fullInventoryBTN = new Button("Current Inventory");

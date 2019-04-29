@@ -185,8 +185,33 @@ public class InventoryItem extends EntityBase implements IView{
 
 	public void stateChangeRequest(String key, Object value) {
 		if(key.equals("Back"))
-			createAndShowEnterItemBarcodeView();		
+			createAndShowEnterItemBarcodeView();
+		if(key.equals("ConfirmItemRemovalView"))
+			getInventoryItem(value);
 	}
+	
+	private void getInventoryItem(Object value) {
+		try {	
+			InventoryItem item = new InventoryItem((String)value);
+			createAndShowConfirmItemRemovalView(item);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createAndShowConfirmItemRemovalView(InventoryItem value) {
+		Scene localScene = myViews.get("ConfirmItemRemovalView");
+
+		if (localScene == null)
+		{
+			// create our initial view
+		    View newView = ViewFactory.createView("ConfirmItemRemovalView", value); // USE VIEW FACTORY
+		    localScene = new Scene(newView);
+		    myViews.put("ConfirmItemRemovalView", localScene);
+		    localScene.getStylesheets().add("style.css");
+		}
+		swapToView(localScene);
+}
 
 	@Override
 	protected void initializeSchema(String tableName) {
