@@ -98,7 +98,7 @@ private Node createFormContents() {
 		System.out.println("diff = " + diff);
 		System.out.println("validityDays = " + validityDays);
 		if(diff > validityDays) {
-			label.setText(myModel.getState("InventoryItemTypeName") + " is/are expired and its status has been updated.");
+			label.setText(myModel.getState("InventoryItemTypeName") + " is/are expired and its status has been updated to expired.");
 			confirm.setVisible(false);
 			updateItem(false);
 		}
