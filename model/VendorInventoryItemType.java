@@ -160,6 +160,7 @@ public class VendorInventoryItemType extends EntityBase implements IView
 				Properties whereClause = new Properties();
 				whereClause.setProperty("InventoryItemTypeName",
 						persistentState.getProperty("InventoryItemTypeName"));
+				whereClause.setProperty("VendorId", Vendor.getSelectedVendorId());
 					deletePersistentState(mySchema, whereClause);
 				updateStatusMessage = "InventoryItemType data for name: " + persistentState.getProperty("InventoryItemTypeName") + " delete successfully in database!";
 		
