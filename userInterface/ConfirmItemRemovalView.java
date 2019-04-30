@@ -103,7 +103,14 @@ private Node createFormContents() {
 			updateItem(false);
 		}
 		else
-			label.setText("Take "+myModel.getState("InventoryItemTypeName")+" Out Of Inventory?");
+			label.setText("Take this item out of inventory?\n"
+							+   "Name:                  "+ myModel.getState("InventoryItemTypeName")
+							+ "\nBarcode:              " + myModel.getState("Barcode")
+							+ "\nVendorId:            " + myModel.getState("VendorId")
+							+ "\nDateReceived:     " + myModel.getState("DateReceived") 
+							+ "\nDateOfLastUse:   " + myModel.getState("DateOfLastUse")
+							+ "\nNotes:                  " + myModel.getState("Notes")
+							+ "\nStatus:                 " + myModel.getState("Status"));
 			
 	}
 	
