@@ -126,6 +126,10 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		if(history=="ModifyIIT" && value!=null) {
 			modifyIIT((String)value);
 		}
+		else if(key.equals("Back") && history=="DeleteIIT")
+			createAndShowFindInventoryItemTypeView();
+		else if(key.equals("BackIIT") &&history=="DeleteIIT")
+			new Manager();
 		else if(history=="DeleteIIT"){
 			deleteIIT((String)value);
 		}
