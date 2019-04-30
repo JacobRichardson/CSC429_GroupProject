@@ -89,7 +89,6 @@ public class EnterItemBarcodeView extends View {
 			});
 			
 			barcodeTF.setOnKeyPressed(new EventHandler<KeyEvent>() {
-				@Override
 				public void handle(KeyEvent k) {
 					if(k.getCode().equals(KeyCode.ENTER) && barcodeTF.getText().length() != 9)
 						messageLBL.setText("Improper or missing barcode");
