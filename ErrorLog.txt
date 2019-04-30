@@ -58,3 +58,4 @@
 [4/24/19 7:44 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '111111111' for key 'PRIMARY'>
 [4/29/19 1:35 PM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'hello' in 'where clause'>
 [4/29/19 1:56 PM]|InventoryItemType|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'hello' in 'where clause'>
+[4/30/19 5:09 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000001' for key 'PRIMARY'>

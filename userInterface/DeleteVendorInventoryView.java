@@ -116,7 +116,7 @@ public class DeleteVendorInventoryView extends View {
 			viit.delete();
 			label.setText("Successfuly deleted "+name+" from vendor.");
 		} catch (InvalidPrimaryKeyException e1) {
-			label.setText("Vendor does not sell item: "+name+". Deletion failed.");
+			label.setText("Vendor does not sell item: "+name+".\n Deletion failed.");
 		}
 		
 		yes.setVisible(false);
