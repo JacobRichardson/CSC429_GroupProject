@@ -145,6 +145,9 @@ public class Manager implements IView, IModel
 		else if(key.equals("SearchItemCollection")) {
 			searchItem((String)value);
 		}
+		else if(key.equals("reorderList")) {
+			
+		}
 		else {
 			System.out.println("No screen for key.");
 		}
