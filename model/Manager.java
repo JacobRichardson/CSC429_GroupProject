@@ -149,6 +149,9 @@ public class Manager implements IView, IModel
 				e.printStackTrace();
 			}
 		}
+		else if(key.equals("reorderList")) {
+			
+		}
 		else {
 			System.out.println("No screen for key.");
 		}
