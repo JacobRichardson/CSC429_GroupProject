@@ -250,9 +250,12 @@ public class MangerView extends View {
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("", null);
+		else if(e.getSource() == fullInventoryBTN)
+			myModel.stateChangeRequest("ViewInventory", null);
 		else
 			System.out.println(e);
 	}
+	
 	
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
