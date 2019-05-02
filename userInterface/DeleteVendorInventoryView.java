@@ -54,7 +54,7 @@ public class DeleteVendorInventoryView extends View {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		label.setText("Do you want to delete this item?");
+		label.setText("Do you want to delete: "+InventoryItemType.getSelectedInventoryItemTypeName());
 
 		yes.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
@@ -76,11 +76,11 @@ public class DeleteVendorInventoryView extends View {
 		
 		cancel.setAlignment(Pos.CENTER);
 
-		grid.add(label, 1, 0);
+		grid.add(label, 0, 0);
 		;
 		grid.add(yes, 0, 1);
-		grid.add(no, 2, 1);
-		grid.add(cancel, 2, 5);
+		grid.add(no, 1, 1);
+		grid.add(cancel, 1, 5);
 
 		return grid;
 	}

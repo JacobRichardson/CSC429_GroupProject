@@ -33,14 +33,14 @@ public class Manager implements IView, IModel
 	// For Impresario
 	private Properties dependencies;
 	private ModelRegistry myRegistry;
-	
+
 	// GUI Components
-		private Hashtable<String, Scene> myViews;
-		private Stage	  	myStage;
-		
+	private Hashtable<String, Scene> myViews;
+	private Stage	  	myStage;
+
 	//CHOICE
 	private static String choice;
-		
+
 
 	// constructor for this class
 	//----------------------------------------------------------
@@ -55,7 +55,7 @@ public class Manager implements IView, IModel
 		if(myRegistry == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "Manager",
-				"Could not instantiate Registry", Event.ERROR);
+					"Could not instantiate Registry", Event.ERROR);
 		}
 
 		// STEP 3.2: Be sure to set the dependencies correctly
@@ -63,7 +63,7 @@ public class Manager implements IView, IModel
 
 		// Set up the initial view
 		createAndShowManagerView();
-		
+
 	}
 
 
@@ -95,11 +95,11 @@ public class Manager implements IView, IModel
 	public void stateChangeRequest(String key, Object value)
 	{
 		//Only set choice to the key if it is a key from the choice transaction screen.
-		
+
 		//Debug.
 		//System.out.println("KEY:" + key);
 		//System.out.println("Manger's chocie:" + Manager.getChoice());
-		
+
 		if(key.equals("ModifyVendor")||key.equals("AddVIIT") || key.equals("deleteVIIT") || key.equals("processInvoice")) {
 			Manager.setChoice(key);
 			createAndShowVendorSearch();
@@ -111,11 +111,11 @@ public class Manager implements IView, IModel
 			searchIIT(value);
 		}
 		else if(key.equals("VendorSelected")) {
-			
+
 			//Debug.
 			//System.out.println("VENDOR SELECTED KEY!");
-			
-			
+
+
 		}
 		else if(key.equals("ModifyIIT") || key.equals("DeleteIIT") ){
 			Manager.setChoice(key);
@@ -138,10 +138,13 @@ public class Manager implements IView, IModel
 			getInventoryItem(value);
 			//createAndShowConfirmItemRemovalView(value);
 		}
+		else if(key.equals("modifyItem")) {
+			createAndShowSearchItem();
+		}
 		else {
 			System.out.println("No screen for key.");
 		}
-			
+
 		myRegistry.updateSubscribers(key, this);
 	}
 
@@ -166,7 +169,7 @@ public class Manager implements IView, IModel
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void getInventoryItem(Object value) {
 		try {	
 			InventoryItem item = new InventoryItem((String)value);
@@ -217,20 +220,20 @@ public class Manager implements IView, IModel
 		{
 			System.out.println("Librarian.swapToView(): Missing view for display");
 			new Event(Event.getLeafLevelClassName(this), "swapToView",
-				"Missing view for display ", Event.ERROR);
+					"Missing view for display ", Event.ERROR);
 			return;
 		}
 
 		myStage.setScene(newScene);
 		myStage.sizeToScene();
-		
-			
+
+
 		//Place in center
 		WindowPosition.placeCenter(myStage);
 
 	}
 
-//---------			Create and show methods			-----------------------------------------------------------------------------------------------//
+	//---------			Create and show methods			-----------------------------------------------------------------------------------------------//
 	private void createAndShowManagerView() {
 		Scene currentScene = (Scene)myViews.get("ManagerView");
 		if (currentScene == null)
@@ -240,18 +243,18 @@ public class Manager implements IView, IModel
 			currentScene = new Scene(newView);
 			currentScene.getStylesheets().add("style.css");
 			myViews.put("ManagerView", currentScene);
-			
+
 			//Reset choice.
 			Manager.setChoice("");
 		}
-				
+
 		swapToView(currentScene);
-		
+
 	}
-	
+
 	private void createAndShowIITCollectionView(IITCollection iIT) {
 		Scene currentScene = (Scene)myViews.get("IITCollectionView");
-		
+
 		if (currentScene == null)
 		{
 			// create our initial view
@@ -260,15 +263,15 @@ public class Manager implements IView, IModel
 			currentScene.getStylesheets().add("style.css");
 			myViews.put("IITCollectionView", currentScene);
 		}
-				
+
 
 		// make the view visible by installing it into the frame
 		swapToView(currentScene);
-		
+
 	}
 	private void createAndShowVendorSearch() {
 		Scene currentScene = (Scene)myViews.get("searchVendor");
-		
+
 		if (currentScene == null)
 		{
 			// create our initial view
@@ -277,13 +280,13 @@ public class Manager implements IView, IModel
 			currentScene.getStylesheets().add("style.css");
 			myViews.put("searchVendor", currentScene);
 		}
-				
+
 
 		// make the view visible by installing it into the frame
 		swapToView(currentScene);
-		
+
 	}
-	
+
 	private void createAndShowVendorCollection(VendorSearchCollection v) {
 		Scene localScene = myViews.get("vendorCollection");
 
@@ -297,48 +300,48 @@ public class Manager implements IView, IModel
 		}	
 		swapToView(localScene);
 	}
-	
-    private void createAndShowModifyVendor(Vendor v) {
-    	Scene localScene = myViews.get("vendorModify");
+
+	private void createAndShowModifyVendor(Vendor v) {
+		Scene localScene = myViews.get("vendorModify");
 
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    localScene.getStylesheets().add("style.css");
-		    myViews.put("vendorModify", localScene);
+			View newView = ViewFactory.createView("vendorModify", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("vendorModify", localScene);
 		}
 		swapToView(localScene);
 	}
-private void createAndShowFindInventoryItemTypeView() {
-    	
-    	Scene localScene = myViews.get("FindInventoryItemTypeView");
+	private void createAndShowFindInventoryItemTypeView() {
+
+		Scene localScene = myViews.get("FindInventoryItemTypeView");
 
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    localScene.getStylesheets().add("style.css");
-		    myViews.put("FindInventoryItemTypeView", localScene);
+			View newView = ViewFactory.createView("FindInventoryItemTypeView", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("FindInventoryItemTypeView", localScene);
 		}
 		swapToView(localScene);
-    }
-	
-	private void createAndShowAddVendorView () {
-		
-	 	Scene localScene = myViews.get("AddVendor");
+	}
 
-			if (localScene == null)
-			{
-				// create our initial view
-			    View newView = ViewFactory.createView("AddVendor", this); // USE VIEW FACTORY
-			    localScene = new Scene(newView);
-			    localScene.getStylesheets().add("style.css");
-			    myViews.put("AddVendor", localScene);
-			}
-			swapToView(localScene);
+	private void createAndShowAddVendorView () {
+
+		Scene localScene = myViews.get("AddVendor");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("AddVendor", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("AddVendor", localScene);
+		}
+		swapToView(localScene);
 	}
 	private void createAndShowEnterItemBarcodeView() {
 		Scene localScene = myViews.get("EnterItemBarcodeView");
@@ -346,49 +349,64 @@ private void createAndShowFindInventoryItemTypeView() {
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("EnterItemBarcodeView", this); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    localScene.getStylesheets().add("style.css");
-		    myViews.put("EnterItemBarcodeView", localScene);
+			View newView = ViewFactory.createView("EnterItemBarcodeView", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("EnterItemBarcodeView", localScene);
 		}
 		swapToView(localScene);
 	}
-	
-	private void createAndShowAddInventoryItemTypeView () {
-		
-	 	Scene localScene = myViews.get("AddIIT");
 
-			if (localScene == null)
-			{
-				// create our initial view
-			    View newView = ViewFactory.createView("AddIIT", this); // USE VIEW FACTORY
-			    localScene = new Scene(newView);
-			    localScene.getStylesheets().add("style.css");
-			    myViews.put("AddIIT", localScene);
-			}
-			swapToView(localScene);
+	private void createAndShowAddInventoryItemTypeView () {
+
+		Scene localScene = myViews.get("AddIIT");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("AddIIT", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("AddIIT", localScene);
+		}
+		swapToView(localScene);
 	}
-	
+
 	private void createAndShowConfirmItemRemovalView(InventoryItem value) {
 		Scene localScene = myViews.get("ConfirmItemRemovalView");
 
 		if (localScene == null)
 		{
 			// create our initial view
-		    View newView = ViewFactory.createView("ConfirmItemRemovalView", value); // USE VIEW FACTORY
-		    localScene = new Scene(newView);
-		    myViews.put("ConfirmItemRemovalView", localScene);
-		    localScene.getStylesheets().add("style.css");
+			View newView = ViewFactory.createView("ConfirmItemRemovalView", value); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			myViews.put("ConfirmItemRemovalView", localScene);
+			localScene.getStylesheets().add("style.css");
 		}
 		swapToView(localScene);
-}
-	
-	
-//-----------------------------------------------------------------------------
+	}
 
 
-//------------------------------   CHOICE METHODS - ---------------------------------------------//
-	
+	private void createAndShowSearchItem () {
+
+		Scene localScene = myViews.get("SearchItem");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItem", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("SearchItem", localScene);
+		}
+		swapToView(localScene);
+	}
+
+	//-----------------------------------------------------------------------------
+
+
+	//------------------------------   CHOICE METHODS - ---------------------------------------------//
+
 
 	/*
 	 * Sets the variable choice to the passed in string.
@@ -399,7 +417,7 @@ private void createAndShowFindInventoryItemTypeView() {
 	{
 		Manager.choice = choice;
 	}
-	
+
 	/*
 	 * Returns the value of the variable choice.
 	 * 
@@ -409,7 +427,7 @@ private void createAndShowFindInventoryItemTypeView() {
 	{
 		return Manager.choice;
 	}
-	
+
 	/*
 	 * Sets the value of choice to an empty string.
 	 * 

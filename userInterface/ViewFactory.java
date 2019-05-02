@@ -46,6 +46,9 @@ public class ViewFactory {
 		else if(viewName.equals("EnterItemBarcodeNotesView")) {
 			return new EnterBarcodeAndNotesView(model);
 		}
+		else if(viewName.equals("SearchItem")) {
+			return new SearchItem(model);
+		}
 		else
 			return null;
 	}
