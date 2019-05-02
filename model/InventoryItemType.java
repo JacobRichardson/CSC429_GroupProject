@@ -437,10 +437,10 @@ public class InventoryItemType extends EntityBase implements IView{
 	
 	//------------------------------   SELECTED INVENTORY ITEM TYPE NAME METHODS - ---------------------------------------------//
 	
-	public static int compare(InventoryItemType a, InventoryItemType b)
+	public static int compare(InventoryItemType p, InventoryItemType midSession)
 	{
-		String aNum = (String)a.getState("ItemTypeName");
-		String bNum = (String)b.getState("ItemTypeName");
+		String aNum = (String)p.getState("ItemTypeName");
+		String bNum = (String)midSession.getState("ItemTypeName");
 
 		return aNum.compareTo(bNum);
 	}

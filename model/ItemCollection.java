@@ -28,7 +28,7 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 
 	private static final String myTableName = "InventoryItem";
 	String history;
-	private Vector <InventoryItemType>iIT;
+	private Vector<InventoryItem> iIT;
 	// GUI Components
 	private Hashtable<String, Scene> myViews;
 	private Stage	  	myStage;
@@ -53,13 +53,13 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		Vector allDataRetrieved = getSelectQueryResult(query);
 		if (allDataRetrieved != null)
 		{
-			iIT = new Vector<InventoryItemType>();
+			iIT = new Vector<InventoryItem>();
 
 			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
 			{
 				Properties nextIITData = (Properties)allDataRetrieved.elementAt(cnt);
 
-				InventoryItemType itemType = new InventoryItemType(nextIITData);
+				InventoryItem itemType = new InventoryItem(nextIITData);
 
 				if (itemType != null)
 				{
@@ -75,14 +75,14 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		myStage = MainStageContainer.getInstance();
 	}
 
-	private void addIIT(InventoryItemType p) {
+	private void addIIT(InventoryItem p) {
 		// TODO Auto-generated method stub
 		int index = findIndexToAdd(p);
 		iIT.insertElementAt(p,index);
 	}
 
 
-	private int findIndexToAdd(InventoryItemType p) {
+	private int findIndexToAdd(InventoryItem p) {
 		//users.add(u);
 		int low=0;
 		int high = iIT.size()-1;
@@ -92,9 +92,9 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		{
 			middle = (low+high)/2;
 
-			InventoryItemType midSession = iIT.elementAt(middle);
+			InventoryItem midSession = iIT.elementAt(middle);
 
-			int result = InventoryItemType.compare(p,midSession);
+			int result = InventoryItem.compare(p,midSession);
 
 			if (result ==0)
 			{

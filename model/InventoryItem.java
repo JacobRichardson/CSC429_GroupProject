@@ -223,7 +223,7 @@ public class InventoryItem extends EntityBase implements IView{
 	
 	
 	
-	public static int compare(InventoryItemType a, InventoryItemType b)
+	public static int compare(InventoryItem a, InventoryItem b)
 	{
 		String aNum = (String)a.getState("ItemTypeName");
 		String bNum = (String)b.getState("ItemTypeName");
@@ -272,11 +272,11 @@ public class InventoryItem extends EntityBase implements IView{
 	{
 		Vector<String> v = new Vector<String>();
 
-		v.addElement(persistentState.getProperty("ItemTypeName"));
-		v.addElement(persistentState.getProperty("Units"));
-		v.addElement(persistentState.getProperty("UnitMeasure"));
-		v.addElement(persistentState.getProperty("ValidityDays"));
-		v.addElement(persistentState.getProperty("ReorderPoint"));
+		v.addElement(persistentState.getProperty("Barcode"));
+		v.addElement(persistentState.getProperty("VendorId"));
+		v.addElement(persistentState.getProperty("InventoryItemTypeName"));
+		v.addElement(persistentState.getProperty("DateReceived"));
+		v.addElement(persistentState.getProperty("DateOfLastUse"));
 		v.addElement(persistentState.getProperty("Notes"));
 		v.addElement(persistentState.getProperty("Status"));
 		

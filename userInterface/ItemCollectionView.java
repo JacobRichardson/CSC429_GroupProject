@@ -22,7 +22,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -33,11 +32,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 import model.ItemCollection;
 import model.InventoryItem;
-import model.Vendor;
-import model.VendorSearchCollection;
 
 public class ItemCollectionView extends View {
 
@@ -75,10 +71,11 @@ public class ItemCollectionView extends View {
 			ItemCollection itemCollection = (ItemCollection) myModel.getState("ItemCollection");
 			Vector entryList = (Vector) itemCollection.getState("Item");
 			Enumeration entries = entryList.elements();
-
 			while (entries.hasMoreElements() == true) {
-				InventoryItem nextIIT = (InventoryItem) entries.nextElement();
-				Vector<String> view = nextIIT.getEntryListView();
+				InventoryItem nextItem = (InventoryItem) entries.nextElement();
+				System.out.println(nextItem);
+				Vector<String> view = nextItem.getEntryListView();
+				System.out.println(nextItem);
 				// add this list entry to the list
 				ItemTableModel nextTableRowData = new ItemTableModel(view);
 				tableData.add(nextTableRowData);
