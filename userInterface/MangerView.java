@@ -244,8 +244,8 @@ public class MangerView extends View {
 			myModel.stateChangeRequest("processInvoice", null);
 		else if(e.getSource() == modifyStatusInventoryItemBTN)
 			myModel.stateChangeRequest("modifyItem", null);
-		else if(e.getSource() == modifyIventoryItemTypeBTN)
-			myModel.stateChangeRequest("", null);
+		else if(e.getSource() == reorderListBTN)
+			myModel.stateChangeRequest("ReorderList", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)
 			myModel.stateChangeRequest("", null);
 		else if(e.getSource() == modifyIventoryItemTypeBTN)

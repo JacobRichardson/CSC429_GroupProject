@@ -52,6 +52,9 @@ public class ViewFactory {
 		else if(viewName.equals("SearchItemCollection")) {
 			return new ItemCollectionView(model);
 		}
+		else if(viewName.equals("ReorderList")) {
+			return new ReorderList(model);
+		}
 		else
 			return null;
 	}

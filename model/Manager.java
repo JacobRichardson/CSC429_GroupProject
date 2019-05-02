@@ -145,8 +145,8 @@ public class Manager implements IView, IModel
 		else if(key.equals("SearchItemCollection")) {
 			searchItem((String)value);
 		}
-		else if(key.equals("reorderList")) {
-			
+		else if(key.equals("ReorderList")) {
+			createAndShowReorderList();
 		}
 		else {
 			System.out.println("No screen for key.");
@@ -437,6 +437,19 @@ public class Manager implements IView, IModel
 		swapToView(localScene);
 	}
 
+	
+	private void createAndShowReorderList() {
+		Scene localScene = myViews.get("ReorderList");
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("ReorderList", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("SearchItem", localScene);
+		}
+		swapToView(localScene);
+	}
 	//-----------------------------------------------------------------------------
 
 
