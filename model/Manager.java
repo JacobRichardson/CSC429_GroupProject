@@ -139,15 +139,11 @@ public class Manager implements IView, IModel
 			//createAndShowConfirmItemRemovalView(value);
 		}
 		else if(key.equals("modifyItem")) {
+			Manager.setChoice(key);
 			createAndShowSearchItem();
 		}
 		else if(key.equals("SearchItemCollection")) {
-			try {
-				new ItemCollection((String)value,"");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			searchItem((String)value);
 		}
 		else {
 			System.out.println("No screen for key.");
@@ -186,7 +182,35 @@ public class Manager implements IView, IModel
 			e.printStackTrace();
 		}
 	}
+	
+	private void searchItem(String s) {
+		try {
+			createAndShowItemCollection(new ItemCollection(s,""));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+
+
+	private void createAndShowItemCollection(ItemCollection itemCollection) {
+		Scene currentScene = (Scene)myViews.get("SearchItemCollection");
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItemCollection", itemCollection); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
+			myViews.put("SearchItemCollection", currentScene);
+
+			//Reset choice.
+			Manager.setChoice("");
+		}
+
+		swapToView(currentScene);
+		
+	}
 
 
 	/** Called via the IView relationship */

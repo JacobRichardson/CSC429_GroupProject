@@ -49,6 +49,9 @@ public class ViewFactory {
 		else if(viewName.equals("SearchItem")) {
 			return new SearchItem(model);
 		}
+		else if(viewName.equals("SearchItemCollection")) {
+			return new ItemCollectionView(model);
+		}
 		else
 			return null;
 	}
