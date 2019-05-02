@@ -141,6 +141,14 @@ public class Manager implements IView, IModel
 		else if(key.equals("modifyItem")) {
 			createAndShowSearchItem();
 		}
+		else if(key.equals("SearchItemCollection")) {
+			try {
+				new ItemCollection((String)value,"");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		else {
 			System.out.println("No screen for key.");
 		}
