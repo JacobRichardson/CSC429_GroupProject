@@ -38,13 +38,14 @@ import java.util.Enumeration;
 // project imports
 import impresario.IModel;
 import model.Manager;
-import model.Vendor;
-import model.VendorSearchCollection;
+import model.InventoryItemType;
+import model.IITCollection;
+import model.InventoryItem;
 
 //==============================================================================
 public class ReorderList extends View
 {
-	protected TableView<vendorTableModel> tableOfVendors;
+	protected TableView<IITTableModel> iITTable;
 	protected Button doneBTN;
 	protected Button submitButton;
 
@@ -55,7 +56,7 @@ public class ReorderList extends View
 	//--------------------------------------------------------------------------
 	public ReorderList(IModel wsc)
 	{
-		super(wsc, "PatronCollectionView");
+		super(wsc, null);
 
 		// create a container for showing the contents
 		VBox container = new VBox(10);
@@ -69,7 +70,7 @@ public class ReorderList extends View
 		container.getChildren().add(createStatusLog("                                            "));
 
 		getChildren().add(container);
-		
+
 		populateFields();
 	}
 
@@ -82,28 +83,27 @@ public class ReorderList extends View
 	//--------------------------------------------------------------------------
 	protected void getEntryTableModelValues()
 	{
-		
-		ObservableList<vendorTableModel> tableData = FXCollections.observableArrayList();
-		try
-		{
-			VendorSearchCollection vendorCollection = (VendorSearchCollection)myModel.getState("VendorList");
-	 		Vector entryList = (Vector)vendorCollection.getState("Vendor");
+
+		ObservableList<IITTableModel> tableData = FXCollections.observableArrayList();
+		try {
+			IITCollection iITCollection = (IITCollection) myModel.getState("IITCollection");
+			Vector entryList = (Vector) iITCollection.getState("InventoryItemType");
 			Enumeration entries = entryList.elements();
 
-			while (entries.hasMoreElements() == true)
-			{
-				Vendor nextVendor= (Vendor)entries.nextElement();
-				Vector<String> view = nextVendor.getEntryListView();
+			while (entries.hasMoreElements() == true) {
+				InventoryItemType nextIIT = (InventoryItemType) entries.nextElement();
+				Vector<String> view = nextIIT.getEntryListView();
 				// add this list entry to the list
-				vendorTableModel nextTableRowData = new vendorTableModel(view);
+				IITTableModel nextTableRowData = new IITTableModel(view);
 				tableData.add(nextTableRowData);
 				
+
 			}
-			
-			tableOfVendors.setItems(tableData);
-		}
-		catch (Exception e) {//SQLException e) {
+
+			iITTable.setItems(tableData);
+		} catch (Exception e) {// SQLException e) {
 			// Need to handle this exception
+			System.out.println(e);
 		}
 	}
 
@@ -118,9 +118,9 @@ public class ReorderList extends View
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 		titleText.setWrappingWidth(300);
 		titleText.setTextAlignment(TextAlignment.CENTER);
-		
+
 		container.getChildren().add(titleText);
-		
+
 		return container;
 	}
 
@@ -131,62 +131,62 @@ public class ReorderList extends View
 		VBox vbox = new VBox(10);
 
 		GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-       	grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-        
-        Text prompt = new Text("REORDER LIST");
-        prompt.setWrappingWidth(350);
-        prompt.setTextAlignment(TextAlignment.CENTER);
-        prompt.setFill(Color.BLACK);
-        grid.add(prompt, 0, 0, 2, 1);
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		tableOfVendors = new TableView<vendorTableModel>();
-		tableOfVendors.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-	
+		Text prompt = new Text("REORDER LIST");
+		prompt.setWrappingWidth(350);
+		prompt.setTextAlignment(TextAlignment.CENTER);
+		prompt.setFill(Color.BLACK);
+		grid.add(prompt, 0, 0, 2, 1);
+
+		iITTable = new TableView<IITTableModel>();
+		iITTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
 		TableColumn IdColumn = new TableColumn("ItemTypeName") ;
 		IdColumn.setMinWidth(200);
 		IdColumn.setCellValueFactory(
-	                new PropertyValueFactory<vendorTableModel, String>("Id"));
-		
+				new PropertyValueFactory<IITTableModel, String>("Id"));
+
 		TableColumn nameColumn = new TableColumn("Count") ;
 		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(
-	                new PropertyValueFactory<vendorTableModel, String>("Name"));
-		  
+				new PropertyValueFactory<IITTableModel, String>("Name"));
 
-		tableOfVendors.getColumns().addAll(IdColumn, nameColumn);
+
+		iITTable.getColumns().addAll(IdColumn, nameColumn);
 
 
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setContent(tableOfVendors);
+		scrollPane.setContent(iITTable);
 
 		doneBTN = new Button("Confirm");
- 		doneBTN.setOnAction(new EventHandler<ActionEvent>() {
-       		     public void handle(ActionEvent e) {
-       		    	new Manager();
-            	  }
-        	});
+		doneBTN.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				new Manager();
+			}
+		});
 
- 		
+
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
 		btnContainer.getChildren().add(doneBTN);
-		
+
 		vbox.getChildren().add(grid);
 		vbox.getChildren().add(scrollPane);
 		vbox.getChildren().add(btnContainer);
-	
+
 		return vbox;
 	}
 
-	
+
 
 	//--------------------------------------------------------------------------
 	public void updateState(String key, Object value)
 	{
-		
+
 	}
 
 	//--------------------------------------------------------------------------

@@ -146,7 +146,14 @@ public class Manager implements IView, IModel
 			searchItem((String)value);
 		}
 		else if(key.equals("ReorderList")) {
-			createAndShowReorderList();
+
+			String q = "SELECT * FROM InventoryItemType";
+			try {
+				createAndShowReorderList(new IITCollection(q, "ReorderList"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		else {
 			System.out.println("No screen for key.");
@@ -438,12 +445,12 @@ public class Manager implements IView, IModel
 	}
 
 	
-	private void createAndShowReorderList() {
+	private void createAndShowReorderList(IITCollection iIT) {
 		Scene localScene = myViews.get("ReorderList");
 		if (localScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("ReorderList", this); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("ReorderList", iIT); // USE VIEW FACTORY
 			localScene = new Scene(newView);
 			localScene.getStylesheets().add("style.css");
 			myViews.put("SearchItem", localScene);
