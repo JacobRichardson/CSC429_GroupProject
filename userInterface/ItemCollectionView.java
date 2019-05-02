@@ -142,7 +142,7 @@ public class ItemCollectionView extends View {
 
 		TableColumn lastUseColumn = new TableColumn("DateOfLastUse");
 		lastUseColumn.setMinWidth(200);
-		lastUseColumn.setCellValueFactory(new PropertyValueFactory<ItemTableModel, String>("ReorderPoint"));
+		lastUseColumn.setCellValueFactory(new PropertyValueFactory<ItemTableModel, String>("DateOfLastUse"));
 
 		TableColumn notesColumn = new TableColumn("Notes");
 		notesColumn.setMinWidth(200);
@@ -197,7 +197,7 @@ public class ItemCollectionView extends View {
 
 	// --------------------------------------------------------------------------
 	protected void processIITSelected() {
-		
+		myModel.stateChangeRequest("ModifyIIView", null);
 	}
 
 	// --------------------------------------------------------------------------
