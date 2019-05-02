@@ -29,6 +29,7 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 	private static final String myTableName = "InventoryItem";
 	String history;
 	private Vector<InventoryItem> iIT;
+	private int numRecords;
 	// GUI Components
 	private Hashtable<String, Scene> myViews;
 	private Stage	  	myStage;
@@ -54,7 +55,9 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		if (allDataRetrieved != null)
 		{
 			iIT = new Vector<InventoryItem>();
-
+			
+			numRecords = allDataRetrieved.size();
+			
 			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
 			{
 				Properties nextIITData = (Properties)allDataRetrieved.elementAt(cnt);
@@ -123,6 +126,11 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		return null;
 	}
 
+	public int getNumRecords () 
+	{
+		return numRecords;
+	}
+	
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{

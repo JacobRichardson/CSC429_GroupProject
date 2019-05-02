@@ -146,7 +146,6 @@
 /SearchItem$1.class
 /SearchItem$2.class
 /SearchItem.class
-<<<<<<< Updated upstream
 /ItemCollection$1.class
 /ItemCollection$2.class
 /ItemCollection$3.class
@@ -156,14 +155,14 @@
 /ItemCollectionView$3.class
 /ItemCollectionView.class
 /ItemTableModel.class
-=======
 /ReorderList.class
 /ReorderList$1.class
 /ReorderList$2.class
 /ReorderList$3.class
->>>>>>> Stashed changes
 /ModifyVIITView.class
 /ModifyIIView$1.class
 /ModifyIIView$2.class
 /ModifyIIView$3.class
 /ModifyIIView.class
+/ReorderListTableModel.class
+/ReorderListTabelModel.class

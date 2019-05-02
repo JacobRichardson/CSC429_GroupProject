@@ -41,11 +41,12 @@ import model.Manager;
 import model.InventoryItemType;
 import model.IITCollection;
 import model.InventoryItem;
+import model.ItemCollection;
 
 //==============================================================================
 public class ReorderList extends View
 {
-	protected TableView<IITTableModel> iITTable;
+	protected TableView<ReorderListTableModel> ReorderListTable;
 	protected Button doneBTN;
 	protected Button submitButton;
 
@@ -82,9 +83,9 @@ public class ReorderList extends View
 
 	//--------------------------------------------------------------------------
 	protected void getEntryTableModelValues()
-	{
+	{	
 
-		ObservableList<IITTableModel> tableData = FXCollections.observableArrayList();
+		ObservableList<ReorderListTableModel> tableData = FXCollections.observableArrayList();
 		try {
 			IITCollection iITCollection = (IITCollection) myModel.getState("IITCollection");
 			Vector entryList = (Vector) iITCollection.getState("InventoryItemType");
@@ -94,16 +95,58 @@ public class ReorderList extends View
 				InventoryItemType nextIIT = (InventoryItemType) entries.nextElement();
 				Vector<String> view = nextIIT.getEntryListView();
 				// add this list entry to the list
-				IITTableModel nextTableRowData = new IITTableModel(view);
-				tableData.add(nextTableRowData);
-				
-
+				ReorderListTableModel nextTableRowData = new ReorderListTableModel(view);
+				tableData.add(nextTableRowData);	
 			}
-
-			iITTable.setItems(tableData);
+			
+			//Variables for process eaching inventory item type name.
+			ReorderListTableModel data;
+			String query = "";
+			ItemCollection itemCollection;
+			int numberOfItems;
+			int reorderPoint;
+			
+			//For each table data.
+			for(int i=0; i<tableData.size(); i++) {
+				
+				//Get the data.
+				data = tableData.get(i);
+					
+				//Get the reorder point.
+				reorderPoint = Integer.parseInt(data.getReorderPoint());
+				
+				//Select the Inventory item where the name equals the row's name and the status is avaiable.
+				query = "SELECT * FROM InventoryItem WHERE InventoryItemTypeName = '" 
+				+ data.getItemTypeName() + "' AND Status = 'Available'";
+				
+				//Use the query to get an item collection.
+				itemCollection = new ItemCollection(query, "ReorderList");
+				
+				//Get the number of items found.
+				numberOfItems = itemCollection.getNumRecords();
+				
+				//If the number of items is greater then the reorder point.
+				if(numberOfItems > reorderPoint)
+				{
+					//Remove the item from the data.
+					tableData.remove(i);
+				}
+				
+				
+				//DEBUG
+				 
+//				 System.out.println("Query: " + query);
+//				 System.out.println("NUM RECORDS: " + itemCollection.getNumRecords());
+//				 System.out.println("Reorder Point:" + reorderPoint);
+				 			
+			}
+			
+			
+			
+			ReorderListTable.setItems(tableData);
 		} catch (Exception e) {// SQLException e) {
 			// Need to handle this exception
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -142,25 +185,33 @@ public class ReorderList extends View
 		prompt.setFill(Color.BLACK);
 		grid.add(prompt, 0, 0, 2, 1);
 
-		iITTable = new TableView<IITTableModel>();
-		iITTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		ReorderListTable = new TableView<ReorderListTableModel>();
+		ReorderListTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		TableColumn IdColumn = new TableColumn("ItemTypeName") ;
-		IdColumn.setMinWidth(200);
-		IdColumn.setCellValueFactory(
-				new PropertyValueFactory<IITTableModel, String>("Id"));
+		TableColumn ItemTypeName = new TableColumn("ItemTypeName") ;
+		ItemTypeName.setMinWidth(200);
+		ItemTypeName.setCellValueFactory(
+				new PropertyValueFactory<ReorderListTableModel, String>("ItemTypeName"));
 
-		TableColumn nameColumn = new TableColumn("Count") ;
-		nameColumn.setMinWidth(200);
-		nameColumn.setCellValueFactory(
-				new PropertyValueFactory<IITTableModel, String>("Name"));
+		
+		TableColumn reorderPointColumn = new TableColumn("Reorder Point") ;
+		reorderPointColumn.setMinWidth(200);
+		reorderPointColumn.setCellValueFactory(
+				new PropertyValueFactory<ReorderListTableModel, String>("ReorderPoint"));
+		
+		//TODO: Implement way to display how many there are.
+//		
+//		TableColumn countColumn = new TableColumn("Count") ;
+//		countColumn.setMinWidth(200);
+//		countColumn.setCellValueFactory(
+//				new PropertyValueFactory<ReorderListTableModel, String>(""));
 
-
-		iITTable.getColumns().addAll(IdColumn, nameColumn);
+		//reorderPointColumn, countColumn
+		ReorderListTable.getColumns().addAll(ItemTypeName);
 
 
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setContent(iITTable);
+		scrollPane.setContent(ReorderListTable);
 
 		doneBTN = new Button("Confirm");
 		doneBTN.setOnAction(new EventHandler<ActionEvent>() {
