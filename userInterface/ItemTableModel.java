@@ -7,7 +7,7 @@ public class ItemTableModel {
 		private final SimpleStringProperty Barcode;
 		private final SimpleStringProperty VendorId;
 		private final SimpleStringProperty InventoryItemTypeName;
-		private final SimpleStringProperty DateRecieved;
+		private final SimpleStringProperty DateReceived;
 		private final SimpleStringProperty DateOfLastUse;
 		private final SimpleStringProperty Notes;
 		private final SimpleStringProperty Status;
@@ -18,7 +18,7 @@ public class ItemTableModel {
 			Barcode =  new SimpleStringProperty(data.elementAt(0));
 			VendorId =  new SimpleStringProperty(data.elementAt(1));
 			InventoryItemTypeName =  new SimpleStringProperty(data.elementAt(2));
-			DateRecieved =  new SimpleStringProperty(data.elementAt(3));
+			DateReceived =  new SimpleStringProperty(data.elementAt(3));
 			DateOfLastUse =  new SimpleStringProperty(data.elementAt(4));
 			Notes =  new SimpleStringProperty(data.elementAt(5));
 			Status =  new SimpleStringProperty(data.elementAt(6));
@@ -56,12 +56,12 @@ public class ItemTableModel {
 
 	    //----------------------------------------------------------------------------
 	    public String getDateRecieved() {
-	        return DateRecieved.get();
+	        return DateReceived.get();
 	    }
 
 	    //----------------------------------------------------------------------------
 	    public void setDateRecieved(String n) {
-	        DateRecieved.set(n);
+	        DateReceived.set(n);
 	    }
 	    //----------------------------------------------------------------------------
 	    public String getDateOfLastUse() {

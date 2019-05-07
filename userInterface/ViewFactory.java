@@ -55,6 +55,9 @@ public class ViewFactory {
 		else if(viewName.equals("ReorderList")) {
 			return new ReorderList(model);
 		}
+		else if(viewName.contentEquals("ViewInventory")) {
+			return new ViewInventory(model);
+		}
 		else
 			return null;
 	}

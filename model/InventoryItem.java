@@ -225,11 +225,10 @@ public class InventoryItem extends EntityBase implements IView{
 	
 	public static int compare(InventoryItem a, InventoryItem b)
 	{
-//		String aNum = (String)a.getState("ItemTypeName");
-//		String bNum = (String)b.getState("ItemTypeName");
-//
-//		return aNum.compareTo(bNum);
-		return 0;
+		String aNum = (String)a.getState("Barcode");
+		String bNum = (String)b.getState("Barcode");
+
+		return aNum.compareTo(bNum);
 	}
 	
 	private void setDependencies()

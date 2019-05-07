@@ -145,6 +145,15 @@ public class Manager implements IView, IModel
 		else if(key.equals("SearchItemCollection")) {
 			searchItem((String)value);
 		}
+		
+		else if(key.contentEquals("ViewInventory")) {
+			String q = "SELECT * FROM InventoryItem WHERE Status=\"Available\"";
+			try{
+				createAndShowViewInventory(new ItemCollection(q, "ViewInventory"));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		else if(key.equals("ReorderList")) {
 
 			String q = "SELECT * FROM InventoryItemType";
@@ -201,7 +210,23 @@ public class Manager implements IView, IModel
 			e.printStackTrace();
 		}
 	}
+	
+	private void createAndShowViewInventory(ItemCollection itemCollection) {
+		Scene currentScene = (Scene)myViews.get("ViewInventory");
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("ViewInventory", itemCollection); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
+			myViews.put("ViewInventory", currentScene);
 
+			//Reset choice.
+			Manager.setChoice("");
+		}
+		
+		swapToView(currentScene);
+	}
 
 
 	private void createAndShowItemCollection(ItemCollection itemCollection) {
