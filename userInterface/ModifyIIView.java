@@ -67,7 +67,7 @@ public class ModifyIIView extends View {
 	// Fill fields on screen
 	private void populateFields() {
 		// typeNameLBL =new Label((String) myModel.getState("ItemTypeName"));
-		statusCB.getItems().addAll("Availible", "Returned to Vendor", "Expired", "Damaged", "Lost");
+		statusCB.getItems().addAll("Available", "Returned to Vendor", "Expired", "Damaged", "Lost");
 		statusCB.setValue(myModel.getState("Status"));
 	}
 
@@ -118,7 +118,7 @@ public class ModifyIIView extends View {
 		
 		backBTN.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				processAction(e);
+				
 			}
 		});
 
@@ -133,7 +133,7 @@ public class ModifyIIView extends View {
 
 	// Process action from submit button
 	protected void processAction(Event e) {
-
+		
 	}
 
 	protected void modifyItem() {

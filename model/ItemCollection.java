@@ -141,10 +141,20 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 			createAndShowSearchItem();
 		}
 		else if(key.equals("itemSelected")) {
-			createAndShowModifyItem();
+			modifyItem((String)value);
 		}
 		else {
 			System.out.println(key+" "+value);
+		}
+	}
+	
+	public void modifyItem(String item) {
+		try {
+			InventoryItem iT=new InventoryItem((String)item);
+			createAndShowModifyItem(iT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -165,14 +175,14 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 	}
 
 
-	private void createAndShowModifyItem() {
+	private void createAndShowModifyItem(InventoryItem item) {
 
 		Scene localScene = myViews.get("ModifyItem");
 
 		if (localScene == null)
 		{
 			// create our initial view
-			View newView = ViewFactory.createView("ModifyItem", this); // USE VIEW FACTORY
+			View newView = ViewFactory.createView("ModifyItem", item); // USE VIEW FACTORY
 			localScene = new Scene(newView);
 			localScene.getStylesheets().add("style.css");
 			myViews.put("ModifyItem", localScene);
