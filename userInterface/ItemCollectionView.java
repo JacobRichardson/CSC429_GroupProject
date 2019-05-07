@@ -34,6 +34,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.ItemCollection;
 import model.InventoryItem;
+import model.InventoryItemType;
 
 public class ItemCollectionView extends View {
 
@@ -197,7 +198,19 @@ public class ItemCollectionView extends View {
 
 	// --------------------------------------------------------------------------
 	protected void processIITSelected() {
-		myModel.stateChangeRequest("ModifyItemView", null);
+		ItemTableModel selectedItem =  iITTable.getSelectionModel().getSelectedItem();
+		if(selectedItem!=null) {
+			String selectedItemTypeName = selectedItem.getBarcode();
+			InventoryItemType.setSelectedInventoryItemTypeName(selectedItem.getBarcode());
+
+			/*
+			 * For some reason this will not switch over to the vendor selected key. It
+			 * won't call the manager stateChangeRequest for some reason. This needs to be
+			 * looked into.
+			 */
+			System.out.println(myModel);
+			myModel.stateChangeRequest("itemSelected", selectedItemTypeName);
+		}
 	}
 
 	// --------------------------------------------------------------------------

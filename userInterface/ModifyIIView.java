@@ -134,71 +134,14 @@ public class ModifyIIView extends View {
 	// Process action from submit button
 	protected void processAction(Event e) {
 
-		// First check to see if the fields are empty.
-		if (unitsTF.getText().isEmpty() || unitMeasureTF.getText().isEmpty() || validityDaysTF.getText().isEmpty()
-				|| reorderPointTF.getText().isEmpty() || notesTF.getText().isEmpty())
-			messageLBL.setText("All Item Type data must be filled");
-		// Then check to see if it is the submit button.
-		else if (!isInteger(unitsTF.getText()))
-			messageLBL.setText("Please enter a Integer \nnumber for units");
-		else if(e.getSource()==backBTN)
-			myModel.stateChangeRequest("BackMIIT", null);
-		else if (e.getSource() == submitBTN)
-			modifyInventoryItemType();
 	}
 
-	protected void modifyInventoryItemType() {
+	protected void modifyItem() {
 
-		// Process modifing the inventory item type.
-
-		// New properties object.
-		Properties props = new Properties();
-
-		// Set the values.
-		
-		props.setProperty("Status", (String) statusCB.getValue());
-
-		InventoryItem i = new InventoryItem(props);
-
-		i.update();
-
-		messageLBL.setText("Inventory Item Type Updated!");
-		submitBTN.setVisible(false);
-		backBTN.setVisible(false);
-		cancelBTN.setText("Back");
 	}
 
 	public void updateState(String key, Object value) {
 		// TODO Auto-generated method stub
 
 	}
-
-	private boolean isInteger(String s) {
-		try {
-			if (Integer.parseInt(s) < 0) {
-				return false;
-			}
-		} catch (NumberFormatException e) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private boolean isDouble(String s) {
-		try {
-			if (Double.parseDouble(s) < 0) {
-				return false;
-			}
-		} catch (NumberFormatException e) {
-			return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-
-		return true;
-	}
-
 }

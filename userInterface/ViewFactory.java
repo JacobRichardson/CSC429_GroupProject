@@ -58,6 +58,9 @@ public class ViewFactory {
 		else if(viewName.contentEquals("ViewInventory")) {
 			return new ViewInventory(model);
 		}
+		else if(viewName.contentEquals("ModifyItem")) {
+			return new ModifyIIView(model);
+		}
 		else
 			return null;
 	}
