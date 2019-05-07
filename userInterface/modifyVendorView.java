@@ -127,10 +127,11 @@ public class modifyVendorView extends View {
     backBTN=new Button("Back");
     backBTN.setOnAction(new EventHandler<ActionEvent>() {
 	     public void handle(ActionEvent e) {
+	    	 myModel.stateChangeRequest("BackV", null);
 	      messageLBL.setText("");
 	     }
     });
-    grid.add(backBTN, 0, 4);
+    grid.add(backBTN, 1, 4);
     
     phoneTF.setOnAction(new EventHandler<ActionEvent>() {
 	     public void handle(ActionEvent e) {

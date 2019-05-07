@@ -4,6 +4,7 @@ package model;
 // system imports
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 import javax.swing.JFrame;
@@ -13,9 +14,12 @@ import exception.InvalidPrimaryKeyException;
 import database.*;
 import event.Event;
 import impresario.IView;
-
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userInterface.MainStageContainer;
 import userInterface.View;
 import userInterface.ViewFactory;
+import userInterface.WindowPosition;
 
 /** The class containing the Account for the ATM application */
 //==============================================================
@@ -28,6 +32,8 @@ public class Vendor extends EntityBase implements IView
 	protected Properties dependencies;
 
 	// GUI Components
+	private Hashtable<String, Scene> myViews= new Hashtable<String, Scene>();
+	private Stage	  	myStage= MainStageContainer.getInstance();
 
 	private String updateStatusMessage = "";
 
@@ -128,8 +134,77 @@ public class Vendor extends EntityBase implements IView
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-
+		if(key.equals("BackV"))
+			createAndShowVendorSearch();
+		else if(key.equals("BackVendor"))
+			new Manager();
+		else if(key.equals("VendorSelectionScreen"))
+			searchVendors(value);
+		else {
+			System.out.println(key+" "+value);
+		}
 		myRegistry.updateSubscribers(key, this);
+	}
+	
+	private void searchVendors(Object value) {
+		try {
+			String history=Manager.getChoice();
+			VendorSearchCollection v=new VendorSearchCollection((String)value, history);
+			createAndShowVendorCollection(v);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void createAndShowVendorSearch() {
+		Scene currentScene = (Scene)myViews.get("searchVendor");
+
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("searchVendor", this); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
+			myViews.put("searchVendor", currentScene);
+		}
+
+		// make the view visible by installing it into the frame
+		swapToView(currentScene);
+
+	}
+	
+	private void createAndShowVendorCollection(VendorSearchCollection v) {
+		Scene localScene = myViews.get("vendorCollection");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("vendorCollection", v); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("vendorCollection", localScene);
+		}	
+		swapToView(localScene);
+	}
+	
+	public void swapToView(Scene newScene)
+	{		
+		if (newScene == null)
+		{
+			System.out.println("Librarian.swapToView(): Missing view for display");
+			new Event(Event.getLeafLevelClassName(this), "swapToView",
+					"Missing view for display ", Event.ERROR);
+			return;
+		}
+
+		myStage.setScene(newScene);
+		myStage.sizeToScene();
+
+
+		//Place in center
+		WindowPosition.placeCenter(myStage);
+
 	}
 
 	/** Called via the IView relationship */

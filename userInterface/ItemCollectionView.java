@@ -197,7 +197,7 @@ public class ItemCollectionView extends View {
 
 	// --------------------------------------------------------------------------
 	protected void processIITSelected() {
-		myModel.stateChangeRequest("ModifyIIView", null);
+		myModel.stateChangeRequest("ModifyItemView", null);
 	}
 
 	// --------------------------------------------------------------------------

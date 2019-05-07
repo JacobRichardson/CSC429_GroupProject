@@ -121,7 +121,7 @@ public class IITCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-		System.out.println(key);
+		System.out.println(history);
 		// Class is invariant, so this method does not change any attributes
 		if(history=="ModifyIIT" && value!=null) {
 			modifyIIT((String)value);
@@ -136,6 +136,8 @@ public class IITCollection  extends EntityBase implements IView, IModel
 		else if(key.equals("Back"))
 			createAndShowFindInventoryItemTypeView();
 		else if(key.equals("BackIIT") && history=="ModifyVendor")
+			new Manager();
+		else if(key.equals("BackIIT") && history=="ModifyIIT")
 			new Manager();
 		else if(key.equals("BackIIT"))
 			createAndShowVendorSearch();

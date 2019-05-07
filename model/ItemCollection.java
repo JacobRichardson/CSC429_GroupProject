@@ -134,7 +134,15 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 	//----------------------------------------------------------------
 	public void stateChangeRequest(String key, Object value)
 	{
-
+		if(key.equals("ModifyItemView")) {
+			
+		}
+		else if(key.equals("Back")) {
+			createAndShowSearchItem();
+		}
+		else {
+			System.out.println(key+" "+value);
+		}
 	}
 
 	/** Called via the IView relationship */
@@ -154,7 +162,20 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 	}
 
 
+	private void createAndShowSearchItem() {
 
+		Scene localScene = myViews.get("SearchItem");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItem", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("SearchItem", localScene);
+		}
+		swapToView(localScene);
+	}
 
 
 	public void swapToView(Scene newScene)
