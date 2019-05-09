@@ -143,6 +143,9 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		else if(key.equals("itemSelected")) {
 			modifyItem((String)value);
 		}
+		else if(key.equals("SearchItemCollection")) {
+			searchItem((String)value);
+		}
 		else {
 			System.out.println(key+" "+value);
 		}
@@ -152,6 +155,15 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 		try {
 			InventoryItem iT=new InventoryItem((String)item);
 			createAndShowModifyItem(iT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void searchItem(String s) {
+		try {
+			createAndShowItemCollection(new ItemCollection(s,""));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,6 +216,24 @@ public class ItemCollection  extends EntityBase implements IView, IModel
 			myViews.put("SearchItem", localScene);
 		}
 		swapToView(localScene);
+	}
+	
+	private void createAndShowItemCollection(ItemCollection itemCollection) {
+		Scene currentScene = (Scene)myViews.get("SearchItemCollection");
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItemCollection", itemCollection); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
+			myViews.put("SearchItemCollection", currentScene);
+
+			//Reset choice.
+			Manager.setChoice("");
+		}
+
+		swapToView(currentScene);
+		
 	}
 	
 	public void swapToView(Scene newScene)

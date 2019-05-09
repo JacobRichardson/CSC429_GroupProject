@@ -119,7 +119,7 @@ public class ModifyIIView extends View {
 		
 		backBTN.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				
+				myModel.stateChangeRequest("BackItem", null);
 			}
 		});
 
@@ -135,6 +135,10 @@ public class ModifyIIView extends View {
 	// Process action from submit button
 	protected void processAction(Event e) {
 		modifyItem((String)statusCB.getValue());
+		messageLBL.setText("Status of item: "+(String)myModel.getState("InventoryItemTypeName")+" with barcode: "+(String)myModel.getState("Barcode")+" successfully updated.");
+		submitBTN.setVisible(false);
+		backBTN.setVisible(false);
+		cancelBTN.setText("Done");
 	}
 
 	protected void modifyItem(String s) {
@@ -147,12 +151,7 @@ public class ModifyIIView extends View {
 		props.setProperty("Notes", (String)myModel.getState("Notes"));
 		props.setProperty("Status", s);
 		InventoryItem i=new InventoryItem(props);
-		try {
-			i.update((String)i.getState("Barcode"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		i.modifyItem();
 	}
 
 	public void updateState(String key, Object value) {

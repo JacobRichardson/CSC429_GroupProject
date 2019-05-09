@@ -74,9 +74,7 @@ public class ItemCollectionView extends View {
 			Enumeration entries = entryList.elements();
 			while (entries.hasMoreElements() == true) {
 				InventoryItem nextItem = (InventoryItem) entries.nextElement();
-				System.out.println(nextItem);
 				Vector<String> view = nextItem.getEntryListView();
-				System.out.println(nextItem);
 				// add this list entry to the list
 				ItemTableModel nextTableRowData = new ItemTableModel(view);
 				tableData.add(nextTableRowData);

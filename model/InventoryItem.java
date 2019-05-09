@@ -49,7 +49,7 @@ public class InventoryItem extends EntityBase implements IView{
 			// There should be EXACTLY one account. More than that is an error
 			if (size > 1)
 			{
-				throw new InvalidPrimaryKeyException("Multiple accounts matching id : "
+				throw new InvalidPrimaryKeyException("Multiple Items matching id : "
 					+ barcode + " found.");
 			}
 			else if(size == 0) {
@@ -82,7 +82,6 @@ public class InventoryItem extends EntityBase implements IView{
 			throw new InvalidPrimaryKeyException("No account matching id : "
 				+ barcode + " found.");
 		}
-		System.out.print(getState("Status"));
 	}
 	
 	public InventoryItem(Properties props)
@@ -136,6 +135,18 @@ public class InventoryItem extends EntityBase implements IView{
 		//DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
 	}
 	
+	public void modifyItem() {
+		try {
+		Properties whereClause = new Properties();
+		whereClause.setProperty("Barcode",persistentState.getProperty("Barcode"));
+		updatePersistentState(mySchema, persistentState, whereClause);
+		updateStatusMessage = "Item Inventory data for : " + persistentState.getProperty("ItemTypeName") + " updated successfully in database!";
+		}
+		catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	
 	//FOR TAKING AN ITEM OUT OF INVENTORY
 	
 	/*
@@ -186,8 +197,12 @@ public class InventoryItem extends EntityBase implements IView{
 	public void stateChangeRequest(String key, Object value) {
 		if(key.equals("Back"))
 			createAndShowEnterItemBarcodeView();
-		if(key.equals("ConfirmItemRemovalView"))
+		else if(key.equals("ConfirmItemRemovalView"))
 			getInventoryItem(value);
+		else if(key.equals("BackItem"))
+			createAndShowSearchItem();
+		else if(key.equals("SearchItemCollection"))
+			searchItem((String)value);
 	}
 	
 	private void getInventoryItem(Object value) {
@@ -195,6 +210,15 @@ public class InventoryItem extends EntityBase implements IView{
 			InventoryItem item = new InventoryItem((String)value);
 			createAndShowConfirmItemRemovalView(item);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void searchItem(String s) {
+		try {
+			createAndShowItemCollection(new ItemCollection(s,""));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -211,7 +235,25 @@ public class InventoryItem extends EntityBase implements IView{
 		    localScene.getStylesheets().add("style.css");
 		}
 		swapToView(localScene);
-}
+	}
+	
+	private void createAndShowItemCollection(ItemCollection itemCollection) {
+		Scene currentScene = (Scene)myViews.get("SearchItemCollection");
+		if (currentScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItemCollection", itemCollection); // USE VIEW FACTORY
+			currentScene = new Scene(newView);
+			currentScene.getStylesheets().add("style.css");
+			myViews.put("SearchItemCollection", currentScene);
+
+			//Reset choice.
+			Manager.setChoice("");
+		}
+
+		swapToView(currentScene);
+		
+	}
 
 	@Override
 	protected void initializeSchema(String tableName) {
@@ -250,6 +292,22 @@ public class InventoryItem extends EntityBase implements IView{
 		}
 		swapToView(localScene);
 	}
+	
+	private void createAndShowSearchItem () {
+
+		Scene localScene = myViews.get("SearchItem");
+
+		if (localScene == null)
+		{
+			// create our initial view
+			View newView = ViewFactory.createView("SearchItem", this); // USE VIEW FACTORY
+			localScene = new Scene(newView);
+			localScene.getStylesheets().add("style.css");
+			myViews.put("SearchItem", localScene);
+		}
+		swapToView(localScene);
+	}
+	
 	public void swapToView(Scene newScene)
 	{		
 		if (newScene == null)

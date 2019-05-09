@@ -63,3 +63,7 @@
 [5/9/19 10:20 AM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000002' for key 'PRIMARY'>
 [5/9/19 10:23 AM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000002' for key 'PRIMARY'>
 [5/9/19 10:28 AM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000002' for key 'PRIMARY'>
+[5/9/19 12:13 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000012' for key 'PRIMARY'>
+[5/9/19 12:18 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000001' for key 'PRIMARY'>
+[5/9/19 12:19 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000002' for key 'PRIMARY'>
+[5/9/19 12:21 PM]|InventoryItem|insertPersistentState|Error|NOTAG|null<SQL Exception: 1062: Duplicate entry '000000002' for key 'PRIMARY'>

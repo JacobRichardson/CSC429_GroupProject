@@ -111,6 +111,8 @@ public class SearchItem extends View {
 	protected void processAction(Event e) {
 		if(barcodeTF.getText().isEmpty() && itemNameTF.getText().isEmpty())
 			messageLBL.setText("Barcode or Item type name must be filled");
+		else if(barcodeTF.getText().length()>9)
+			messageLBL.setText("Barcode must be less then 9 digits");
 		else if(isInteger(barcodeTF.getText()) || barcodeTF.getText().isEmpty()) {
 			getTypes();
 		}
