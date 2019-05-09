@@ -1,5 +1,6 @@
 package userInterface;
 
+import java.sql.SQLException;
 //imports
 import java.util.Properties;
 
@@ -133,11 +134,25 @@ public class ModifyIIView extends View {
 
 	// Process action from submit button
 	protected void processAction(Event e) {
-		
+		modifyItem((String)statusCB.getValue());
 	}
 
-	protected void modifyItem() {
-
+	protected void modifyItem(String s) {
+		Properties props=new Properties();
+		props.setProperty("Barcode", (String)myModel.getState("Barcode"));
+		props.setProperty("VendorId", (String)myModel.getState("VendorId"));
+		props.setProperty("InventoryItemTypeName", (String)myModel.getState("InventoryItemTypeName"));
+		props.setProperty("DateReceived", (String)myModel.getState("DateReceived"));
+		props.setProperty("DateOfLastUse", (String)myModel.getState("DateOfLastUse"));
+		props.setProperty("Notes", (String)myModel.getState("Notes"));
+		props.setProperty("Status", s);
+		InventoryItem i=new InventoryItem(props);
+		try {
+			i.update((String)i.getState("Barcode"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void updateState(String key, Object value) {

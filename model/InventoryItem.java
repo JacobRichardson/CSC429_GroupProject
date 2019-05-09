@@ -172,7 +172,7 @@ public class InventoryItem extends EntityBase implements IView{
 			return persistentState.getProperty(key);
 		else if((key.equals("InventoryItemTypeName") == true))
 			return persistentState.getProperty(key);
-		else  if(key.equals("DateRecieved"))
+		else  if(key.equals("DateReceived"))
 			return persistentState.getProperty(key);
 		else if(key.equals("DateOfLastUse"))
 			return persistentState.getProperty(key);
