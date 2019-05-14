@@ -105,9 +105,9 @@ public class ReorderList extends View
 			ItemCollection itemCollection;
 			int numberOfItems;
 			int reorderPoint;
-			
+			System.out.println(tableData.size());
 			//For each table data.
-			for(int i=0; i<tableData.size(); i++) {
+			for(int i=0; i<=tableData.size(); i++) {
 				
 				//Get the data.
 				data = tableData.get(i);
@@ -135,9 +135,9 @@ public class ReorderList extends View
 				
 				//DEBUG
 				 
-//				 System.out.println("Query: " + query);
-//				 System.out.println("NUM RECORDS: " + itemCollection.getNumRecords());
-//				 System.out.println("Reorder Point:" + reorderPoint);
+				// System.out.println("Query: " + query);
+				 //System.out.println("NUM RECORDS: " + itemCollection.getNumRecords());
+				 //System.out.println("Reorder Point:" + reorderPoint);
 				 			
 			}
 			
