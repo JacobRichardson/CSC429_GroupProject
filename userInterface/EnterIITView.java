@@ -103,15 +103,18 @@ public class EnterIITView extends View {
 				//Make sure it is not null.
 				if(viit != null) {
 				
+					//Get the inventory item type name off the viit instead of what the user typed.
+					String actualItemTypeName = viit.getState("InventoryItemTypeName").toString();
+					
 					//Set the item type name.
-					InventoryItemType.setSelectedInventoryItemTypeName(itemTypeName);
+					InventoryItemType.setSelectedInventoryItemTypeName(actualItemTypeName);
 					
 					//Reset the items.
 					nameTF.setText("");
 					messageLBL.setText("");
 					
 					//Proceed to next screen for notes and barcode.
-					myModel.stateChangeRequest("EnterBarcodeNotes", itemTypeName);
+					myModel.stateChangeRequest("EnterBarcodeNotes", actualItemTypeName);
 				}
 			} catch (InvalidPrimaryKeyException e1) {
 				

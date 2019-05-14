@@ -177,6 +177,8 @@ public class AddIITView extends View {
 		// New properties object.
 		Properties props = new Properties();
 
+		/* DEBUG
+		
 		System.out.println(typeNameTF.getText());
 		System.out.println(unitsTF.getText());
 		System.out.println(unitMeasureTF.getText());
@@ -184,6 +186,8 @@ public class AddIITView extends View {
 		System.out.println(reorderPointTF.getText());
 		System.out.println(notesTF.getText());
 		System.out.println(statusCB.getValue());
+	
+		*/ 
 
 		// Set the values.
 		props.setProperty("ItemTypeName", typeNameTF.getText());
@@ -200,9 +204,10 @@ public class AddIITView extends View {
 		// Save it into the database.
 		iit.update();
 
-
+		populateFields();
+		
 		// Display message on GUI.
-		submitBTN.setVisible(false);
+		//submitBTN.setVisible(false);
 		cancelBTN.setText("Back");
 		messageLBL.setText("Inventory Item Type added.");
 	}

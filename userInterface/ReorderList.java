@@ -189,15 +189,15 @@ public class ReorderList extends View
 		ReorderListTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		TableColumn ItemTypeName = new TableColumn("ItemTypeName") ;
-		ItemTypeName.setMinWidth(200);
+		ItemTypeName.setMinWidth(900);
 		ItemTypeName.setCellValueFactory(
 				new PropertyValueFactory<ReorderListTableModel, String>("ItemTypeName"));
 
 		
-		TableColumn reorderPointColumn = new TableColumn("Reorder Point") ;
-		reorderPointColumn.setMinWidth(200);
-		reorderPointColumn.setCellValueFactory(
-				new PropertyValueFactory<ReorderListTableModel, String>("ReorderPoint"));
+//		TableColumn reorderPointColumn = new TableColumn("Reorder Point") ;
+//		reorderPointColumn.setMinWidth(200);
+//		reorderPointColumn.setCellValueFactory(
+//				new PropertyValueFactory<ReorderListTableModel, String>("ReorderPoint"));
 		
 		//TODO: Implement way to display how many there are.
 //		

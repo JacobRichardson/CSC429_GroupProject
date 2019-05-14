@@ -128,7 +128,7 @@ public class addVendorView extends View {
 
 	      messageLBL.setText("");
 	     }
-});
+    });
     	
     	return grid;
 	}
@@ -150,7 +150,10 @@ public class addVendorView extends View {
 		props.setProperty("Status", (String) statusCB.getValue());
 		Vendor v= new Vendor(props);
 		v.update();
-		submitBTN.setVisible(false);
+		
+		vendorTF.setText("");
+		phoneTF.setText("");
+		//submitBTN.setVisible(false);
 		cancelBTN.setText("Back");
 		messageLBL.setText("Vendor added.");
 	}

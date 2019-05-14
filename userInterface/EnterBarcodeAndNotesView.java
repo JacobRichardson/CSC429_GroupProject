@@ -36,6 +36,7 @@ public class EnterBarcodeAndNotesView extends View {
 	private Label messageLBL = new Label();
 	private Button submit = new Button("SUBMIT");
 	private Button cancel = new Button("CANCEL");
+	private Button continueBTN = new Button("CONTINUE");
 	private TextField barcodeTF = new TextField();
 	private TextField notesTF = new TextField();
 	
@@ -77,7 +78,13 @@ public class EnterBarcodeAndNotesView extends View {
 			}
 		});
 		
-
+		continueBTN.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+		
+		
 		grid.add(barcodeLabel, 0, 0);
 		grid.add(barcodeTF, 2, 0);
 		grid.add(andLabel, 0, 1);
@@ -85,8 +92,13 @@ public class EnterBarcodeAndNotesView extends View {
 		grid.add(notesTF, 2, 2);
 		grid.add(submit, 0, 4);
 		grid.add(cancel, 2, 4);
-		grid.add(messageLBL, 0, 5, 5, 5);
+		grid.add(continueBTN, 0, 5);
+		grid.add(messageLBL, 0, 6, 6, 6);
 
+		
+		//Set the continue button to hidden initalliy.
+		continueBTN.setVisible(false);
+		
 		return grid;
 	}
 	
@@ -114,6 +126,7 @@ public class EnterBarcodeAndNotesView extends View {
 				return;
 			}
 			
+			
 			//Insert the inventory item into the db.
 			Properties props = new Properties();
 			
@@ -139,9 +152,10 @@ public class EnterBarcodeAndNotesView extends View {
 				//Clear fields.
 				barcodeTF.setText("");
 				notesTF.setText("");
+				messageLBL.setText("Item has been successfully inserted!");
 				
-				//Swtich back to the EIITView.
-				myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
+				//Set the continue button visible.
+				continueBTN.setVisible(true);
 				
 			} catch (SQLException ex) {
 				
@@ -155,6 +169,14 @@ public class EnterBarcodeAndNotesView extends View {
 				}
 				
 			}
+			
+		} else if (e.getSource() == continueBTN) {
+				
+			//Clear the message.
+			messageLBL.setText("");
+			
+			//Swtich back to the EIITView.
+			myModel.stateChangeRequest("VendorSelected", Vendor.getSelectedVendorId());
 			
 		} else {
 			
